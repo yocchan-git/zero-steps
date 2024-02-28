@@ -1,16 +1,24 @@
-## サービスの説明
+# README
 
-Zero Stepsというサービスは目標の進捗共有アプリです。
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-このアプリではゼロ高生がお互いに挑戦していることに対して励まし合いながら切磋琢磨していきたいが、それぞれがどんなことに、どのように挑戦しているかの様子を知ることが難しい問題を解決できます。
+Things you may want to cover:
 
-対象ユーザーはゼロ高等学院という通信制高校の生徒と先生向けです。
+* Ruby version
 
-ユーザーは 自分が挑戦する目標を立て、その目標が達成されるまでのTODOと進捗の管理、それらをゼロ高生間で共有、コメントを投稿しあえることができます。
+* System dependencies
 
-## 特徴
-ゼロ高生間のコミュニケーションのために使っているDiscordサーバで、現在の進捗を報告し合うのとは違って、
-- 挑戦している目標と、その目標が達成されるまでのロードマップも見れる
-    - 報告される進捗に関するコンテキストが多く得られること
-- このツールはゼロ高に興味を持つ企業も見れるようになっている
-    - 企業から仕事のオファーやアドバイスを貰えます
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
