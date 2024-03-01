@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   def check_logged_in
     return if current_user
 
-    redirect_to root_path
+    redirect_to new_users_session_path
   end
 end

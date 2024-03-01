@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < ApplicationController
-  skip_before_action :check_logged_in, only: :new
+  skip_before_action :check_logged_in, only: %i[new callback]
 
   def new
-    redirect_uri = new_users_session_url
+  end
+
+  def callback
+    redirect_uri = auth_discord_callback_url
     access_token = DiscordAuthentication.fetch_access_token(params[:code], redirect_uri)
     discord_account_information = DiscordAuthentication.fetch_discord_account_information(access_token)
 
@@ -16,7 +19,7 @@ class Users::SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to root_path
+    redirect_to new_users_session_path
   end
 
   private
