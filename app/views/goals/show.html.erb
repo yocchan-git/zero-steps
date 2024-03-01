@@ -1,0 +1,7 @@
+<div>
+  <h2><%= @goal.title %></h2>
+  <p><%= @goal.description %></p>
+
+  <%= link_to '修正する', edit_goal_path(@goal) %>
+  <%= link_to 'TOPへ', goals_path, class: 'bg-gray-600 hover:bg-gray-500 text-white rounded block px-4 py-2' %>
+</div>
