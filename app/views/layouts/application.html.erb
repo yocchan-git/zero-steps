@@ -11,6 +11,16 @@
   </head>
 
   <body>
+     <header>
+        <% if current_user %>
+          <%= image_tag current_user.image %>
+          <%= current_user.name %>さん
+          <%= link_to "ログアウト", users_session_path(current_user), data: { turbo_method: :delete }  %>
+        <% else  %>
+          ゲストさん
+          <%= link_to 'Discord アカウントでログイン', ENV['DISCORD_AUTHENTICATION_URL'], class: 'a-button is-sm' %>
+        <% end %>
+      </header>
     <%= yield %>
   </body>
 </html>
