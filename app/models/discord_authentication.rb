@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class DiscordAuthentication
-  require 'net/http'
+require 'net/http'
 
+class DiscordAuthentication
   def self.fetch_access_token(code, redirect_uri)
     uri = URI.parse('https://discordapp.com/api/oauth2/token')
     http = Net::HTTP.new(uri.host, uri.port)
