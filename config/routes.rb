@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'home#index'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get "auth/discord/callback", to: "users/sessions#callback"
+  namespace :users do
+    resources :sessions, only: %i[new destroy]
+  end
 end
