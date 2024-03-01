@@ -7,6 +7,8 @@ class Users::SessionsController < ApplicationController
   end
 
   def callback
+    return redirect_to new_users_session_path, alert: 'ログインをキャンセルしました' unless params[:code]
+
     redirect_uri = auth_discord_callback_url
     access_token = DiscordAuthentication.fetch_access_token(params[:code], redirect_uri)
     discord_account_information = DiscordAuthentication.fetch_discord_account_information(access_token)
@@ -14,7 +16,7 @@ class Users::SessionsController < ApplicationController
     if user = find_or_create_from_discord_info(discord_account_information)
       log_in user
     end
-    redirect_to root_path
+    redirect_to root_path, notice: 'ログインしました'
   end
 
   def destroy

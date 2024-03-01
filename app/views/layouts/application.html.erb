@@ -15,6 +15,7 @@
         <% if current_user %>
           <%= image_tag current_user.image %>
           <%= current_user.name %>さん
+          <%= link_to "目標一覧", goals_path  %>
           <%= link_to "ログアウト", users_session_path(current_user), data: { turbo_method: :delete }  %>
         <% end %>
       </header>

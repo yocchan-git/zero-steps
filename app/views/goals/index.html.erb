@@ -1,0 +1,18 @@
+<h1>みんなの目標</h1>
+<div>
+  <div><%= link_to '目標を作成する', new_goal_path %></div>
+  <div>
+    <% @goals.each do |goal| %>
+      <div>
+        <div>
+          <h2><%= link_to goal.title, goal %></h2>
+          <p><%= goal.description %></p>
+        </div>
+
+        <div>
+          <span><%= goal.user.name %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
