@@ -13,11 +13,14 @@
   <body>
      <header>
         <% if current_user %>
-          <%= image_tag current_user.image %>
+          <% if using_personal? %>
+            <%= image_tag current_user.image %>
+          <% end %>
           <%= current_user.name %>さん
-          <%= link_to "ユーザー一覧", users_path  %>
-          <%= link_to "目標一覧", goals_path  %>
-          <%= link_to "ログアウト", users_session_path(current_user), data: { turbo_method: :delete }  %>
+          <%= link_to "ユーザー一覧", users_path %>
+          <%= link_to '企業一覧', companies_path %>
+          <%= link_to "目標一覧", goals_path %>
+          <%= link_to "ログアウト", session_path(current_user), data: { turbo_method: :delete } %>
         <% end %>
       </header>
     <%= yield %>

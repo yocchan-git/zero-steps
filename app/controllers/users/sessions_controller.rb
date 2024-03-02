@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < ApplicationController
+  include Users::SessionsHelper
+
   skip_before_action :check_logged_in, only: %i[new callback]
 
   def new
@@ -18,11 +20,6 @@ class Users::SessionsController < ApplicationController
       log_in user
     end
     redirect_to root_path, notice: 'ログインしました'
-  end
-
-  def destroy
-    log_out
-    redirect_to new_users_session_path
   end
 
   private

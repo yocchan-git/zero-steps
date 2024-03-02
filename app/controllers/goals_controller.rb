@@ -1,4 +1,5 @@
 class GoalsController < ApplicationController
+  before_action :check_using_personal, only: %i[edit update destroy]
   before_action :set_goal, only: %i[edit update destroy]
 
   def index

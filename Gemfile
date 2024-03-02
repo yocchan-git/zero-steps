@@ -14,15 +14,13 @@ gem "jbuilder"
 gem 'dotenv-rails'
 gem 'i18n_generators'
 gem 'kaminari'
+gem "bcrypt"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
 
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
