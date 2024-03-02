@@ -2,7 +2,7 @@ class GoalsController < ApplicationController
   before_action :set_goal, only: %i[edit update destroy]
 
   def index
-    @goals = Goal.order(created_at: :desc)
+    @goals = Goal.order(created_at: :desc).page(params[:page])
   end
 
   def show
