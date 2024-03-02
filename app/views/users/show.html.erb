@@ -3,5 +3,8 @@
   <p><%= @user.name %></p>
   <p><%= @user.dream %></p>
 
+  <% if current_user == @user %>
+    <%= link_to '修正する', edit_user_path(@user) %>
+  <% end %>
   <%= link_to 'ユーザー一覧へ戻る', users_path, class: 'bg-gray-600 hover:bg-gray-500 text-white rounded block px-4 py-2' %>
 </div>
