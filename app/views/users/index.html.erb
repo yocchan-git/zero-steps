@@ -1,0 +1,14 @@
+<h1>ユーザー一覧</h1>
+<div>
+  <% @users.each do |user| %>
+    <div>
+      <%= image_tag user.image %>
+      <div>
+        <p><%= link_to user.name, user %></p>
+        <p><%= user.dream %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <%= paginate @users %>
+</div>
