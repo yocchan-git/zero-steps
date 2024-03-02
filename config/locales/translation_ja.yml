@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      goal: 目標
+      user: ユーザー
+
+    attributes:
+      goal:
+        description: 説明
+        title: タイトル
+        user: :activerecord.models.user
+
+      user:
+        dream: 夢
+        email: Eメール
+        goals: 目標
+        image: 画像
+        name: 名前
+        uid: ウイド
