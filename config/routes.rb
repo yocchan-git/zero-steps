@@ -6,5 +6,5 @@ Rails.application.routes.draw do
     resources :sessions, only: %i[new destroy]
   end
   resources :goals
-  resources :users, only: %i[index show]
+  resources :users, only: %i[index show edit update]
 end

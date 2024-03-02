@@ -1,0 +1,10 @@
+<%= form_with model: current_user do |form| %>
+  <%= render 'shared/validation_errors', resource: current_user %>
+
+  <div>
+    <%= form.label :dream %>
+    <%= form.text_field :dream %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
