@@ -1,0 +1,14 @@
+<h1>企業の一覧</h1>
+<div>
+  <% @companies.each do |company| %>
+    <div>
+      <div>
+        <p><%= link_to company.name, company %></p>
+        <p><%= company.industry %></p>
+        <%= link_to 'HP', company.home_page_url %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= paginate @companies %>
+</div>

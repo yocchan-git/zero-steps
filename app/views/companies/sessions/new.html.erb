@@ -1,0 +1,12 @@
+<%= form_with(url: companies_sessions_path, scope: :session) do |f| %>
+  <%= f.label :login_id %>
+  <%= f.text_field :login_id, class: 'form-control' %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, class: 'form-control' %>
+
+  <%= f.submit "ログイン", class: "btn btn-primary" %>
+<% end %>
+
+<p><%= link_to "企業アカウント登録", new_company_path %></p>
+<%= link_to 'ゼロ高関係者のログイン', new_users_session_path %>

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :check_using_personal, only: %i[edit update]
   before_action :check_can_edit_user, only: %i[edit update]
 
   def index

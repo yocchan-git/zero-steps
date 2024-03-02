@@ -1,0 +1,42 @@
+<%= form_with(model: company) do |form| %>
+  <%= render 'shared/validation_errors', resource: company %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :login_id, style: "display: block" %>
+    <%= form.text_field :login_id %>
+  </div>
+
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.label :industry, style: "display: block" %>
+    <%= form.text_field :industry %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :home_page_url, style: "display: block" %>
+    <%= form.text_field :home_page_url %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

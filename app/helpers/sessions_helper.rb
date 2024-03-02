@@ -1,16 +1,20 @@
 module SessionsHelper
   def current_user
-    return unless (user_id = session[:user_id])
+    return unless session[:user_id] || session[:company_id]
 
-    @current_user ||= User.find_by(id: user_id)
-  end
-  
-  def log_in(user)
-    session[:user_id] = user.id
+    if session[:user_id]
+      @current_user ||= User.find_by(id: session[:user_id])
+    elsif session[:company_id]
+      @current_user ||= Company.find_by(id: session[:company_id])
+    end
   end
 
   def log_out
-    session.delete(:user_id)
+    reset_session
     @current_user = nil
+  end
+
+  def using_personal?
+    !!session[:user_id]
   end
 end
