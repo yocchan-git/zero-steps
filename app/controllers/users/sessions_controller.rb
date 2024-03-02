@@ -14,6 +14,7 @@ class Users::SessionsController < ApplicationController
     discord_account_information = DiscordAuthentication.fetch_discord_account_information(access_token)
 
     if user = find_or_create_from_discord_info(discord_account_information)
+      reset_session
       log_in user
     end
     redirect_to root_path, notice: 'ログインしました'
