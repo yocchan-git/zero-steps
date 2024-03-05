@@ -2,7 +2,7 @@
 
 one:
   name: MyString
-  login_id: MyString
+  email: MyString
   password_digest: MyString
   industry: MyString
   description: MyText
@@ -10,7 +10,7 @@ one:
 
 two:
   name: MyString
-  login_id: MyString
+  email: MyString
   password_digest: MyString
   industry: MyString
   description: MyText

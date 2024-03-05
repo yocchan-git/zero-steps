@@ -8,7 +8,7 @@ class Companies::SessionsController < ApplicationController
   def new; end
 
   def create
-    company = Company.find_by(login_id: params[:session][:login_id])
+    company = Company.find_by(email: params[:session][:email])
     if company&.authenticate(params[:session][:password])
       reset_session
       log_in company

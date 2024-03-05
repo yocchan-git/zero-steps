@@ -3,6 +3,7 @@ ja:
     models:
       goal: 目標
       user: ユーザー
+      company: 会社
 
     attributes:
       goal:
@@ -17,3 +18,11 @@ ja:
         image: 画像
         name: 名前
         uid: ウイド
+
+      company:
+        description: 説明
+        email: Eメール
+        home_page_url: ホームページの URL
+        industry: 業界
+        name: 名前
+        password_digest: パスワード
