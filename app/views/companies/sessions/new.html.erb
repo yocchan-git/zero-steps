@@ -4,6 +4,7 @@
 
   <%= f.label :password %>
   <%= f.password_field :password, class: 'form-control' %>
+  <%= link_to "パスワードを忘れましたか？", new_companies_password_path %>
 
   <%= f.submit "ログイン", class: "btn btn-primary" %>
 <% end %>
