@@ -16,9 +16,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_02_082939) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
-    t.string "login_id", null: false
+    t.string "email", null: false
     t.string "password_digest", null: false
-    t.string "industry", null: false
+    t.string "industry"
     t.text "description"
     t.text "home_page_url"
     t.datetime "created_at", null: false
