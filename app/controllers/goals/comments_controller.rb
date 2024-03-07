@@ -2,7 +2,7 @@ class Goals::CommentsController < ApplicationController
   before_action :set_goal
 
   def index
-    @comments = @goal.comments.order(:created_at)
+    @comments = @goal.comments.order(created_at: :desc)
   end
 
   def create
