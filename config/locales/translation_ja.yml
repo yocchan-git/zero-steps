@@ -11,7 +11,7 @@ ja:
         user: :activerecord.models.user
 
       user:
-        dream: 夢
+        is_hidden: 非公開
         email: Eメール
         goals: 目標
         image: 画像

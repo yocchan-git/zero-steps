@@ -14,6 +14,7 @@ class Users::SessionsController < ApplicationController
     discord_account_information = DiscordAuthentication.fetch_discord_account_information(access_token)
 
     if user = find_or_create_from_discord_info(discord_account_information)
+      reset_session
       log_in user
     end
     redirect_to root_path, notice: 'ログインしました'
@@ -31,7 +32,6 @@ class Users::SessionsController < ApplicationController
       user.update!(
         uid: discord_account_information['id'],
         name: discord_account_information['username'],
-        email: discord_account_information['email'],
         image: "https://cdn.discordapp.com/avatars/#{discord_account_information['id']}/#{discord_account_information['avatar']}"
       )
     end
