@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   end
   resources :goals do
     resources :complete_posts, only: %i[new create], module: :goals
+    resources :comments, only: %i[index create], module: :goals
   end
 end
