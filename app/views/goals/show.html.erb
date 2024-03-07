@@ -7,6 +7,7 @@
   <% else %>
     <%= link_to '終了投稿する', new_goal_complete_post_path(@goal) %>
   <% end %>
+  <%= link_to 'コメント一覧を見る', goal_comments_path(@goal) %>
   <%= link_to '修正する', edit_goal_path(@goal) %>
   <%= link_to '目標一覧へ戻る', goals_path, class: 'bg-gray-600 hover:bg-gray-500 text-white rounded block px-4 py-2' %>
 </div>
