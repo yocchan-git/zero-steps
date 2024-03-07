@@ -1,0 +1,12 @@
+<%= form_with(model: [ complete_postable, CompletePost.new ]) do |form| %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+    <%= link_to '戻る', :back, class: 'bg-gray-600 hover:bg-gray-500 text-white rounded block px-4 py-2' %>
+  </div>
+<% end %>

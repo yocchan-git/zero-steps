@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  complete_postable: one
+  complete_postable_type: Complete postable
+  content: MyText
+
+two:
+  user: two
+  complete_postable: two
+  complete_postable_type: Complete postable
+  content: MyText
