@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <%= link_to root_path, class: 'navbar-brand d-flex align-items-center' do %>
+      <%= image_tag 'logo.png', width: 50, height: 45 %>
+      <span class="align-middle">Zero Steps</span>
+    <% end %>
+
+    <div class="ms-auto me-4">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <% if current_user %>
+          <li class="nav-item">
+            <%= link_to current_user, class: 'nav-link active' do %>
+              <%= image_tag current_user.image, class: 'rounded-circle', width: 30, height: 30 %>
+              <%= current_user.name %>さん
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ユーザー", users_path, class: 'nav-link active' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "目標", goals_path, class: 'nav-link active' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", users_session_path(current_user), class: 'nav-link active', data: { turbo_method: :delete }  %>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "ログイン", new_users_session_path, class: 'nav-link active' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
