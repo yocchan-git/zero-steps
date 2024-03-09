@@ -1,16 +1,29 @@
-<h1>みんなの目標</h1>
 <div>
-  <div><%= link_to '目標を作成する', new_goal_path %></div>
-  <div>
-    <% @goals.each do |goal| %>
-      <div>
-        <div>
-          <h2><%= link_to goal.title, goal %></h2>
-          <p><%= goal.description %></p>
-        </div>
+  <div class="d-flex justify-content-between mb-3">
+    <div>
+      <h1 class="fs-2">みんなの目標</h1>
+    </div>
 
-        <div>
-          <span><%= goal.user.name %></span>
+    <div class="me-5">
+      <%= link_to '目標を作成する', new_goal_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @goals.each do |goal| %>
+      <div class="col-md-4 mb-3">
+        <div class="border border-2 rounded-1">
+          <div class="p-4">
+            <h2 class="fs-4"><%= link_to goal.title, goal, class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></h2>
+            <p><%= goal.description %></p>
+          </div>
+
+          <div class="p-3 text-end">
+            <%= link_to current_user, class: 'text-reset text-decoration-none ' do %>
+              <%= image_tag goal.user.image, class: 'rounded-circle', width: 30, height: 30 %>
+              <%= goal.user.name %>さん
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>
