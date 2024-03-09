@@ -1,11 +1,15 @@
-<%= form_with(model: [ commentable, Comment.new ]) do |form| %>
+<div class="d-flex justify-content-center">
+  <div class="col-lg-6 col-md-8 col-12">
+    <%= form_with(model: [ commentable, Comment.new ]) do |form| %>
+      <div class="mb-3">
+        <%= form.label :content, class: 'form-label' %><span>(500文字以内で入力してください)</span>
+        <%= form.text_area :content, class: 'form-control', required: true %>
+      </div>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content, required: true %>
+      <div class="d-flex justify-content-center">
+        <%= form.submit 'コメントする', class: 'btn btn-primary me-3' %>
+        <%= link_to '戻る', :back, class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

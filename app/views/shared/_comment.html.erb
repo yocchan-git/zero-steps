@@ -1,4 +1,17 @@
-<% comments.each do |comment| %>
-  <p><%= comment.content %></p>
-  <span><%= comment.user.name %></span>
-<% end %>
+<div class="d-flex justify-content-center">
+  <div class="col-lg-6 col-md-8 col-12">
+    <% comments.each do |comment| %>
+      <div class="mb-3">
+        <div class="border border-2 rounded-1">
+          <p class="p-4"><%= comment.content %></p>
+          <div class="p-3 text-end">
+            <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
+              <%= image_tag comment.user.image, class: 'rounded-circle', width: 30, height: 30 %>
+              <%= comment.user.name %>さん
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
