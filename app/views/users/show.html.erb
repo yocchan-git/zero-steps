@@ -2,9 +2,9 @@
   <%= image_tag @user.image, width: 120, height: 120 %>
   <p><%= @user.name %></p>
 
-  <%= link_to '一覧へ戻る', users_path, class: 'btn btn-secondary' %>
-  <div class="follow-btn mt-2">
-    <%= render 'follow_form' %>
+  <div class="d-flex justify-content-center">
+    <%= link_to '一覧へ戻る', users_path, class: 'btn btn-secondary me-2' %>
+    <%= render 'follow_form', user: @user, is_users_page: false %>
   </div>
 </div>
 

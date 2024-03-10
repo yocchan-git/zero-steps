@@ -13,6 +13,10 @@
           <p class="mt-2 mb-0">目標の数:<%= user.goals.length %></p>
           <p class="mb-0">コメントの数:<%= user.comments.length %></p>
         </div>
+
+        <div class="text-center my-2">
+          <%= render 'follow_form', user:, is_users_page: true %>
+        </div>
       </div>
     </div>
   <% end %>
