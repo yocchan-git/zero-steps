@@ -1,4 +1,16 @@
-<h1 class="fs-2 text-center">ユーザー一覧</h1>
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+  <div>
+    <h1 class="fs-3 text-center">ユーザー一覧</h1>
+  </div>
+
+  <div class="text-end">
+    <% if params[:only_follows] %>
+      <%= link_to '全てのユーザーを表示する', users_path, class: 'btn btn-primary me-3' %>
+    <% else %>
+      <%= link_to 'フォローしている人で絞り込む', users_path(only_follows: true), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
 
 <div class="row">
   <% @users.each do |user| %>
@@ -12,6 +24,10 @@
           <%= link_to user.name, user, class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover mb-3' %>
           <p class="mt-2 mb-0">目標の数:<%= user.goals.length %></p>
           <p class="mb-0">コメントの数:<%= user.comments.length %></p>
+        </div>
+
+        <div class="text-center my-2">
+          <%= render 'follow_form', user:, is_users_page: true %>
         </div>
       </div>
     </div>

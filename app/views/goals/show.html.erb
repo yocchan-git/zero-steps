@@ -1,11 +1,11 @@
-<div>
-  <div class="d-flex justify-content-between justify-content-md-around">
-    <div>
-      <h2><%= @goal.title %></h2>
+
+  <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+    <div class="text-center">
+      <h2 class="fs-3"><%= @goal.title %></h2>
       <p><%= @goal.description %></p>
     </div>
 
-    <div>
+    <div class="text-end">
       <% if @goal.completed_at? %>
         <p>完了</p>
       <% else %>
@@ -19,12 +19,14 @@
     <%= link_to '目標一覧へ戻る', goals_path, class: 'btn btn-secondary' %>
   </div>
 
-  <div class="d-flex justify-content-between justify-content-md-around">
-    <h2>最近のコメント</h2>
-    <%= link_to 'もっと見る', goal_comments_path(@goal), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
+  <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+    <h2 class="fs-3">最近のコメント</h2>
+    <div class="text-end">
+      <%= link_to 'もっと見る', goal_comments_path(@goal), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
+    </div>
   </div>
 
   <%# TODO: ここリファクタリングする %>
   <% comments = @goal.comments.includes(:user).order(created_at: :desc).limit(3) %>
   <%= render 'shared/comment', comments:, content_type: :user %>
-</div>
+

@@ -10,4 +10,5 @@ Rails.application.routes.draw do
     resources :complete_posts, only: %i[new create], module: :goals
     resources :comments, only: %i[index create], module: :goals
   end
+  resources :relationships, only: %i[create destroy]
 end

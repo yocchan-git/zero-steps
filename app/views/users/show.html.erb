@@ -2,17 +2,23 @@
   <%= image_tag @user.image, width: 120, height: 120 %>
   <p><%= @user.name %></p>
 
-  <%= link_to '一覧へ戻る', users_path, class: 'btn btn-secondary' %>
+  <div class="d-flex justify-content-center">
+    <%= link_to '一覧へ戻る', users_path, class: 'btn btn-secondary me-2' %>
+    <%= render 'follow_form', user: @user, is_users_page: false %>
+  </div>
 </div>
 
-<div class="mb-3">
-  <h2 class="fs-3 text-center">最近の目標</h2>
-  <%# TODO: リファクタリングする(マジックナンバーとか) %>
-  <% goals = @user.goals.order(created_at: :desc).limit(3) %>
-  <%= render 'shared/goal', goals: %>
-</div>
-
-<h2 class="fs-3 text-center">最近のコメント</h2>
+<%# TODO: リファクタリングする(マジックナンバーとか) %>
+<% goals = @user.goals.order(created_at: :desc).limit(3) %>
+<% if goals.present? %>
+  <div class="mb-3">
+    <h2 class="fs-3 text-center">最近の目標</h2>
+    <%= render 'shared/goal', goals: %>
+  </div>
+<% end %>
 
 <% comments = @user.comments.includes(:commentable).order(created_at: :desc).limit(3) %>
-<%= render 'shared/comment', comments:, content_type: :commentable  %>
+<% if comments.present? %>
+  <h2 class="fs-3 text-center">最近のコメント</h2>
+  <%= render 'shared/comment', comments:, content_type: :commentable  %>
+<% end %>
