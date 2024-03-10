@@ -1,8 +1,10 @@
 class Goals::CommentsController < ApplicationController
   before_action :set_goal
 
+  COMMENT_COUNT = 5
+
   def index
-    @comments = @goal.comments.order(created_at: :desc)
+    @comments = @goal.comments.includes(:user).order(created_at: :desc).page(params[:page]).per(COMMENT_COUNT)
   end
 
   def create
@@ -12,6 +14,7 @@ class Goals::CommentsController < ApplicationController
     if comment.save
       redirect_to goal_comments_path(@goal), notice: 'コメントを投稿しました'
     else
+      @comments = @goal.comments.includes(:user).order(created_at: :desc).page(params[:page]).per(COMMENT_COUNT)
       render 'goals/comments/index'
     end
   end

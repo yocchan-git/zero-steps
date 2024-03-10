@@ -1,13 +1,30 @@
 <div>
-  <h2><%= @goal.title %></h2>
-  <p><%= @goal.description %></p>
+  <div class="d-flex justify-content-between justify-content-md-around">
+    <div>
+      <h2><%= @goal.title %></h2>
+      <p><%= @goal.description %></p>
+    </div>
 
-  <% if @goal.completed_at? %>
-    <p>完了</p>
-  <% else %>
-    <%= link_to '終了投稿する', new_goal_complete_post_path(@goal) %>
-  <% end %>
-  <%= link_to 'コメント一覧を見る', goal_comments_path(@goal) %>
-  <%= link_to '修正する', edit_goal_path(@goal) %>
-  <%= link_to '目標一覧へ戻る', goals_path, class: 'bg-gray-600 hover:bg-gray-500 text-white rounded block px-4 py-2' %>
+    <div>
+      <% if @goal.completed_at? %>
+        <p>完了</p>
+      <% else %>
+        <%= link_to '終了投稿する', new_goal_complete_post_path(@goal), class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mb-5">
+    <%= link_to '修正する', edit_goal_path(@goal), class: 'btn btn-warning me-3' %>
+    <%= link_to '目標一覧へ戻る', goals_path, class: 'btn btn-secondary' %>
+  </div>
+
+  <div class="d-flex justify-content-between justify-content-md-around">
+    <h2>最近のコメント</h2>
+    <%= link_to 'もっと見る', goal_comments_path(@goal), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
+  </div>
+
+  <%# TODO: ここリファクタリングする %>
+  <% comments = @goal.comments.includes(:user).order(created_at: :desc).limit(3) %>
+  <%= render 'shared/comment', comments:, content_type: :user %>
 </div>

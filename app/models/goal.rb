@@ -3,6 +3,6 @@ class Goal < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :user
 
-  validates :title, presence: true, length: { maximum: 256 }
+  validates :title, presence: true, length: { maximum: 255 }
   validates :description, presence: true
 end
