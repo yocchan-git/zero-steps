@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def index
-    @users = User.includes(:goals, :comments).order(created_at: :desc).page(params[:page])
+    # TODO: リファクタリングする
+    @users = 
+      params[:only_follows] ?
+        current_user.following.includes(:goals, :comments).order(created_at: :desc).page(params[:page]) :
+        User.includes(:goals, :comments).order(created_at: :desc).page(params[:page])
   end
 
   def show

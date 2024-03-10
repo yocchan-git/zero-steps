@@ -1,4 +1,16 @@
-<h1 class="fs-2 text-center">ユーザー一覧</h1>
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+  <div>
+    <h1 class="fs-3 text-center">ユーザー一覧</h1>
+  </div>
+
+  <div class="text-end">
+    <% if params[:only_follows] %>
+      <%= link_to '全てのユーザーを表示する', users_path, class: 'btn btn-primary me-3' %>
+    <% else %>
+      <%= link_to 'フォローしている人で絞り込む', users_path(only_follows: true), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
 
 <div class="row">
   <% @users.each do |user| %>

@@ -5,6 +5,7 @@ class RelationshipsController < ApplicationController
 
     @is_users_page = params[:is_users_page]
     redirect_uri = @is_users_page ? users_path : @user
+
     respond_to do |format|
       format.html { redirect_to redirect_uri }
       format.turbo_stream
