@@ -26,5 +26,5 @@
 
   <%# TODO: ここリファクタリングする %>
   <% comments = @goal.comments.includes(:user).order(created_at: :desc).limit(3) %>
-  <%= render 'shared/comment', comments: %>
+  <%= render 'shared/comment', comments:, content_type: :user %>
 </div>

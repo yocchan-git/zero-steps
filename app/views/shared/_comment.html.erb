@@ -5,9 +5,15 @@
         <div class="border border-2 rounded-1">
           <p class="p-4"><%= comment.content %></p>
           <div class="p-3 text-end">
-            <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
-              <%= image_tag comment.user.image, class: 'rounded-circle', width: 30, height: 30 %>
-              <%= comment.user.name %>さん
+            <% if content_type == :user %>
+              <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
+                <%= image_tag comment.user.image, class: 'rounded-circle', width: 30, height: 30 %>
+                <%= comment.user.name %>さん
+              <% end %>
+            <% elsif content_type == :commentable %>
+              <%= link_to comment.commentable, class: 'text-reset text-decoration-none ' do %>
+                <%= comment.commentable.title %>(<%= comment.goal? ? '目標' : 'タスク' %>)
+              <% end %>
             <% end %>
           </div>
         </div>
