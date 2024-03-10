@@ -8,14 +8,17 @@
   </div>
 </div>
 
-<div class="mb-3">
-  <h2 class="fs-3 text-center">最近の目標</h2>
-  <%# TODO: リファクタリングする(マジックナンバーとか) %>
-  <% goals = @user.goals.order(created_at: :desc).limit(3) %>
-  <%= render 'shared/goal', goals: %>
-</div>
-
-<h2 class="fs-3 text-center">最近のコメント</h2>
+<%# TODO: リファクタリングする(マジックナンバーとか) %>
+<% goals = @user.goals.order(created_at: :desc).limit(3) %>
+<% if goals.present? %>
+  <div class="mb-3">
+    <h2 class="fs-3 text-center">最近の目標</h2>
+    <%= render 'shared/goal', goals: %>
+  </div>
+<% end %>
 
 <% comments = @user.comments.includes(:commentable).order(created_at: :desc).limit(3) %>
-<%= render 'shared/comment', comments:, content_type: :commentable  %>
+<% if comments.present? %>
+  <h2 class="fs-3 text-center">最近のコメント</h2>
+  <%= render 'shared/comment', comments:, content_type: :commentable  %>
+<% end %>
