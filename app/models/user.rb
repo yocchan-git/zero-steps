@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_many :goals, dependent: :destroy
+  has_many :tasks, dependent: :destroy
   has_many :complete_posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :active_relationships, class_name: "Relationship",
