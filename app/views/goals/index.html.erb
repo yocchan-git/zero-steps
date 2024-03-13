@@ -15,6 +15,8 @@
         <div class="p-4">
           <h2 class="fs-4"><%= link_to goal.title, goal, class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></h2>
           <p><%= goal.description %></p>
+
+          <%= render 'shared/task_progress_bar', goal: %>
         </div>
 
         <div class="p-3 text-end">

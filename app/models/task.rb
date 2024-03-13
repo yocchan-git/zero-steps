@@ -6,4 +6,6 @@ class Task < ApplicationRecord
 
   validates :content, presence: true
   validates :completion_limits, presence: true
+
+  scope :completed, -> { where.not(completed_at: nil) }
 end

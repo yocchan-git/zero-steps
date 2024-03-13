@@ -2,6 +2,8 @@
   <div>
     <h2 class="fs-3"><%= @goal.title %></h2>
     <p><%= @goal.description %></p>
+
+    <%= render 'shared/task_progress_bar', goal: @goal %>
   </div>
 
   <div class="text-end">
