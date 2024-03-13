@@ -1,7 +1,7 @@
 class Goals::TasksController < ApplicationController
   before_action :set_goal, only: %i[index show]
-  before_action :set_current_user_goal, only: %i[new create edit]
-  before_action :set_task, only: %i[show edit]
+  before_action :set_current_user_goal, only: :create
+  before_action :set_task, only: :show
   before_action :set_current_user_task, only: %i[update destroy]
 
   def index
@@ -11,10 +11,6 @@ class Goals::TasksController < ApplicationController
 
   def show; end
 
-  def new
-    @task = Task.new
-  end
-
   def create
     @task = @goal.tasks.build(task_params)
     @task.user = current_user
@@ -22,17 +18,15 @@ class Goals::TasksController < ApplicationController
     if @task.save
       redirect_to params[:redirect_uri], notice: 'タスクを作成しました'
     else
-      render :new, status: :unprocessable_entity
+      redirect_to params[:redirect_uri], alert: 'タスクの作成に失敗しました'
     end
   end
-
-  def edit; end
 
   def update
     if @task.update(task_params)
       redirect_to params[:redirect_uri], notice: 'タスクを更新しました'
     else
-      render 'goals/tasks/edit'
+      redirect_to params[:redirect_uri], alert: 'タスクの更新に失敗しました'
     end
   end
 
