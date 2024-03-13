@@ -6,6 +6,7 @@ class Goals::TasksController < ApplicationController
 
   def index
     @tasks = @goal.tasks.order(created_at: :desc).page(params[:page])
+    @task = Task.new
   end
 
   def show; end
@@ -19,7 +20,7 @@ class Goals::TasksController < ApplicationController
     @task.user = current_user
 
     if @task.save
-      redirect_to goal_tasks_path(@goal), notice: 'タスクを作成しました'
+      redirect_to params[:redirect_uri], notice: 'タスクを作成しました'
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,16 +30,15 @@ class Goals::TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to goal_task_path(@task, goal_id: @task.goal.id), notice: 'タスクを更新しました'
+      redirect_to params[:redirect_uri], notice: 'タスクを更新しました'
     else
-      puts @task.errors
       render 'goals/tasks/edit'
     end
   end
 
   def destroy
     @task.destroy!
-    redirect_to goal_tasks_path(@task.goal), notice: '削除成功しました'
+    redirect_to params[:redirect_uri], notice: '削除成功しました'
   end
 
   private

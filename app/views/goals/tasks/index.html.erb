@@ -4,11 +4,14 @@
   </div>
 
   <div class="text-end">
-    <%= link_to 'タスクを作成する', new_goal_task_path, class: 'btn btn-primary' %>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskFormModal">
+      タスクを作成する
+    </button>
   </div>
 </div>
 
 <%= render 'shared/task_list', tasks: @tasks, goal: @goal %>
+<%= render 'shared/task_create_modal', task: @task, goal: @goal %>
 
 <div class="d-flex justify-content-center">
   <%= paginate @tasks %>
