@@ -1,0 +1,27 @@
+<div class="modal fade" id="taskFormModal<%= task.id %>" tabindex="-1" aria-labelledby="taskFormModalLabel<%= task.id %>" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="taskFormModalLabel<%= task.id %>">「<%= task.content %>」を編集する</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_with(model: task, url: goal_task_path(task, goal_id: task.goal.id, redirect_uri: request.url)) do |form| %>
+        <div class="modal-body">
+            <%= render 'shared/validation_errors', resource: task %>
+
+            <div class="mb-3">
+              <%= form.label :content, class: 'form-label' %>
+              <%= form.text_area :content, class: 'form-control', required: true %>
+            </div>
+
+            <%= form.label :completion_limits, '締切日' %>
+            <%= form.datetime_field :completion_limits, class: 'form-control' %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+          <%= form.submit class: 'btn btn-primary me-3' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_10_041313) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_10_071446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,6 +56,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_10_041313) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "goal_id", null: false
+    t.text "content"
+    t.datetime "completion_limits", null: false
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_id"], name: "index_tasks_on_goal_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "uid", null: false
     t.string "name", null: false
@@ -70,4 +82,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_10_041313) do
   add_foreign_key "goals", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
+  add_foreign_key "tasks", "goals"
+  add_foreign_key "tasks", "users"
 end

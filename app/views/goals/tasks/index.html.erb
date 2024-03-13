@@ -1,0 +1,22 @@
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+  <div class="text-center">
+    <h1 class="fs-2"><%= @goal.title %>のタスク一覧</h1>
+  </div>
+
+  <div class="text-end">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskFormModal">
+      タスクを作成する
+    </button>
+  </div>
+</div>
+
+<%= render 'shared/task_list', tasks: @tasks %>
+<%= render 'shared/task_create_modal', task: @task, goal: @goal %>
+
+<div class="d-flex justify-content-center">
+  <%= paginate @tasks %>
+</div>
+
+<div class="d-flex justify-content-center">
+  <%= link_to '目標詳細に戻る', @goal, class: 'btn btn-secondary' %>
+</div>
