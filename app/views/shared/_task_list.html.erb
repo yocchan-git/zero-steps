@@ -3,7 +3,7 @@
     <% tasks.each do |task| %>
       <div class="mb-3">
         <div class="border border-2 rounded-1">
-          <p class="p-4"><%= link_to task.content, goal_task_path(task, goal_id: goal.id), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
+          <p class="p-4"><%= link_to task.content, goal_task_path(task, goal_id: task.goal.id), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
 
           <div class="p-3 text-end">
             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#taskFormModal<%= task.id %>">

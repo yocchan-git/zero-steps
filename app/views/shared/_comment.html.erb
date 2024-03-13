@@ -11,8 +11,10 @@
                 <%= comment.user.name %>さん
               <% end %>
             <% elsif content_type == :commentable %>
-              <%= link_to comment.commentable, class: 'text-reset text-decoration-none ' do %>
-                <%= comment.commentable.title %>(<%= comment.goal? ? '目標' : 'タスク' %>)
+              <%# TODO: リファクタリングする %>
+              <% request_uri = comment.goal? ? comment.commentable : goal_task_path(comment.commentable, goal_id: comment.commentable.goal.id) %>
+              <%= link_to request_uri, class: 'text-reset text-decoration-none ' do %>
+                <%= comment.goal? ? "#{comment.commentable.title}(目標)" : "#{comment.commentable.content}(タスク)" %>
               <% end %>
             <% end %>
           </div>

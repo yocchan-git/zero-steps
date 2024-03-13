@@ -12,13 +12,21 @@
 <% goals = @user.goals.order(created_at: :desc).limit(3) %>
 <% if goals.present? %>
   <div class="mb-3">
-    <h2 class="fs-3 text-center">最近の目標</h2>
+    <h2 class="fs-4 text-center">最近の目標</h2>
     <%= render 'shared/goal', goals: %>
+  </div>
+<% end %>
+
+<% tasks = @user.tasks.order(created_at: :desc).limit(3) %>
+<% if tasks.present? %>
+  <div class="mb-3">
+    <h2 class="fs-4 text-center">最近のタスク</h2>
+    <%= render 'shared/task_list', tasks: %>
   </div>
 <% end %>
 
 <% comments = @user.comments.includes(:commentable).order(created_at: :desc).limit(3) %>
 <% if comments.present? %>
-  <h2 class="fs-3 text-center">最近のコメント</h2>
+  <h2 class="fs-4 text-center">最近のコメント</h2>
   <%= render 'shared/comment', comments:, content_type: :commentable  %>
 <% end %>
