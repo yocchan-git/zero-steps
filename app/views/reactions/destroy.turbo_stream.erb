@@ -1,0 +1,10 @@
+<%# TODO: ヘルパーメソッドにリファクタする %>
+<% request_uri = reactionable_uri(@reaction) %>
+
+<%= turbo_stream.update "#{@reaction.reaction_form_id_name}" do %>
+  <%= render partial: "shared/unreactions", locals: {reactionable: @reaction.reactionable, request_uri:} %>
+<% end %>
+
+<%= turbo_stream.update "#{@reaction.reaction_count_id_name}" do %>
+  <%= Reaction.where(reactionable: @reaction.reactionable).count %>
+<% end %>

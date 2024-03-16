@@ -4,19 +4,25 @@
       <div class="mb-3">
         <div class="border border-2 rounded-1">
           <p class="p-4"><%= comment.content %></p>
-          <div class="p-3 text-end">
-            <% if content_type == :user %>
-              <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
-                <%= image_tag comment.user.image, class: 'rounded-circle', width: 30, height: 30 %>
-                <%= comment.user.name %>さん
+          <div class="d-flex justify-content-between p-3">
+            <div class="d-flex align-items-center">
+              <%= render 'shared/reaction_form', reactionable: comment, content_type: :comment, request_uri: comment_reactions_path(comment) %>
+            </div>
+
+            <div>
+              <% if content_type == :user %>
+                <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
+                  <%= image_tag comment.user.image, class: 'rounded-circle', width: 30, height: 30 %>
+                  <%= comment.user.name %>さん
+                <% end %>
+              <% elsif content_type == :commentable %>
+                <%# TODO: リファクタリングする %>
+                <% request_uri = comment.goal? ? comment.commentable : goal_task_path(comment.commentable, goal_id: comment.commentable.goal.id) %>
+                <%= link_to request_uri, class: 'text-reset text-decoration-none ' do %>
+                  <%= comment.goal? ? "#{comment.commentable.title}(目標)" : "#{comment.commentable.content}(タスク)" %>
+                <% end %>
               <% end %>
-            <% elsif content_type == :commentable %>
-              <%# TODO: リファクタリングする %>
-              <% request_uri = comment.goal? ? comment.commentable : goal_task_path(comment.commentable, goal_id: comment.commentable.goal.id) %>
-              <%= link_to request_uri, class: 'text-reset text-decoration-none ' do %>
-                <%= comment.goal? ? "#{comment.commentable.title}(目標)" : "#{comment.commentable.content}(タスク)" %>
-              <% end %>
-            <% end %>
+            </div>
           </div>
         </div>
       </div>

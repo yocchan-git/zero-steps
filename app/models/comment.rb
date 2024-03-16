@@ -1,4 +1,5 @@
 class Comment < ApplicationRecord
+  has_many :reactions, as: :reactionable, dependent: :destroy
   belongs_to :user
   belongs_to :commentable, polymorphic: true
 
