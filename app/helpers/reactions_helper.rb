@@ -1,10 +1,19 @@
 module ReactionsHelper
-  def reactionable_id_name(reactionable, content_type)
+  def reaction_form_id_name(reactionable, content_type)
     case content_type
     when :comment
       "comment_reaction_form#{reactionable.id}"
     when :complete_post
       "complete_post_reaction_form#{reactionable.id}"
+    end
+  end
+
+  def reaction_count_id_name(reactionable, content_type)
+    case content_type
+    when :comment
+      "comment_reaction_count#{reactionable.id}"
+    when :complete_post
+      "complete_post_reaction_count#{reactionable.id}"
     end
   end
 
