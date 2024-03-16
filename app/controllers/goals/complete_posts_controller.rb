@@ -7,7 +7,7 @@ class Goals::CompletePostsController < ApplicationController
     @goal.completed_at = Time.current
     @goal.save!
 
-    complete_post = @goal.complete_posts.build(complete_post_params)
+    complete_post = @goal.build_complete_post(complete_post_params)
     complete_post.user = current_user
 
     if complete_post.save
