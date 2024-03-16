@@ -20,6 +20,14 @@
   <%= link_to '目標一覧へ戻る', goals_path, class: 'btn btn-secondary' %>
 </div>
 
+<% if @goal.completed_at? %>
+  <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+    <h2 class="fs-3">終了投稿</h2>
+  </div>
+  <% complete_post = @goal.complete_posts.includes(:user).order(created_at: :desc).first %>
+  <%= render 'shared/complete_post', complete_post: %>
+<% end %>
+
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
   <h2 class="fs-3">最近のタスク</h2>
   <div class="text-end">

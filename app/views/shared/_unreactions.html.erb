@@ -1,0 +1,6 @@
+<%= form_with(model: reactionable.reactions.build, url: request_uri) do |f| %>
+  <%= hidden_field_tag :redirect_uri, request.url %>
+  <%= f.button type: 'submit', class: 'btn' do %>
+    <i class="fa-regular fa-heart" style="color: #f005dc;"></i>
+  <% end %>
+<% end %>

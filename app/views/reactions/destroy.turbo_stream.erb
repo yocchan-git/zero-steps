@@ -1,0 +1,6 @@
+<%# TODO: ヘルパーメソッドにリファクタする %>
+<% request_uri = @reaction.comment? ? comment_reactions_path(@reaction.reactionable) : complete_post_reactions_path(@reaction.reactionable) %>
+
+<%= turbo_stream.update "#{@reaction.reactionable_id_name}" do %>
+  <%= render partial: "shared/unreactions", locals: {reactionable: @reaction.reactionable, request_uri:} %>
+<% end %>

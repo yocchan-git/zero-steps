@@ -1,0 +1,10 @@
+<% reactionable_id_name = reactionable_id_name(reactionable, content_type) %>
+<% if reaction = Reaction.find_by(user: current_user, reactionable:) %>
+  <div id="<%= reactionable_id_name %>">
+    <%= render partial: "shared/reactions", locals: {reactionable:} %>
+  </div>
+<% else %>
+  <div id="<%= reactionable_id_name %>">
+    <%= render partial: "shared/unreactions", locals: {reactionable:, request_uri:} %>
+  </div>
+<% end %>

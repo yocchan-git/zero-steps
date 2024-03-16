@@ -1,0 +1,3 @@
+<%= turbo_stream.update "comment_reaction_form#{@reactionable.id}" do %>
+  <%= render partial: "shared/reactions", locals: {reactionable: @reactionable} %>
+<% end %>

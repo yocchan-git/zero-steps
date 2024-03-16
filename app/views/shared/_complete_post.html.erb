@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-center">
+  <div class="col-lg-6 col-md-8 col-12">
+    <div class="mb-3">
+      <div class="border border-2 rounded-1">
+        <p class="p-4"><%= complete_post.content %></p>
+        <%= render 'shared/reaction_form', reactionable: complete_post, content_type: :complete_post, request_uri: complete_post_reactions_path(complete_post) %>
+        <div class="p-3 text-end">
+          <%= link_to complete_post.user, class: 'text-reset text-decoration-none ' do %>
+            <%= image_tag complete_post.user.image, class: 'rounded-circle', width: 30, height: 30 %>
+            <%= complete_post.user.name %>さん
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

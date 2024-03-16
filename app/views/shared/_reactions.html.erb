@@ -1,0 +1,7 @@
+<%= form_with(model: reactionable.reactions.find_by(reactionable:),
+              html: { method: :delete }) do |f| %>
+  <%= hidden_field_tag :redirect_uri, request.url %>
+  <%= f.button type: 'submit', class: 'btn' do %>
+    <i class="fa-solid fa-heart" style="color: #e811a4;"></i>
+  <% end %>
+<% end %>

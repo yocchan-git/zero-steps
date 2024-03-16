@@ -4,6 +4,7 @@
       <div class="mb-3">
         <div class="border border-2 rounded-1">
           <p class="p-4"><%= comment.content %></p>
+          <%= render 'shared/reaction_form', reactionable: comment, content_type: :comment, request_uri: comment_reactions_path(comment) %>
           <div class="p-3 text-end">
             <% if content_type == :user %>
               <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
