@@ -7,7 +7,7 @@ class Tasks::CompletePostsController < ApplicationController
     @task.completed_at = Time.current
     @task.save!
 
-    complete_post = @task.complete_posts.build(complete_post_params)
+    complete_post = @task.build_complete_post(complete_post_params)
     complete_post.user = current_user
 
     if complete_post.save

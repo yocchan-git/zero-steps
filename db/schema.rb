@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_13_115845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["complete_postable_type", "complete_postable_id"], name: "index_complete_posts_on_complete_postable"
+    t.index ["complete_postable_type", "complete_postable_id"], name: "index_complete_posts_on_postable", unique: true
     t.index ["user_id"], name: "index_complete_posts_on_user_id"
   end
 

@@ -7,5 +7,7 @@ class CreateCompletePosts < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_index :complete_posts, [:complete_postable_type, :complete_postable_id], unique: true, name: 'index_complete_posts_on_postable'
   end
 end
