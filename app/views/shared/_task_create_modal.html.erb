@@ -5,17 +5,17 @@
         <h1 class="modal-title fs-5" id="taskFormModalLabel">タスクを作成する</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <%= form_with(model: task, url: goal_tasks_path(goal, redirect_uri: request.url)) do |form| %>
+      <%= form_with(model: task, url: goal_tasks_path(goal)) do |form| %>
         <div class="modal-body">
             <%= render 'shared/validation_errors', resource: task %>
 
             <div class="mb-3">
-              <%= form.label :content, class: 'form-label' %>
-              <%= form.text_area :content, class: 'form-control', required: true %>
+              <%= form.label :content, "内容(500文字以内)", class: 'form-label' %>
+              <%= form.text_area :content, class: 'form-control', required: true, maxlength: 500 %>
             </div>
 
             <%= form.label :completion_limits, '締切日' %>
-            <%= form.datetime_field :completion_limits, value: Time.current.beginning_of_day.strftime('%Y-%m-%dT%T'), class: 'form-control' %>
+            <%= form.datetime_field :completion_limits, value: Time.current.beginning_of_day.strftime('%Y-%m-%dT%T'), class: 'form-control', required: true %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>

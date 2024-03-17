@@ -4,13 +4,13 @@
       <%= render 'shared/validation_errors', resource: goal %>
 
       <div class="mb-3">
-        <%= form.label :title, class: 'form-label' %>
-        <%= form.text_field :title, class: 'form-control' %>
+        <%= form.label :title, "タイトル(250文字以内)", class: 'form-label' %>
+        <%= form.text_field :title, class: 'form-control', required: true, maxlength: 250 %>
       </div>
 
       <div class="mb-3">
-        <%= form.label :description, class: 'form-label' %>
-        <%= form.text_area :description, class: 'form-control' %>
+        <%= form.label :description, "説明(500文字以内)", class: 'form-label' %>
+        <%= form.text_area :description, class: 'form-control', required: true, maxlength: 500 %>
       </div>
 
       <div class="d-flex justify-content-center">

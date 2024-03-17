@@ -4,7 +4,7 @@ class ReactionsController < ApplicationController
     @reaction.destroy!
 
     respond_to do |format|
-      format.html { redirect_to params[:redirect_uri] }
+      format.html { redirect_to request.referer }
       format.turbo_stream
     end
   end

@@ -3,11 +3,8 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:followed_id])
     current_user.follow(@user)
 
-    @is_users_page = params[:is_users_page]
-    redirect_uri = @is_users_page ? users_path : @user
-
     respond_to do |format|
-      format.html { redirect_to redirect_uri }
+      format.html { redirect_to request.referer }
       format.turbo_stream
     end
   end
@@ -16,11 +13,8 @@ class RelationshipsController < ApplicationController
     @user = Relationship.find(params[:id]).followed
     current_user.unfollow(@user)
 
-    @is_users_page = params[:is_users_page]
-    redirect_uri = @is_users_page ? users_path : @user
-
     respond_to do |format|
-      format.html { redirect_to redirect_uri, status: :see_other }
+      format.html { redirect_to request.referer, status: :see_other }
       format.turbo_stream
     end
   end

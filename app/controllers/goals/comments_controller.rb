@@ -11,12 +11,8 @@ class Goals::CommentsController < ApplicationController
     comment = @goal.comments.build(comment_params)
     comment.user = current_user
 
-    if comment.save
-      redirect_to request.referer, notice: 'コメントを投稿しました'
-    else
-      @comments = @goal.comments.includes(:user).order(created_at: :desc).page(params[:page]).per(COMMENT_COUNT)
-      render 'goals/comments/index'
-    end
+    comment.save!
+    redirect_to request.referer, notice: 'コメントを投稿しました'
   end
 
   private

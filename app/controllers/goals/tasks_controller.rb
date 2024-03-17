@@ -15,24 +15,18 @@ class Goals::TasksController < ApplicationController
     @task = @goal.tasks.build(task_params)
     @task.user = current_user
 
-    if @task.save
-      redirect_to params[:redirect_uri], notice: 'タスクを作成しました'
-    else
-      redirect_to params[:redirect_uri], alert: 'タスクの作成に失敗しました'
-    end
+    @task.save!
+    redirect_to request.referer, notice: 'タスクを作成しました'
   end
 
   def update
-    if @task.update(task_params)
-      redirect_to params[:redirect_uri], notice: 'タスクを更新しました'
-    else
-      redirect_to params[:redirect_uri], alert: 'タスクの更新に失敗しました'
-    end
+    @task.update!(task_params)
+    redirect_to request.referer, notice: 'タスクを更新しました'
   end
 
   def destroy
     @task.destroy!
-    redirect_to params[:redirect_uri], notice: '削除成功しました'
+    redirect_to request.referer, notice: '削除成功しました'
   end
 
   private
