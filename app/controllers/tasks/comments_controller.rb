@@ -12,7 +12,7 @@ class Tasks::CommentsController < ApplicationController
     comment.user = current_user
 
     if comment.save
-      redirect_to task_comments_path(@task), notice: 'コメントを投稿しました'
+      redirect_to request.referer, notice: 'コメントを投稿しました'
     else
       @comments = @task.comments.includes(:user).order(created_at: :desc).page(params[:page]).per(COMMENT_COUNT)
       render 'tasks/comments/index'

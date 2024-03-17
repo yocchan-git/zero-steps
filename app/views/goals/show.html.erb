@@ -30,24 +30,50 @@
   <%= render 'shared/complete_post', complete_post: %>
 <% end %>
 
+<% tasks = @goal.tasks.includes(:user).order(created_at: :desc).limit(3) %>
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
   <h2 class="fs-3">最近のタスク</h2>
   <div class="text-end">
-    <%= link_to 'もっと見る', goal_tasks_path(@goal), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
+    <% if tasks.empty? && current_user == @goal.user %>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskFormModal">
+        タスクを作成する
+      </button>
+    <% else %>
+      <%= link_to 'もっと見る', goal_tasks_path(@goal), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
+    <% end %>
   </div>
 </div>
-
-<% tasks = @goal.tasks.includes(:user).order(created_at: :desc).limit(3) %>
+<% if tasks.empty? %>
+  <div class="d-flex justify-content-center mb-3">
+    <div class="border-bottom border-bottom-5 m-4 px-4">
+      <p class="mb-1 p-0">最近のタスクはありません</p>
+    </div>
+  </div>
+<% end %>
 <%= render 'shared/task_list', tasks: %>
-
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-  <h2 class="fs-3">最近のコメント</h2>
-  <div class="text-end">
-    <%= link_to 'もっと見る', goal_comments_path(@goal), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
-  </div>
-</div>
+<%= render 'shared/task_create_modal', task: Task.new, goal: @goal %>
 
 <%# TODO: ここリファクタリングする %>
 <% comments = @goal.comments.includes(:user).order(created_at: :desc).limit(3) %>
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+  <h2 class="fs-3">最近のコメント</h2>
+  <div class="text-end">
+    <% if comments.empty? %>
+      <span>コメント受付中</span>
+    <% else %>
+      <%= link_to 'もっと見る', goal_comments_path(@goal), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
+    <% end %>
+  </div>
+</div>
+
+<% if comments.empty? %>
+  <div class="d-flex justify-content-center mb-3">
+    <div class="border-bottom border-bottom-5 m-4 px-4">
+      <p class="mb-1 p-0">最近のコメントはありません</p>
+    </div>
+  </div>
+<% end %>
+
 <%= render 'shared/comment', comments:, content_type: :user %>
+<%= render 'shared/comment_form', commentable: @goal %>
 

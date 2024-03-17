@@ -37,13 +37,27 @@
   <%= render 'shared/complete_post', complete_post: %>
 <% end %>
 
+<%# TODO: ここリファクタリングする %>
+<% comments = @task.comments.includes(:user).order(created_at: :desc).limit(3) %>
+
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
   <h2 class="fs-3">最近のコメント</h2>
   <div class="text-end">
-    <%= link_to 'もっと見る', task_comments_path(@task), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
+    <% if comments.empty? %>
+      <span>コメント受付中</span>
+    <% else %>
+      <%= link_to 'もっと見る', task_comments_path(@task), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
+    <% end %>
   </div>
 </div>
 
-<%# TODO: ここリファクタリングする %>
-<% comments = @task.comments.includes(:user).order(created_at: :desc).limit(3) %>
+<% if comments.empty? %>
+  <div class="d-flex justify-content-center mb-3">
+    <div class="border-bottom border-bottom-5 m-4 px-4">
+      <p class="mb-1 p-0">最近のコメントはありません</p>
+    </div>
+  </div>
+<% end %>
+
 <%= render 'shared/comment', comments:, content_type: :user %>
+<%= render 'shared/comment_form', commentable: @task %>
