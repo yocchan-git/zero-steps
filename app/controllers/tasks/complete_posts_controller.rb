@@ -11,6 +11,7 @@ class Tasks::CompletePostsController < ApplicationController
     complete_post.user = current_user
 
     if complete_post.save
+      Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}というタスクを終了しました", url: task_url(@task))
       redirect_to goal_task_path(@task, goal_id: @task.goal.id), notice: '終了投稿しました'
     else
       render 'tasks/complete_posts/new'

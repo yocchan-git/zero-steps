@@ -8,4 +8,8 @@ class Task < ApplicationRecord
   validates :completion_limits, presence: true
 
   scope :completed, -> { where.not(completed_at: nil) }
+
+  def formatted_content
+    content.length <= 20 ? content : "#{content[0...20]}..."
+  end
 end

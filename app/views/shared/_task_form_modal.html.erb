@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="taskFormModalLabel<%= task.id %>">「<%= formatted_content(task) %>」を編集する</h1>
+        <h1 class="modal-title fs-5" id="taskFormModalLabel<%= task.id %>">「<%= task.formatted_content %>」を編集する</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <%= form_with(model: task, url: goal_task_path(task, goal_id: task.goal.id)) do |form| %>

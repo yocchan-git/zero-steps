@@ -12,6 +12,7 @@ class Goals::CommentsController < ApplicationController
     comment.user = current_user
 
     comment.save!
+    Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@goal.formatted_title}にコメントしました", url: goal_comments_url(@goal))
     redirect_to request.referer, notice: 'コメントを投稿しました'
   end
 

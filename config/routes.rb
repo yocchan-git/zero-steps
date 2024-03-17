@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'goals#index'
+  root 'timelines#index'
 
   get "auth/discord/callback", to: "users/sessions#callback"
   resources :users, only: %i[index show]
@@ -23,4 +23,5 @@ Rails.application.routes.draw do
     resources :reactions, only: %i[create], module: :complete_posts
   end
   resources :reactions, only: %i[destroy]
+  resources :timelines, only: %i[index]
 end
