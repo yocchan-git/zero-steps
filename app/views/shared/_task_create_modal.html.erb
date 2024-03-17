@@ -15,7 +15,7 @@
             </div>
 
             <%= form.label :completion_limits, '締切日' %>
-            <%= form.datetime_field :completion_limits, value: Time.current.beginning_of_day.strftime('%Y-%m-%dT%T'), class: 'form-control' %>
+            <%= form.datetime_field :completion_limits, value: Time.current.beginning_of_day.strftime('%Y-%m-%dT%T'), class: 'form-control', required: true %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
