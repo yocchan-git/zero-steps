@@ -6,7 +6,7 @@
           <p class="p-4"><%= link_to task.formatted_content, goal_task_path(task, goal_id: task.goal.id), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
 
           <div class="p-3 text-end">
-            <% if current_user == task.user %>
+            <% if current_user?(task.user) %>
               <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#taskFormModal<%= task.id %>">
                 <i class="fa-solid fa-pen"></i>
               </button>

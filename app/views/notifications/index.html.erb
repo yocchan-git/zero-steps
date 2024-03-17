@@ -1,0 +1,25 @@
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+  <h1 class="fs-3 text-center">通知一覧</h1>
+</div>
+
+<div class="d-flex justify-content-center mb-4">
+  <div class="col-lg-6 col-md-8 col-12">
+    <% if @notifications.present? %>
+        <% @notifications.each do |notification| %>
+          <div class="border border-1 rounded-1">
+            <p class="p-4 mb-0"><%= link_to notification.content, notification_path(notification), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
+          </div>
+        <% end %>
+    <% else %>
+      <div class="d-flex justify-content-center mt-0">
+        <div class="border-bottom border-bottom-5 m-4 px-4">
+          <p class="mb-1 p-0">通知はありません</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <%= paginate @notifications %>
+</div>

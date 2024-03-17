@@ -13,6 +13,7 @@ class Tasks::CommentsController < ApplicationController
 
     comment.save!
     Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}にコメントしました", url: task_comments_url(@task))
+    Notification.create!(user: @task.user, content: "#{@task.formatted_content}に#{current_user.name}さんからコメントがありました", url: task_comments_url(@task)) if !current_user?(@task.user)
     redirect_to request.referer, notice: 'コメントを投稿しました'
   end
 
