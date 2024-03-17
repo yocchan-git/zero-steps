@@ -138,6 +138,9 @@ GEM
       net-smtp
     marcel (1.0.3)
     matrix (0.4.2)
+    mentionable (0.3.0)
+      activerecord
+      railties
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.22.2)
@@ -253,6 +256,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   kaminari
+  mentionable
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8)
