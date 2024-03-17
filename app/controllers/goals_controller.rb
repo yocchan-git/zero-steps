@@ -19,6 +19,7 @@ class GoalsController < ApplicationController
     @goal = current_user.goals.new(goal_params)
 
     if @goal.save
+      Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@goal.formatted_title}という目標を作成しました", url: goal_url(@goal))
       redirect_to @goal, notice: '目標を作成しました'
     else
       render :new, status: :unprocessable_entity
@@ -34,9 +35,8 @@ class GoalsController < ApplicationController
   end
 
   def destroy
-    @goal.destroy
-
-    redirect_to root_path
+    @goal.destroy!
+    redirect_to goals_path
   end
 
   private
