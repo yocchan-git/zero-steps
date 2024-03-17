@@ -1,0 +1,18 @@
+<div class="ms-auto me-4">
+  <div class="dropdown">
+    <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa-solid fa-bell fa-lg"></i>
+    </button>
+    <ul class="dropdown-menu">
+      <% notifications.each do |notification| %>
+        <li class="dropdown-item">
+          <%= link_to notification.content, notification_path(notification), class: 'link-secondary link-offset-2 text-decoration-none' %>
+        </li>
+      <% end %>
+
+      <li class="dropdown-item">
+        <%= link_to 'すべての通知を見る', notifications_path, class: 'link-secondary link-offset-2 text-decoration-none' %>
+      </li>
+    </ul>
+  </div>
+</div>

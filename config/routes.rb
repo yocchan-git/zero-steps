@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   end
   resources :reactions, only: %i[destroy]
   resources :timelines, only: %i[index]
+  resources :notifications, only: %i[index show]
 end
