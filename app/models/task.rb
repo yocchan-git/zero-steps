@@ -4,7 +4,7 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :goal
 
-  validates :content, presence: true
+  validates :content, presence: true, length: { maximum: 500 }
   validates :completion_limits, presence: true
 
   scope :completed, -> { where.not(completed_at: nil) }
