@@ -33,6 +33,7 @@
   <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
     <h2 class="fs-3">終了投稿</h2>
   </div>
+  <p class="text-center">いいねやコメントでお祝いしましょう！</p>
   <% complete_post = @task.complete_post %>
   <%= render 'shared/complete_post', complete_post: %>
 <% end %>
@@ -41,7 +42,10 @@
 <% comments = @task.comments.includes(:user).order(created_at: :desc).limit(3) %>
 
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-  <h2 class="fs-3">最近のコメント</h2>
+  <div>
+    <h2 class="fs-3 mb-3">最近のコメント</h2>
+    <p>気軽にいいねやコメントで交流しよう！</p>
+  </div>
   <div class="text-end">
     <% if comments.empty? %>
       <span>コメント受付中</span>
