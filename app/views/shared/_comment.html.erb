@@ -15,6 +15,12 @@
                   <%= image_tag comment.user.image, class: 'rounded-circle', width: 30, height: 30 %>
                   <%= comment.user.name %>さん
                 <% end %>
+
+                <% if current_user?(comment.user) && is_comment_index %>
+                  <%= link_to comment_path(comment, page: params[:page]), class: "btn", data: { turbo_method: :delete, turbo_confirm: "#{comment.formatted_content}を本当に削除しますか？" } do %>
+                    <i class="fa-solid fa-trash"></i>
+                  <% end %>
+                <% end %>
               <% elsif content_type == :commentable %>
                 <%# TODO: リファクタリングする %>
                 <% request_uri = comment.goal? ? comment.commentable : goal_task_path(comment.commentable, goal_id: comment.commentable.goal.id) %>

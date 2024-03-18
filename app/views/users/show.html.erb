@@ -28,5 +28,5 @@
 <% comments = @user.comments.includes(:commentable).order(created_at: :desc).limit(3) %>
 <% if comments.present? %>
   <h2 class="fs-4 text-center">最近のコメント</h2>
-  <%= render 'shared/comment', comments:, content_type: :commentable  %>
+  <%= render 'shared/comment', comments:, content_type: :commentable %>
 <% end %>

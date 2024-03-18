@@ -14,4 +14,9 @@ class Comment < ApplicationRecord
   def after_save_mention(new_mentions)
     # メンションされた後のメソッドだが、何もしない
   end
+
+  # TODO: taskと全く同じなので、まとめる
+  def formatted_content
+    content.length <= 20 ? content : "#{content[0...20]}..."
+  end
 end
