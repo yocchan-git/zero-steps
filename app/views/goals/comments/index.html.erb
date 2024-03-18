@@ -9,7 +9,9 @@
   </div>
 </div>
 
-<%= render 'shared/comment', comments: @comments, content_type: :user %>
+<div id="comments">
+  <%= render 'shared/comment', comments: @comments, content_type: :user, is_comment_index: true %>
+</div>
 
 <div class="d-flex justify-content-center">
   <%= paginate @comments %>
