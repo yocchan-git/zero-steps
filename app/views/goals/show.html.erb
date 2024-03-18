@@ -8,7 +8,7 @@
 
   <div class="text-end">
     <% if @goal.completed_at? %>
-      <p class="text-success">完了</p>
+      <p class="text-success">達成(<%= l @goal.completed_at, format: :date %>)</p>
     <% elsif current_user?(@goal.user) %>
       <%= link_to '終了投稿する', new_goal_complete_post_path(@goal), class: 'btn btn-primary' %>
     <% end %>
