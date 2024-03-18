@@ -5,11 +5,11 @@
   <% completed_task_rate = task_count.zero? ? 0 : (completed_task_count.to_f / task_count * 100).ceil %>
   <div class="col-9">
     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 10px;">
-      <div class="progress-bar" style="width: <%= completed_task_rate %>%"></div>
+      <div class="progress-bar" style="width: <%= goal.completed_at? ? 100 : completed_task_rate %>%"></div>
     </div>
   </div>
 
   <div class="col-3">
-    <span>(<%= completed_task_count %>/<%= task_count %>)</span>
+    <span>(<%= goal.completed_at? ? '達成' : "#{completed_task_count}/#{task_count}" %>)</span>
   </div>
 </div>
