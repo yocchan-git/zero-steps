@@ -15,6 +15,7 @@ gem 'dotenv-rails'
 gem 'i18n_generators'
 gem 'kaminari'
 gem 'mentionable'
+gem 'high_voltage'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
