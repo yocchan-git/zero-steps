@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :complete_posts, only: %i[new create], module: :tasks
     resources :comments, only: %i[index create], module: :tasks
   end
-  resources :comments, only: [] do
+  resources :comments, only: %i[destroy] do
     resources :reactions, only: %i[create], module: :comments
   end
   resources :complete_posts, only: [] do
