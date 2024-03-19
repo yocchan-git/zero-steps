@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Goals::CommentsController < ApplicationController
   before_action :set_goal
 
@@ -25,7 +27,10 @@ class Goals::CommentsController < ApplicationController
       Notification.create!(user: mentioned_user, content: "コメントで#{current_user.name}さんからメンションされました", url: goal_comments_url(@goal))
     end
 
-    Notification.create!(user: @goal.user, content: "#{@goal.formatted_title}に#{current_user.name}さんからコメントがありました", url: goal_comments_url(@goal)) if is_create_notification && !current_user?(@goal.user)
+    if is_create_notification && !current_user?(@goal.user)
+      Notification.create!(user: @goal.user, content: "#{@goal.formatted_title}に#{current_user.name}さんからコメントがありました",
+                           url: goal_comments_url(@goal))
+    end
     redirect_to request.referer, notice: 'コメントを投稿しました'
   end
 

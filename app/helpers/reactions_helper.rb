@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReactionsHelper
   def reaction_form_id_name(reactionable, content_type)
     case content_type

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Comments::ReactionsController < ApplicationController
   def create
     @reactionable = Comment.find(params[:comment_id])

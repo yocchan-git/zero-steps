@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Tasks::CommentsController < ApplicationController
   before_action :set_task
 
@@ -27,7 +29,10 @@ class Tasks::CommentsController < ApplicationController
       Notification.create!(user: mentioned_user, content: "コメントで#{current_user.name}さんからメンションされました", url: task_comments_url(@task))
     end
 
-    Notification.create!(user: @task.user, content: "#{@task.formatted_content}に#{current_user.name}さんからコメントがありました", url: task_comments_url(@task)) if is_create_notification && !current_user?(@task.user)
+    if is_create_notification && !current_user?(@task.user)
+      Notification.create!(user: @task.user, content: "#{@task.formatted_content}に#{current_user.name}さんからコメントがありました",
+                           url: task_comments_url(@task))
+    end
     redirect_to request.referer, notice: 'コメントを投稿しました'
   end
 

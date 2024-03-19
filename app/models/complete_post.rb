@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CompletePost < ApplicationRecord
   has_many :reactions, as: :reactionable, dependent: :destroy
   belongs_to :user

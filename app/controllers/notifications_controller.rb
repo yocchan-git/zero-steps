@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationsController < ApplicationController
   NOTIFICATION_COUNT = 10
 
@@ -9,7 +11,7 @@ class NotificationsController < ApplicationController
     notification = Notification.find(params[:id])
 
     # TODO: ここモデルに移行する
-    if !notification.is_read
+    unless notification.is_read
       notification.is_read = true
       notification.save!
     end

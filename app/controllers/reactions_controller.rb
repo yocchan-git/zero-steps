@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReactionsController < ApplicationController
   def destroy
     @reaction = current_user.reactions.find(params[:id])

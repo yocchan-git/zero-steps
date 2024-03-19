@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'timelines#index'
 
-  get "auth/discord/callback", to: "users/sessions#callback"
+  get 'auth/discord/callback', to: 'users/sessions#callback'
   resources :users, only: %i[index show]
   namespace :users do
     resources :sessions, only: %i[new destroy]
