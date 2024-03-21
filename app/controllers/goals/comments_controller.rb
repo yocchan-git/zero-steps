@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Goals::CommentsController < ApplicationController
+  before_action :check_hide_user, only: %i[create]
   before_action :set_goal
 
   COMMENT_COUNT = 5

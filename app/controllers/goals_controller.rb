@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GoalsController < ApplicationController
+  before_action :check_hide_user, only: %i[new edit create update destroy]
   before_action :set_goal, only: %i[edit update destroy]
 
   def index

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  before_action :check_hide_user
+
   COMMENT_COUNT = 5
 
   def destroy

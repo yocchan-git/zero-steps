@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Tasks::CompletePostsController < ApplicationController
+  before_action :check_hide_user
   before_action :set_task
 
   def new; end
