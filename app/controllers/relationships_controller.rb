@@ -6,7 +6,7 @@ class RelationshipsController < ApplicationController
     current_user.follow(@user)
 
     respond_to do |format|
-      format.html { redirect_to request.referer }
+      format.html { redirect_back(fallback_location: root_path) }
       format.turbo_stream
     end
   end
@@ -16,7 +16,7 @@ class RelationshipsController < ApplicationController
     current_user.unfollow(@user)
 
     respond_to do |format|
-      format.html { redirect_to request.referer, status: :see_other }
+      format.html { redirect_back(fallback_location: root_path) }
       format.turbo_stream
     end
   end

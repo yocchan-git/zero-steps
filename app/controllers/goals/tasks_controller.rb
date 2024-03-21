@@ -20,17 +20,17 @@ class Goals::TasksController < ApplicationController
     @task.save!
     Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}というタスクを作成しました",
                      url: goal_task_url(@task, goal_id: @goal.id))
-    redirect_to request.referer, notice: 'タスクを作成しました'
+    redirect_back(fallback_location: root_path, notice: 'タスクを作成しました')
   end
 
   def update
     @task.update!(task_params)
-    redirect_to request.referer, notice: 'タスクを更新しました'
+    redirect_back(fallback_location: root_path, notice: 'タスクを更新しました')
   end
 
   def destroy
     @task.destroy!
-    redirect_to request.referer, notice: '削除成功しました'
+    redirect_back(fallback_location: root_path, notice: 'タスクを削除しました')
   end
 
   private

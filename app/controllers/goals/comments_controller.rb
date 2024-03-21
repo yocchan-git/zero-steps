@@ -22,7 +22,7 @@ class Goals::CommentsController < ApplicationController
       Notification.create!(user: @goal.user, content: "#{@goal.formatted_title}に#{current_user.name}さんからコメントがありました",
                            url: goal_comments_url(@goal))
     end
-    redirect_to request.referer, notice: 'コメントを投稿しました'
+    redirect_back(fallback_location: root_path, notice: 'コメントを投稿しました')
   end
 
   private

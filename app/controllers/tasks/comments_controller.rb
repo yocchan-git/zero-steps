@@ -23,7 +23,7 @@ class Tasks::CommentsController < ApplicationController
       Notification.create!(user: @task.user, content: "#{@task.formatted_content}に#{current_user.name}さんからコメントがありました",
                            url: task_comments_url(@task))
     end
-    redirect_to request.referer, notice: 'コメントを投稿しました'
+    redirect_back(fallback_location: root_path, notice: 'コメントを投稿しました')
   end
 
   private

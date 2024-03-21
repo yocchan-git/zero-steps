@@ -6,7 +6,7 @@ class ReactionsController < ApplicationController
     @reaction.destroy!
 
     respond_to do |format|
-      format.html { redirect_to request.referer }
+      format.html { redirect_back(fallback_location: root_path) }
       format.turbo_stream
     end
   end
