@@ -16,6 +16,6 @@ class NotificationsController < ApplicationController
       notification.save!
     end
 
-    redirect_to notification.url
+    redirect_to notification.comment_url
   end
 end
