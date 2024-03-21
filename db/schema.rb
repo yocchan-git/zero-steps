@@ -49,11 +49,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_090527) do
 
   create_table "notifications", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "comment_id", null: false
     t.text "content"
-    t.text "url"
     t.boolean "is_read", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
@@ -92,10 +93,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_090527) do
 
   create_table "timelines", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.string "timelineable_type", null: false
+    t.bigint "timelineable_id", null: false
     t.text "content"
-    t.text "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["timelineable_type", "timelineable_id"], name: "index_timelines_on_timelineable"
     t.index ["user_id"], name: "index_timelines_on_user_id"
   end
 
@@ -111,6 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_090527) do
   add_foreign_key "comments", "users"
   add_foreign_key "complete_posts", "users"
   add_foreign_key "goals", "users"
+  add_foreign_key "notifications", "comments"
   add_foreign_key "notifications", "users"
   add_foreign_key "reactions", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
