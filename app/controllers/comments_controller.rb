@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
 
     @comments = comment.commentable.comments.includes(:user).order(created_at: :desc).page(params[:page]).per(COMMENT_COUNT)
     respond_to do |format|
-      format.html { redirect_to request.referer }
+      format.html { redirect_back(fallback_location: root_path) }
       format.turbo_stream
     end
   end
