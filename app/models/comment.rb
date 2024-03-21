@@ -24,19 +24,19 @@ class Comment < ApplicationRecord
     content.length <= 20 ? content : "#{content[0...20]}..."
   end
 
-  def create_mention_notification(redirect_uri)
+  def create_mention_notification
     mentions.each do |mention|
       mentioned_name = mention[1..]
       mentioned_user = User.find_by(name: mentioned_name)
 
       next unless mentioned_user
 
-      Notification.create!(user: mentioned_user, content: "コメントで#{user.name}さんからメンションされました", url: redirect_uri)
+      notifications.create!(user: mentioned_user, content: "コメントで#{user.name}さんからメンションされました")
     end
   end
 
-  def create_normal_notification?
+  def mention_other_than_commentable_user?
     commentable_user_name = commentable.user.name
-    mentions.include?("@#{commentable_user_name}")
+    mentions.none?("@#{commentable_user_name}")
   end
 end
