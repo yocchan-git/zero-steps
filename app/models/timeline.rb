@@ -2,7 +2,7 @@
 
 class Timeline < ApplicationRecord
   belongs_to :user
+  belongs_to :timelineable, polymorphic: true
 
   validates :content, presence: true
-  validates :url, presence: true
 end

@@ -3,7 +3,9 @@
 class Comment < ApplicationRecord
   mentionable_as :content
 
+  has_many :notifications, dependent: :destroy
   has_many :reactions, as: :reactionable, dependent: :destroy
+  has_many :timelines, as: :timelineable, dependent: :destroy
   belongs_to :user
   belongs_to :commentable, polymorphic: true
 

@@ -2,6 +2,7 @@
 
 class CompletePost < ApplicationRecord
   has_many :reactions, as: :reactionable, dependent: :destroy
+  has_many :timelines, as: :timelineable, dependent: :destroy
   belongs_to :user
   belongs_to :complete_postable, polymorphic: true
 
