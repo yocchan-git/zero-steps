@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CompletePosts::ReactionsController < ApplicationController
   def create
     @reactionable = CompletePost.find(params[:complete_post_id])

@@ -4,12 +4,12 @@
       <div class="mb-3">
         <div class="border border-2 rounded-1">
           <div class="d-flex justify-content-between">
-            <div  class="p-4">
+            <div class="p-4">
               <p><%= link_to task.formatted_content, goal_task_path(task, goal_id: task.goal.id), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
               <p>期限: <%= l task.completion_limits, format: :date %></p>
             </div>
 
-            <div  class="p-4">
+            <div class="p-4">
               <p class="<%= "text-success" if task.completed_at? %>"><%= task.completed_at? ? "完了(#{l task.completed_at, format: :date})" : '進行中' %></p>
             </div>
           </div>

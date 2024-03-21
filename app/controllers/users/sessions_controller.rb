@@ -3,8 +3,7 @@
 class Users::SessionsController < ApplicationController
   skip_before_action :check_logged_in, only: %i[new callback]
 
-  def new
-  end
+  def new; end
 
   def callback
     return redirect_to new_users_session_path, alert: 'ログインをキャンセルしました' unless params[:code]
@@ -13,7 +12,7 @@ class Users::SessionsController < ApplicationController
     access_token = DiscordAuthentication.fetch_access_token(params[:code], redirect_uri)
     discord_account_information = DiscordAuthentication.fetch_discord_account_information(access_token)
 
-    if user = find_or_create_from_discord_info(discord_account_information)
+    if (user = find_or_create_from_discord_info(discord_account_information))
       reset_session
       log_in user
     end

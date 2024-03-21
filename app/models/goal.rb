@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Goal < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_one :complete_post, as: :complete_postable, dependent: :destroy

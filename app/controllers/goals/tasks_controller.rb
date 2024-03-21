@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Goals::TasksController < ApplicationController
   before_action :set_goal, only: %i[index show]
   before_action :set_current_user_goal, only: :create
@@ -16,7 +18,8 @@ class Goals::TasksController < ApplicationController
     @task.user = current_user
 
     @task.save!
-    Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}というタスクを作成しました", url: goal_task_url(@task, goal_id: @goal.id))
+    Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}というタスクを作成しました",
+                     url: goal_task_url(@task, goal_id: @goal.id))
     redirect_to request.referer, notice: 'タスクを作成しました'
   end
 

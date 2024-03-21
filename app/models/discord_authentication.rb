@@ -11,8 +11,8 @@ class DiscordAuthentication
     request = Net::HTTP::Post.new(uri.request_uri)
     request['Content-Type'] = 'application/x-www-form-urlencoded'
     request.set_form_data({
-                            'client_id' => ENV['DISCORD_CLIENT_ID'],
-                            'client_secret' => ENV['DISCORD_CLIENT_SECRET'],
+                            'client_id' => ENV.fetch('DISCORD_CLIENT_ID', nil),
+                            'client_secret' => ENV.fetch('DISCORD_CLIENT_SECRET', nil),
                             'grant_type' => 'authorization_code',
                             'code' => code,
                             'redirect_uri' => redirect_uri

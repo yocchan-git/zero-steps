@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Goals::CompletePostsController < ApplicationController
   before_action :set_goal
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def default_meta_tags
     {
@@ -9,20 +11,30 @@ module ApplicationHelper
       keywords: 'ゼロ高,目標,タスク,共有',
       canonical: request.original_url,
       separator: '|',
-      og: {
-        site_name: :site,
-        title: :title,
-        description: :description,
-        type: 'website',
-        url: request.original_url,
-        image: image_url('ogp.png'),
-        local: 'ja-JP'
-      },
-      twitter: {
-        card: 'summary_large_image',
-        site: '@yocchan_x',
-        image: image_url('ogp.png')
-      }
+      og: default_og,
+      twitter: default_twitter
+    }
+  end
+
+  private
+
+  def default_og
+    {
+      site_name: :site,
+      title: :title,
+      description: :description,
+      type: 'website',
+      url: request.original_url,
+      image: image_url('ogp.png'),
+      local: 'ja-JP'
+    }
+  end
+
+  def default_twitter
+    {
+      card: 'summary_large_image',
+      site: '@yocchan_x',
+      image: image_url('ogp.png')
     }
   end
 end

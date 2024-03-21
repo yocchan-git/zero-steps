@@ -10,7 +10,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-        <%= link_to "削除する", goal_task_path(task, goal_id: task.goal.id), class: 'btn btn-danger me-3', data: { turbo_method: :delete }  %>
+        <%= link_to "削除する", goal_task_path(task, goal_id: task.goal.id), class: 'btn btn-danger me-3', data: { turbo_method: :delete } %>
       </div>
     </div>
   </div>
