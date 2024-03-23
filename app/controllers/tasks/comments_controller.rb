@@ -22,6 +22,7 @@ class Tasks::CommentsController < ApplicationController
     comment.timelines.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}にコメントしました")
     if comment.mention_other_than_commentable_user? && !current_user?(@task.user)
       comment.notifications.create!(user: @task.user, content: "#{@task.formatted_content}に#{current_user.name}さんからコメントがありました")
+      comment.send_message_to_discord(:comment)
     end
     redirect_back(fallback_location: root_path, notice: 'コメントを投稿しました')
   end
