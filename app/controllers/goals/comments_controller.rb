@@ -21,6 +21,7 @@ class Goals::CommentsController < ApplicationController
 
     if comment.mention_other_than_commentable_user? && !current_user?(@goal.user)
       comment.notifications.create!(user: @goal.user, content: "#{@goal.formatted_title}に#{current_user.name}さんからコメントがありました")
+      comment.send_message_to_discord(:comment)
     end
     redirect_back(fallback_location: root_path, notice: 'コメントを投稿しました')
   end
