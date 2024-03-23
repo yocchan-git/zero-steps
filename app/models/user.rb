@@ -22,6 +22,8 @@ class User < ApplicationRecord
   validates :uid, presence: true
   validates :name, presence: true
 
+  scope :active, -> { where.not(is_hidden: true) }
+
   def follow(target_user)
     following << target_user unless self == target_user
   end

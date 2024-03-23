@@ -4,7 +4,11 @@
 
   <div class="d-flex justify-content-center">
     <%= link_to '一覧へ戻る', users_path, class: 'btn btn-secondary me-2' %>
-    <%= render 'follow_form', user: @user %>
+    <% if current_user?(@user) %>
+      <%= link_to '修正する', edit_user_path(current_user), class: 'btn btn-warning' %>
+    <% else %>
+      <%= render 'follow_form', user: @user %>
+    <% end %>
   </div>
 </div>
 

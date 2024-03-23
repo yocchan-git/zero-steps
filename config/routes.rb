@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get 'auth/discord/callback', to: 'users/sessions#callback'
   get 'auth/failure', to: 'users/sessions#failure'
-  resources :users, only: %i[index show]
+  resources :users, only: %i[index show edit update]
   namespace :users do
     resources :sessions, only: %i[new destroy]
   end
