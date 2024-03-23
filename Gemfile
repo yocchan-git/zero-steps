@@ -19,6 +19,8 @@ gem 'rails', '~> 7.0.8'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
+gem 'omniauth-discord'
+gem 'omniauth-rails_csrf_protection'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

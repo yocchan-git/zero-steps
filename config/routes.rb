@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'timelines#index'
 
   get 'auth/discord/callback', to: 'users/sessions#callback'
+  get 'auth/failure', to: 'users/sessions#failure'
   resources :users, only: %i[index show]
   namespace :users do
     resources :sessions, only: %i[new destroy]
