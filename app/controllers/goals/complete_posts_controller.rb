@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Goals::CompletePostsController < ApplicationController
+  before_action :check_hide_user, only: %i[new create]
   before_action :set_goal
 
   def new; end

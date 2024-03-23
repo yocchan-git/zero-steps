@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
     redirect_to new_users_session_path
   end
 
+  def check_hide_user
+    return unless current_user.is_hidden
+
+    redirect_to root_path, alert: '非公開のユーザーはアクセスできません'
+  end
+
   private
 
   def set_unread_notifications

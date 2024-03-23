@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Goals::TasksController < ApplicationController
+  before_action :check_hide_user, only: %i[new edit create update destroy]
   before_action :set_goal, only: %i[index show]
   before_action :set_current_user_goal, only: :create
   before_action :set_task, only: :show
