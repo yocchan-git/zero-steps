@@ -16,12 +16,11 @@ class Goals::CommentsController < ApplicationController
 
     comment.save!
 
-    comment.create_mention_notification(goal_comments_url(@goal))
-    Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@goal.formatted_title}にコメントしました", url: goal_comments_url(@goal))
+    comment.create_mention_notification
+    comment.timelines.create!(user: current_user, content: "#{current_user.name}さんが#{@goal.formatted_title}にコメントしました")
 
-    if comment.create_normal_notification? && !current_user?(@goal.user)
-      Notification.create!(user: @goal.user, content: "#{@goal.formatted_title}に#{current_user.name}さんからコメントがありました",
-                           url: goal_comments_url(@goal))
+    if comment.mention_other_than_commentable_user? && !current_user?(@goal.user)
+      comment.notifications.create!(user: @goal.user, content: "#{@goal.formatted_title}に#{current_user.name}さんからコメントがありました")
     end
     redirect_back(fallback_location: root_path, notice: 'コメントを投稿しました')
   end

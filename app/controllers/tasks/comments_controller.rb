@@ -17,12 +17,11 @@ class Tasks::CommentsController < ApplicationController
     comment.save!
 
     # ここリファクタリングする
-    comment.create_mention_notification(task_comments_url(@task))
+    comment.create_mention_notification
 
-    Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}にコメントしました", url: task_comments_url(@task))
-    if comment.create_normal_notification? && !current_user?(@task.user)
-      Notification.create!(user: @task.user, content: "#{@task.formatted_content}に#{current_user.name}さんからコメントがありました",
-                           url: task_comments_url(@task))
+    comment.timelines.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}にコメントしました")
+    if comment.mention_other_than_commentable_user? && !current_user?(@task.user)
+      comment.notifications.create!(user: @task.user, content: "#{@task.formatted_content}に#{current_user.name}さんからコメントがありました")
     end
     redirect_back(fallback_location: root_path, notice: 'コメントを投稿しました')
   end

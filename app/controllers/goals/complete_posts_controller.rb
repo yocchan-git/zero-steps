@@ -14,7 +14,7 @@ class Goals::CompletePostsController < ApplicationController
     complete_post.user = current_user
 
     if complete_post.save
-      Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@goal.formatted_title}という目標を終了しました", url: goal_url(@goal))
+      complete_post.timelines.create!(user: current_user, content: "#{current_user.name}さんが#{@goal.formatted_title}という目標を終了しました")
       redirect_to @goal, notice: '終了投稿しました'
     else
       render 'goals/complete_posts/new'
