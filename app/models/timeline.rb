@@ -13,7 +13,7 @@ class Timeline < ApplicationRecord
     when 'Goal'
       goal_path(timelineable)
     when 'Task'
-      goal_task_path(timelineable)
+      goal_task_path(timelineable, goal_id: timelineable.goal.id)
     when 'Comment'
       timelineable.comment_url
     when 'CompletePost'

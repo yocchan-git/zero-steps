@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
+  include Rails.application.routes.url_helpers
   mentionable_as :content
 
   has_many :notifications, dependent: :destroy
@@ -38,5 +39,9 @@ class Comment < ApplicationRecord
   def mention_other_than_commentable_user?
     commentable_user_name = commentable.user.name
     mentions.none?("@#{commentable_user_name}")
+  end
+
+  def comment_url
+    goal? ? goal_comments_path(commentable) : task_comments_path(commentable)
   end
 end

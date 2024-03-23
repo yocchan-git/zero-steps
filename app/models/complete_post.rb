@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CompletePost < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   has_many :reactions, as: :reactionable, dependent: :destroy
   has_many :timelines, as: :timelineable, dependent: :destroy
   belongs_to :user
@@ -13,7 +15,7 @@ class CompletePost < ApplicationRecord
     if complete_postable == 'Goal'
       goal_path(complete_postable)
     else
-      goal_task_path(complete_postable)
+      goal_task_path(complete_postable, goal_id: complete_postable.goal.id)
     end
   end
 end
