@@ -47,11 +47,8 @@
     <p>気軽にいいねやコメントで交流しよう！</p>
   </div>
   <div class="text-end">
-    <% if comments.empty? %>
-      <span>コメント受付中</span>
-    <% else %>
-      <%= link_to 'もっと見る', task_comments_path(@task), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
-    <% end %>
+    <% link_message = comments.empty? ? 'コメント受付中' : 'もっと見る' %>
+    <%= link_to link_message, task_comments_path(@task), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
   </div>
 </div>
 
@@ -64,4 +61,3 @@
 <% end %>
 
 <%= render 'shared/comment', comments:, content_type: :user, is_comment_index: false %>
-<%= render 'shared/comment_form', commentable: @task %>

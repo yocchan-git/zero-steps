@@ -23,7 +23,11 @@ class Goals::CommentsController < ApplicationController
       comment.notifications.create!(user: @goal.user, content: "#{@goal.formatted_title}に#{current_user.name}さんからコメントがありました")
       comment.send_message_to_discord(:comment)
     end
-    redirect_back(fallback_location: root_path, notice: 'コメントを投稿しました')
+
+    respond_to do |format|
+      format.html { redirect_to goal_comments_path(@goal) }
+      format.turbo_stream
+    end
   end
 
   private
