@@ -18,8 +18,7 @@ class Goals::TasksController < ApplicationController
     @task.user = current_user
 
     @task.save!
-    Timeline.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}というタスクを作成しました",
-                     url: goal_task_url(@task, goal_id: @goal.id))
+    @task.timelines.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}というタスクを作成しました")
     redirect_back(fallback_location: root_path, notice: 'タスクを作成しました')
   end
 

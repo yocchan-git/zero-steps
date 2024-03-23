@@ -2,6 +2,7 @@
 
 class Notification < ApplicationRecord
   belongs_to :user
+  belongs_to :comment
 
   # 3ヶ月以内の通知を取得
   scope :recent, -> { where('created_at > ?', Time.current.ago(3.months)).order(created_at: :desc) }

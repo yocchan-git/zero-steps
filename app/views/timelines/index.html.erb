@@ -15,7 +15,7 @@
     <% @timelines.each do |timeline| %>
       <div class="mb-3">
         <div class="border border-2 rounded-1">
-          <p class="p-4"><%= link_to timeline.content, timeline.url, class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
+          <p class="p-4"><%= link_to timeline.content, timeline.timelineable_url, class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
 
           <div class="p-3 text-end">
             <%= link_to timeline.user, class: 'text-reset text-decoration-none' do %>
