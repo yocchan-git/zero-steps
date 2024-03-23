@@ -22,6 +22,7 @@ gem 'turbo-rails'
 gem 'omniauth-discord'
 gem 'omniauth-rails_csrf_protection'
 gem 'discord-notifier'
+gem 'discordrb'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
