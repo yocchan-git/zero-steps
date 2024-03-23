@@ -99,7 +99,6 @@ GEM
     concurrent-ruby (1.2.3)
     crass (1.0.6)
     date (3.3.4)
-    discord-notifier (1.0.3)
     discordrb (3.5.0)
       discordrb-webhooks (~> 3.5.0)
       ffi (>= 1.9.24)
@@ -372,7 +371,6 @@ DEPENDENCIES
   bootstrap
   byebug
   capybara
-  discord-notifier
   discordrb
   dotenv-rails
   erb_lint
