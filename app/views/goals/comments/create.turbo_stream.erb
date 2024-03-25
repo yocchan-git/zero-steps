@@ -1,0 +1,9 @@
+<% comments = @goal.comments.includes(:user).order(created_at: :desc).page(params[:page]).per(5) %>
+
+<%= turbo_stream.update "comments" do %>
+  <%= render partial: 'shared/comment', locals: {comments:, content_type: :user, is_comment_index: true} %>
+<% end %>
+
+<%= turbo_stream.update "comment_form" do %>
+  <%= render partial: 'shared/comment_form', locals: {commentable: @goal} %>
+<% end %>

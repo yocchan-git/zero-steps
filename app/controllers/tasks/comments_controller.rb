@@ -24,7 +24,11 @@ class Tasks::CommentsController < ApplicationController
       comment.notifications.create!(user: @task.user, content: "#{@task.formatted_content}に#{current_user.name}さんからコメントがありました")
       comment.send_message_to_discord(:comment)
     end
-    redirect_back(fallback_location: root_path, notice: 'コメントを投稿しました')
+
+    respond_to do |format|
+      format.html { redirect_to task_comments_path(@task) }
+      format.turbo_stream
+    end
   end
 
   private

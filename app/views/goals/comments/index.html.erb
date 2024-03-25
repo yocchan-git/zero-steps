@@ -17,4 +17,6 @@
   <%= paginate @comments %>
 </div>
 
-<%= render 'shared/comment_form', commentable: @goal %>
+<div id="comment_form">
+  <%= render 'shared/comment_form', commentable: @goal %>
+</div>
