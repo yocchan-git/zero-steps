@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def update
     current_user.update!(user_params)
-    redirect_to root_path, notice: 'ユーザー情報を更新しました'
+    redirect_to current_user, notice: 'ユーザー情報を更新しました'
   end
 
   private
