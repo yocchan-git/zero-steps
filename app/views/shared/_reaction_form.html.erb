@@ -1,4 +1,4 @@
-<% reaction_form_id_name = reaction_form_id_name(reactionable, content_type) %>
+<% reaction_form_id_name = reaction_form_id_name(reactionable) %>
 <div id="<%= reaction_form_id_name %>">
   <% if reaction = Reaction.find_by(user: current_user, reactionable:) %>
     <%= render partial: "shared/reactions", locals: {reactionable:} %>
@@ -7,7 +7,7 @@
   <% end %>
 </div>
 
-<% reaction_count_id_name = reaction_count_id_name(reactionable, content_type) %>
+<% reaction_count_id_name = reaction_count_id_name(reactionable) %>
 <% reaction_count = reactionable.reactions.count %>
 <div>
   <span id="<%= reaction_count_id_name %>"><%= reaction_count %></span>

@@ -5,7 +5,7 @@
         <p class="p-4"><%= complete_post.content %></p>
         <div class="d-flex justify-content-between p-3">
           <div class="d-flex align-items-center">
-            <%= render 'shared/reaction_form', reactionable: complete_post, content_type: :complete_post, request_uri: complete_post_reactions_path(complete_post) %>
+            <%= render 'shared/reaction_form', reactionable: complete_post, request_uri: complete_post_reactions_path(complete_post) %>
           </div>
 
           <div>
