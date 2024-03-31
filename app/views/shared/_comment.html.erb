@@ -6,7 +6,7 @@
           <p class="p-4"><%= comment.content %></p>
           <div class="d-flex justify-content-between p-3">
             <div class="d-flex align-items-center">
-              <%= render 'shared/reaction_form', reactionable: comment, content_type: :comment, request_uri: comment_reactions_path(comment) %>
+              <%= render 'shared/reaction_form', reactionable: comment, request_uri: comment_reactions_path(comment) %>
             </div>
 
             <div>
