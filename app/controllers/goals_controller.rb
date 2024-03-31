@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class GoalsController < ApplicationController
-  before_action :check_hide_user, only: %i[new edit create update destroy]
-  before_action :set_goal, only: %i[edit update destroy]
+  before_action :check_hide_user, only: %i[new edit create update]
+  before_action :set_goal, only: %i[edit update]
 
   def index
     @goals = Goal.order(created_at: :desc).page(params[:page])
@@ -35,11 +35,6 @@ class GoalsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
-  end
-
-  def destroy
-    @goal.destroy!
-    redirect_to goals_path
   end
 
   private
