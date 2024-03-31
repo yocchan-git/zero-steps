@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe "Users::Sessions", type: :system do
   let(:user) { create(:user) }
 
-  describe 'new' do
+  describe '#new' do
     it 'ログイン画面に遷移できること' do
       visit new_users_session_path
       expect(page).to have_button 'Discord アカウントでログイン'
     end
   end
 
-  describe 'callback' do
+  describe '#callback' do
     before { Rails.application.env_config["omniauth.auth"] = OmniAuth.config.add_mock(:discord, {uid: user.uid, info: { name: user.name, image: user.image }}) }
 
     context '初めてのユーザーの場合' do
@@ -34,7 +34,7 @@ RSpec.describe "Users::Sessions", type: :system do
     end
   end
 
-  describe 'failure' do
+  describe '#failure' do
     before { OmniAuth.config.mock_auth[:discord] = :invalid_credentials }
 
     it 'ログインが失敗する' do
@@ -45,7 +45,7 @@ RSpec.describe "Users::Sessions", type: :system do
     end
   end
 
-  describe 'destroy' do
+  describe '#destroy' do
     it 'ログアウトする' do
       login(user)
 
