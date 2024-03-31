@@ -12,7 +12,7 @@ class CompletePost < ApplicationRecord
   validates :complete_postable_id, uniqueness: { scope: :complete_postable_type }
 
   def complete_post_url
-    if complete_postable == 'Goal'
+    if complete_postable_type == 'Goal'
       goal_path(complete_postable)
     else
       goal_task_path(complete_postable, goal_id: complete_postable.goal.id)
