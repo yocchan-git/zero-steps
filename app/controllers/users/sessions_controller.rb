@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < ApplicationController
-  skip_before_action :check_logged_in, only: %i[new callback]
+  skip_before_action :check_logged_in, only: %i[new callback failure]
 
   def new; end
 
@@ -23,7 +23,7 @@ class Users::SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to new_users_session_path
+    redirect_to new_users_session_path, notice: 'ログアウトしました'
   end
 
   private
