@@ -17,7 +17,7 @@
                 <% end %>
 
                 <% if current_user?(comment.user) && is_comment_index %>
-                  <%= link_to comment_path(comment, page: params[:page]), class: "btn", data: { turbo_method: :delete, turbo_confirm: "#{comment.formatted_content}を本当に削除しますか？" } do %>
+                  <%= link_to comment_path(comment, page: params[:page]), id: "comment-delete-icon#{comment.id}", class: "btn", data: { turbo_method: :delete, turbo_confirm: "#{comment.formatted_content}を本当に削除しますか？" } do %>
                     <i class="fa-solid fa-trash"></i>
                   <% end %>
                 <% end %>

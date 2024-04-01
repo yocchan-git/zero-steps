@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe CompletePost, type: :model do
+RSpec.describe CompletePost do
   include Rails.application.routes.url_helpers
 
   describe '#complete_post_url' do

@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :complete_post do
-    association :user
-    content { "目標達成しました！応援ありがとうございました" }
+    user
+    content { '目標達成しました！応援ありがとうございました' }
     complete_postable_type { 'Goal' }
-    association :complete_postable, factory: :goal
+    complete_postable factory: %i[goal]
 
     trait :task do
       complete_postable_type { 'Task' }
-      association :complete_postable, factory: :task
+      complete_postable factory: %i[task]
     end
   end
 end

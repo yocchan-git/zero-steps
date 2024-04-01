@@ -6,7 +6,7 @@
   <div class="text-end">
     <% if @task.completed_at? %>
       <p class="text-success">完了(<%= l @task.completed_at, format: :date %>)</p>
-    <% else %>
+    <% elsif current_user?(@task.user) %>
       <%= link_to '終了投稿する', new_task_complete_post_path(@task), class: 'btn btn-primary' %>
     <% end %>
   </div>

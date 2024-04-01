@@ -1,23 +1,25 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :timeline do
-    association :user
-    content { "タイムラインが作成されました" }
+    user
+    content { 'タイムラインが作成されました' }
     timelineable_type { 'Goal' }
-    association :timelineable, factory: :goal
+    timelineable factory: %i[goal]
 
     trait :task do
       timelineable_type { 'Task' }
-      association :timelineable, factory: :task
+      timelineable factory: %i[task]
     end
 
     trait :comment do
       timelineable_type { 'Comment' }
-      association :timelineable, factory: :comment
+      timelineable factory: %i[comment]
     end
 
     trait :complete_post do
       timelineable_type { 'CompletePost' }
-      association :timelineable, factory: :complete_post
+      timelineable factory: %i[complete_post]
     end
   end
 end

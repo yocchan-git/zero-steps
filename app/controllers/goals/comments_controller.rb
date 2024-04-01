@@ -16,6 +16,7 @@ class Goals::CommentsController < ApplicationController
 
     comment.save!
 
+    # TODO: まとめてモデルに移行する
     comment.create_mention_notification
     comment.timelines.create!(user: current_user, content: "#{current_user.name}さんが#{@goal.formatted_title}にコメントしました")
 

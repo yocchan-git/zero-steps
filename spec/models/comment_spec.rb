@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Comment, type: :model do
+RSpec.describe Comment do
   include Rails.application.routes.url_helpers
 
   describe '#goal?' do
@@ -8,7 +10,7 @@ RSpec.describe Comment, type: :model do
       let(:goal_comment) { create(:comment) }
 
       it 'trueが返る' do
-        expect(goal_comment.goal?).to be_truthy
+        expect(goal_comment).to be_goal
       end
     end
 
@@ -16,7 +18,7 @@ RSpec.describe Comment, type: :model do
       let(:task_comment) { create(:comment, :task) }
 
       it 'falseが返る' do
-        expect(task_comment.goal?).to be_falsy
+        expect(task_comment).not_to be_goal
       end
     end
   end
@@ -44,12 +46,13 @@ RSpec.describe Comment, type: :model do
   describe '#create_mention_notification' do
     let(:comment) { create(:comment, content: "@#{user.name} さん、こんにちは") }
 
+    before { allow(comment).to receive(:send_message_to_discord) }
+
     context '存在するユーザーへメンションした場合' do
       let(:user) { create(:user) }
 
       it '通知が送られる' do
-        allow_any_instance_of(Comment).to receive(:send_message_to_discord)
-        expect { comment.create_mention_notification }.to change { Notification.count }.by(1)
+        expect { comment.create_mention_notification }.to change(Notification, :count).by(1)
       end
     end
 
@@ -57,7 +60,7 @@ RSpec.describe Comment, type: :model do
       let(:user) { build(:user) }
 
       it '通知が送られない' do
-        expect { comment.create_mention_notification }.to change { Notification.count }.by(0)
+        expect { comment.create_mention_notification }.not_to(change(Notification, :count))
       end
     end
   end
@@ -71,7 +74,7 @@ RSpec.describe Comment, type: :model do
       let(:user) { create(:user) }
 
       it 'trueが返る' do
-        expect(comment.mention_other_than_commentable_user?).to be_truthy
+        expect(comment).to be_mention_other_than_commentable_user
       end
     end
 
@@ -79,7 +82,7 @@ RSpec.describe Comment, type: :model do
       let(:content) { "@#{goal.user.name} さん、こんにちは" }
 
       it 'falseが返る' do
-        expect(comment.mention_other_than_commentable_user?).to be_falsy
+        expect(comment).not_to be_mention_other_than_commentable_user
       end
     end
   end
@@ -104,16 +107,18 @@ RSpec.describe Comment, type: :model do
 
   describe '#send_message_to_discord' do
     before do
-      allow(Discordrb::API::Channel).to receive(:create_message).and_return("Discordに通知しました")
-      # allow(confirm_form_instance).to receive(:article).and_return("Discordに通知しました")
+      allow(Discordrb::API::Channel).to receive(:create_message).and_return('Discordに通知しました')
     end
+
     let(:comment) { create(:comment) }
+
     it 'Discordに通知ができる' do
       expect(comment.send_message_to_discord(:comment)).to eq 'Discordに通知しました'
       expect(Discordrb::API::Channel).to have_received(:create_message).once.with(
-        "Bot #{ENV['DISCORD_BOT_TOKEN']}",
-        ENV['DISCORD_CHANNEL_ID'],
-        "<@#{comment.commentable.user.uid}>さん\n\n#{comment.commentable.formatted_title}に#{comment.user.name}さんからコメントがありました\n\nコメント本文\n「#{comment.formatted_content}」\n\n[詳細はこちら](#{comment.comment_url})"
+        "Bot #{ENV.fetch('DISCORD_BOT_TOKEN', nil)}",
+        ENV.fetch('DISCORD_CHANNEL_ID', nil),
+        "<@#{comment.commentable.user.uid}>さん\n\n#{comment.commentable.formatted_title}に#{comment.user.name}さんから
+        コメントがありました\n\nコメント本文\n「#{comment.formatted_content}」\n\n[詳細はこちら](#{comment.comment_url})".delete(' ')
       )
     end
   end

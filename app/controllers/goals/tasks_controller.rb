@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Goals::TasksController < ApplicationController
-  before_action :check_hide_user, only: %i[new edit create update destroy]
+  before_action :check_hide_user, only: %i[create update destroy]
   before_action :set_goal, only: %i[index show]
   before_action :set_current_user_goal, only: :create
   before_action :set_task, only: :show
@@ -30,7 +30,7 @@ class Goals::TasksController < ApplicationController
 
   def destroy
     @task.destroy!
-    redirect_back(fallback_location: root_path, notice: 'タスクを削除しました')
+    redirect_to goal_tasks_path(@task.goal), notice: 'タスクを削除しました'
   end
 
   private
