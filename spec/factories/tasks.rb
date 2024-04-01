@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :task do
-    association :user
-    association :goal
+    user
+    goal
     content { '筋トレする' }
     completion_limits { '002024-4-01T00:00' }
 

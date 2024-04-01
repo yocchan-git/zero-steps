@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Users", type: :system do
+RSpec.describe 'Users' do
   before { login(user) }
+
   let(:user) { create(:user) }
 
   describe '#index' do
     before { user.follow(following_user) }
+
     let!(:following_user) { create(:user) }
     let!(:unfollowing_user) { create(:user) }
 
@@ -22,7 +26,7 @@ RSpec.describe "Users", type: :system do
         visit users_path
         click_link 'フォローしている人で絞り込む'
         expect(page).to have_content following_user.name
-        expect(page).not_to have_content unfollowing_user.name
+        expect(page).to have_no_content unfollowing_user.name
       end
     end
   end
@@ -44,11 +48,11 @@ RSpec.describe "Users", type: :system do
 
         it 'アクセスできない' do
           visit user_path(other_user)
-          expect(page).to have_selector 'h1', text: 'ユーザー一覧'
-          expect(page).to have_selector '.text-danger', text: 'このユーザーにはアクセスできません'
+          expect(page).to have_css 'h1', text: 'ユーザー一覧'
+          expect(page).to have_css '.text-danger', text: 'このユーザーにはアクセスできません'
         end
       end
-  
+
       context '自分で見た場合' do
         let(:user) { create(:user, is_hidden: true) }
 
@@ -64,7 +68,7 @@ RSpec.describe "Users", type: :system do
   describe '#edit' do
     it 'アクセスできること' do
       visit edit_user_path(user)
-      expect(page).to have_selector 'h1', text: '企業の方ですか？'
+      expect(page).to have_css 'h1', text: '企業の方ですか？'
     end
   end
 
@@ -73,7 +77,7 @@ RSpec.describe "Users", type: :system do
       visit edit_user_path(user)
       check '非公開アカウントにする'
       click_button '更新する'
-      expect(page).to have_selector '.text-success', text: 'ユーザー情報を更新しました'
+      expect(page).to have_css '.text-success', text: 'ユーザー情報を更新しました'
     end
   end
 end

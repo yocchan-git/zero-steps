@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Notification, type: :model do
+RSpec.describe Notification do
   describe 'scope' do
     let!(:recent_unread_notification) { create(:notification, created_at: 1.month.ago) }
     let!(:recent_read_notification) { create(:notification, :read, created_at: 1.month.ago) }

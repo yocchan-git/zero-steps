@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe ReactionsHelper, type: :helper do
+RSpec.describe ReactionsHelper do
   describe 'reaction_form_id_name' do
     let(:reaction) { create(:reaction, :comment) }
     let(:reactionable) { reaction.reactionable }

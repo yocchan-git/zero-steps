@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-  factory :reaction, class: Reaction do
-    association :user
+  factory :reaction, class: 'Reaction' do
+    user
 
     trait :comment do
       reactionable_type { 'Comment' }
-      association :reactionable, factory: :comment
+      reactionable factory: %i[comment]
     end
 
     trait :complete_post do
       reactionable_type { 'CompletePost' }
-      association :reactionable, factory: :complete_post
+      reactionable factory: %i[complete_post]
     end
   end
 end

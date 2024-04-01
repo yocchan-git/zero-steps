@@ -1,15 +1,18 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe SessionsHelper, type: :helper do
+RSpec.describe SessionsHelper do
   describe 'current_user' do
     context 'ログインしていない場合' do
       it 'nilが返る' do
-        expect(current_user).to be nil
+        expect(current_user).to be_nil
       end
     end
 
     context 'ログインしている場合' do
       before { log_in(user) }
+
       let(:user) { create(:user) }
 
       it 'ログインユーザーを返す' do
@@ -27,6 +30,7 @@ RSpec.describe SessionsHelper, type: :helper do
 
     context 'ログインしている場合' do
       before { log_in(user) }
+
       let(:user) { create(:user) }
 
       it 'trueが返る' do
@@ -37,6 +41,7 @@ RSpec.describe SessionsHelper, type: :helper do
 
   describe 'current_user?' do
     before { log_in(user) }
+
     let(:user) { create(:user) }
 
     context 'userがnilの場合' do
@@ -71,13 +76,14 @@ RSpec.describe SessionsHelper, type: :helper do
 
   describe 'log_out' do
     before { log_in(user) }
+
     let(:user) { create(:user) }
 
     it 'session[:user_id]とcurrent_userがnilになる' do
       log_out
 
-      expect(session[:user_id]).to be nil
-      expect(current_user).to be nil
+      expect(session[:user_id]).to be_nil
+      expect(current_user).to be_nil
     end
   end
 end

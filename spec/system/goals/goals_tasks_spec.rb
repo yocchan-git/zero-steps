@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Goals::Tasks", type: :system do
+RSpec.describe 'Goals::Tasks' do
   before { login(user) }
+
   let(:user) { create(:user) }
   let(:goal) { create(:goal) }
   let!(:task) { create(:task, goal:) }
@@ -10,7 +13,7 @@ RSpec.describe "Goals::Tasks", type: :system do
   describe '#index' do
     it '正しく表示されている' do
       visit goal_tasks_path(goal)
-      expect(page).to have_selector 'h1', text: "#{goal.formatted_title}のタスク一覧"
+      expect(page).to have_css 'h1', text: "#{goal.formatted_title}のタスク一覧"
       expect(page).to have_link task.formatted_content
       expect(page).to have_link completed_task.formatted_content
     end
@@ -20,15 +23,15 @@ RSpec.describe "Goals::Tasks", type: :system do
     it '正しく表示されている' do
       visit goal_task_path(task, goal_id: goal.id)
       expect(page).to have_link '目標一覧へ戻る'
-      expect(page).to have_selector 'h2', text: task.content
-      expect(page).to have_selector 'h2', text: '最近のコメント'
+      expect(page).to have_css 'h2', text: task.content
+      expect(page).to have_css 'h2', text: '最近のコメント'
     end
 
     context '終了していないタスクの場合' do
       context '他人のタスクの場合' do
         it '終了投稿ボタンが表示されない' do
           visit goal_task_path(task, goal_id: goal.id)
-          expect(page).not_to have_link '終了投稿する'
+          expect(page).to have_no_link '終了投稿する'
         end
       end
 
@@ -47,7 +50,7 @@ RSpec.describe "Goals::Tasks", type: :system do
 
       it '終了投稿が表示される' do
         visit goal_task_path(completed_task, goal_id: goal.id)
-        expect(page).to have_selector 'h2', text: '終了投稿'
+        expect(page).to have_css 'h2', text: '終了投稿'
         expect(page).to have_content completed_task.complete_post.content
       end
     end
@@ -64,7 +67,7 @@ RSpec.describe "Goals::Tasks", type: :system do
 
       it 'コメントが表示される' do
         visit goal_task_path(task, goal_id: goal.id)
-        expect(page).not_to have_content '最近のコメントはありません'
+        expect(page).to have_no_content '最近のコメントはありません'
         expect(page).to have_content comment.formatted_content
       end
     end
@@ -82,7 +85,7 @@ RSpec.describe "Goals::Tasks", type: :system do
             fill_in '期限', with: '002024-04-01T00:00'
             click_button '作成する'
           end
-    
+
           expect(page).to have_link '水泳教室に通う'
         end
       end
@@ -98,7 +101,7 @@ RSpec.describe "Goals::Tasks", type: :system do
           fill_in '期限', with: '002024-04-01T00:00'
           click_button '作成する'
         end
-  
+
         expect(page).to have_link '水泳教室に通う'
       end
     end
@@ -130,7 +133,7 @@ RSpec.describe "Goals::Tasks", type: :system do
           click_button '更新する'
         end
 
-        expect(page).to have_selector 'h2', text: '水泳教室に通う'
+        expect(page).to have_css 'h2', text: '水泳教室に通う'
       end
     end
   end
@@ -146,8 +149,8 @@ RSpec.describe "Goals::Tasks", type: :system do
           click_link '削除する'
         end
 
-        expect(page).to have_selector '.text-success', text: 'タスクを削除しました'
-        expect(page).not_to have_link '水泳教室に通う'
+        expect(page).to have_css '.text-success', text: 'タスクを削除しました'
+        expect(page).to have_no_link '水泳教室に通う'
       end
     end
 
@@ -158,8 +161,8 @@ RSpec.describe "Goals::Tasks", type: :system do
           click_link '削除する'
         end
 
-        expect(page).to have_selector '.text-success', text: 'タスクを削除しました'
-        expect(page).not_to have_link '水泳教室に通う'
+        expect(page).to have_css '.text-success', text: 'タスクを削除しました'
+        expect(page).to have_no_link '水泳教室に通う'
       end
     end
   end

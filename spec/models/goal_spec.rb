@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Goal, type: :model do
+RSpec.describe Goal do
   describe '#formatted_title' do
     let(:goal) { create(:goal, title:) }
 

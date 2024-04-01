@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Comments", type: :system, js: true do
+RSpec.describe 'Comments', :js do
   before { login(user) }
+
   let(:user) { create(:user) }
 
   describe '#destroy' do
@@ -14,7 +17,7 @@ RSpec.describe "Comments", type: :system, js: true do
         visit goal_comments_path(commentable)
         find("#comment-delete-icon#{comment.id}").click
         expect(page.accept_confirm).to eq "#{comment.formatted_content}を本当に削除しますか？"
-        expect(page).not_to have_content comment.content
+        expect(page).to have_no_content comment.content
       end
     end
 
@@ -25,7 +28,7 @@ RSpec.describe "Comments", type: :system, js: true do
         visit task_comments_path(commentable)
         find("#comment-delete-icon#{comment.id}").click
         expect(page.accept_confirm).to eq "#{comment.formatted_content}を本当に削除しますか？"
-        expect(page).not_to have_content comment.content
+        expect(page).to have_no_content comment.content
       end
     end
   end

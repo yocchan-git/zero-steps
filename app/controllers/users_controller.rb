@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    redirect_to users_path, alert: 'このユーザーにはアクセスできません'  if @user.is_hidden && !current_user?(@user)
+    redirect_to users_path, alert: 'このユーザーにはアクセスできません' if @user.is_hidden && !current_user?(@user)
   end
 
   def edit; end

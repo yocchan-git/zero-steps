@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "CompletePosts::Reactions", type: :system do
+RSpec.describe 'CompletePosts::Reactions' do
   before { login(user) }
+
   let(:user) { create(:user) }
   let(:goal) { create(:goal, :completed) }
   let!(:complete_post) { create(:complete_post, complete_postable: goal) }

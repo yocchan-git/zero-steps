@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Task, type: :model do
+RSpec.describe Task do
   describe 'scope' do
     describe 'completed' do
       let!(:progress_user) { create(:task) }

@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Notifications", type: :system do
+RSpec.describe 'Notifications' do
   before { login(user) }
+
   let(:user) { create(:user) }
 
   describe '#index' do
@@ -11,7 +14,7 @@ RSpec.describe "Notifications", type: :system do
     it '自分の通知が表示されている' do
       visit notifications_path
       expect(page).to have_link own_notification.content
-      expect(page).not_to have_link other_notification.content
+      expect(page).to have_no_link other_notification.content
     end
   end
 end

@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :comment do
-    association :user
+    user
     sequence(:content) { |n| "応援しています#{n}" }
     commentable_type { 'Goal' }
-    association :commentable, factory: :goal
+    commentable factory: %i[goal]
 
     trait :task do
       commentable_type { 'Task' }
-      association :commentable, factory: :task
+      commentable factory: %i[task]
     end
   end
 end

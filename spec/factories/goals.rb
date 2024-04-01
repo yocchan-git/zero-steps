@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :goal do
-    association :user
-    title { "体重を50kgにする" }
+    user
+    title { '体重を50kgにする' }
     description { '最近太ってきたので、ダイエットをする' }
 
     trait :completed do

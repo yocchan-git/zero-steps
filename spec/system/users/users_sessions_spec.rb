@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Users::Sessions", type: :system do
+RSpec.describe 'Users::Sessions' do
   let(:user) { create(:user) }
 
   describe '#new' do
@@ -11,7 +13,10 @@ RSpec.describe "Users::Sessions", type: :system do
   end
 
   describe '#callback' do
-    before { Rails.application.env_config["omniauth.auth"] = OmniAuth.config.add_mock(:discord, {uid: user.uid, info: { name: user.name, image: user.image }}) }
+    before {
+      Rails.application.env_config['omniauth.auth'] =
+        OmniAuth.config.add_mock(:discord, { uid: user.uid, info: { name: user.name, image: user.image } })
+    }
 
     context '初めてのユーザーの場合' do
       let(:user) { build(:user) }
@@ -19,8 +24,8 @@ RSpec.describe "Users::Sessions", type: :system do
       it '新規作成され、更新画面に遷移する' do
         visit new_users_session_path
         click_button 'Discord アカウントでログイン'
-        expect(page).to have_selector '.text-success', text: 'ログインしました'
-        expect(page).to have_selector 'h1', text: '企業の方ですか？'
+        expect(page).to have_css '.text-success', text: 'ログインしました'
+        expect(page).to have_css 'h1', text: '企業の方ですか？'
       end
     end
 
@@ -28,8 +33,8 @@ RSpec.describe "Users::Sessions", type: :system do
       it 'ログインし、タイムライン画面に遷移する' do
         visit new_users_session_path
         click_button 'Discord アカウントでログイン'
-        expect(page).to have_selector '.text-success', text: 'ログインしました'
-        expect(page).to have_selector 'h1', text: 'タイムライン'
+        expect(page).to have_css '.text-success', text: 'ログインしました'
+        expect(page).to have_css 'h1', text: 'タイムライン'
       end
     end
   end
@@ -40,8 +45,8 @@ RSpec.describe "Users::Sessions", type: :system do
     it 'ログインが失敗する' do
       visit new_users_session_path
       click_button 'Discord アカウントでログイン'
-      expect(page).to have_selector '.text-danger', text: 'キャンセルしました'
-      expect(page).to have_selector 'h1', text: 'ログイン'
+      expect(page).to have_css '.text-danger', text: 'キャンセルしました'
+      expect(page).to have_css 'h1', text: 'ログイン'
     end
   end
 
@@ -50,8 +55,8 @@ RSpec.describe "Users::Sessions", type: :system do
       login(user)
 
       click_link 'ログアウト'
-      expect(page).to have_selector '.text-success', text: 'ログアウトしました'
-      expect(page).to have_selector 'h1', text: 'ログイン'
+      expect(page).to have_css '.text-success', text: 'ログアウトしました'
+      expect(page).to have_css 'h1', text: 'ログイン'
     end
   end
 end

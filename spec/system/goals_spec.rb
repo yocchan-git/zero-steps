@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Goals", type: :system do
+RSpec.describe 'Goals' do
   before { login(user) }
+
   let(:user) { create(:user) }
 
   describe '#index' do
@@ -10,7 +13,7 @@ RSpec.describe "Goals", type: :system do
 
     it 'アクセスできる' do
       visit goals_path
-      expect(page).to have_selector 'h1', text: 'みんなの目標'
+      expect(page).to have_css 'h1', text: 'みんなの目標'
       expect(page).to have_content goal1.title
       expect(page).to have_content goal2.title
     end
@@ -40,17 +43,17 @@ RSpec.describe "Goals", type: :system do
       context '他人の目標の場合' do
         it '「タスクを作成する」の文言が表示されない' do
           visit goal_path(goal)
-          expect(page).not_to have_link '終了投稿する'
-          expect(page).not_to have_link '修正する'
-          expect(page).not_to have_button 'タスクを作成する'
+          expect(page).to have_no_link '終了投稿する'
+          expect(page).to have_no_link '修正する'
+          expect(page).to have_no_button 'タスクを作成する'
         end
       end
     end
 
     context 'タスクがある場合' do
-      let!(:task1) { create(:task, goal:, created_at: Time.current - 1.days) }
-      let!(:task2) { create(:task, goal:, created_at: Time.current - 2.days) }
-      let!(:task3) { create(:task, goal:, created_at: Time.current - 3.days) }
+      let!(:task1) { create(:task, goal:, created_at: 1.day.ago) }
+      let!(:task2) { create(:task, goal:, created_at: 2.days.ago) }
+      let!(:task3) { create(:task, goal:, created_at: 3.days.ago) }
 
       context 'タスクが3つ以下の場合' do
         it 'タスクが3つ表示されている' do
@@ -74,9 +77,9 @@ RSpec.describe "Goals", type: :system do
     end
 
     context 'コメントがある場合' do
-      let!(:comment1) { create(:comment, commentable: goal, created_at: Time.current - 1.days) }
-      let!(:comment2) { create(:comment, commentable: goal, created_at: Time.current - 2.days) }
-      let!(:comment3) { create(:comment, commentable: goal, created_at: Time.current - 3.days) }
+      let!(:comment1) { create(:comment, commentable: goal, created_at: 1.day.ago) }
+      let!(:comment2) { create(:comment, commentable: goal, created_at: 2.days.ago) }
+      let!(:comment3) { create(:comment, commentable: goal, created_at: 3.days.ago) }
 
       context 'コメントが3つ以下の場合' do
         it 'コメントが3つ表示されている' do
@@ -103,7 +106,7 @@ RSpec.describe "Goals", type: :system do
   describe '#new' do
     it 'アクセスできる' do
       visit new_goal_path
-      expect(page).to have_selector 'h1', text: '目標を作成する'
+      expect(page).to have_css 'h1', text: '目標を作成する'
     end
   end
 
@@ -112,7 +115,7 @@ RSpec.describe "Goals", type: :system do
 
     it 'アクセスできる' do
       visit edit_goal_path(goal)
-      expect(page).to have_selector 'h1', text: '目標を編集する'
+      expect(page).to have_css 'h1', text: '目標を編集する'
       expect(page).to have_field 'タイトル(250文字以内)', with: goal.title
       expect(page).to have_field '説明(500文字以内)', with: goal.description
     end
@@ -124,7 +127,7 @@ RSpec.describe "Goals", type: :system do
         it '送信できないこと' do
           visit new_goal_path
           click_button '作成する'
-          expect(page).to have_selector 'h1', text: '目標を作成する'
+          expect(page).to have_css 'h1', text: '目標を作成する'
         end
       end
 
@@ -134,7 +137,7 @@ RSpec.describe "Goals", type: :system do
           fill_in 'タイトル(250文字以内)', with: 'あ' * 251
           fill_in '説明(500文字以内)', with: '毎日継続します！'
           click_button '作成する'
-          expect(page).to have_selector 'h2', text: 'あ' * 250
+          expect(page).to have_css 'h2', text: 'あ' * 250
         end
       end
     end
@@ -145,7 +148,7 @@ RSpec.describe "Goals", type: :system do
         fill_in 'タイトル(250文字以内)', with: '体重を50kgにする'
         fill_in '説明(500文字以内)', with: '毎日継続します！'
         click_button '作成する'
-        expect(page).to have_selector 'h2', text: '体重を50kgにする'
+        expect(page).to have_css 'h2', text: '体重を50kgにする'
       end
     end
   end
@@ -159,7 +162,7 @@ RSpec.describe "Goals", type: :system do
           visit edit_goal_path(goal)
           fill_in 'タイトル(250文字以内)', with: ''
           click_button '更新する'
-          expect(page).to have_selector 'h1', text: '目標を編集する'
+          expect(page).to have_css 'h1', text: '目標を編集する'
         end
       end
 
@@ -168,7 +171,7 @@ RSpec.describe "Goals", type: :system do
           visit edit_goal_path(goal)
           fill_in 'タイトル(250文字以内)', with: 'あ' * 251
           click_button '更新する'
-          expect(page).to have_selector 'h2', text: 'あ' * 250
+          expect(page).to have_css 'h2', text: 'あ' * 250
         end
       end
     end
@@ -179,7 +182,7 @@ RSpec.describe "Goals", type: :system do
         fill_in 'タイトル(250文字以内)', with: '体重を50kgにする'
         fill_in '説明(500文字以内)', with: '毎日継続します！'
         click_button '更新する'
-        expect(page).to have_selector 'h2', text: '体重を50kgにする'
+        expect(page).to have_css 'h2', text: '体重を50kgにする'
       end
     end
   end

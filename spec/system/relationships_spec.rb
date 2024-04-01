@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Relationships", type: :system do
+RSpec.describe 'Relationships' do
   before { login(user) }
+
   let(:user) { create(:user) }
 
   describe '#create' do
@@ -26,6 +29,7 @@ RSpec.describe "Relationships", type: :system do
 
   describe '#destroy' do
     before { user.follow(other_user) }
+
     let(:other_user) { create(:user) }
 
     context 'ユーザー一覧ページからフォロー解除した場合' do

@@ -14,6 +14,7 @@ class Users::SessionsController < ApplicationController
 
     flash[:notice] = 'ログインしました'
     return redirect_to edit_user_path(current_user) if @is_new_user
+
     redirect_to root_path
   end
 
@@ -34,7 +35,7 @@ class Users::SessionsController < ApplicationController
       user.update!(
         uid: auth_hash.uid,
         name: auth_hash.info.name,
-        image: auth_hash.info.image,
+        image: auth_hash.info.image
       )
       @is_new_user = true
     end

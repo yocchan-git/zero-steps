@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Reaction, type: :model do
+RSpec.describe Reaction do
   describe '#comment?' do
     context 'コメントのリアクションの場合' do
       let(:comment_reaction) { create(:reaction, :comment) }
 
       it 'trueで返る' do
-        expect(comment_reaction.comment?).to be_truthy
+        expect(comment_reaction).to be_comment
       end
     end
 
@@ -14,7 +16,7 @@ RSpec.describe Reaction, type: :model do
       let(:complete_post_reaction) { create(:reaction, :complete_post) }
 
       it 'falseが返る' do
-        expect(complete_post_reaction.comment?).to be_falsy
+        expect(complete_post_reaction).not_to be_comment
       end
     end
   end

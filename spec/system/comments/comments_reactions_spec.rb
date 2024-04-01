@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Comments::Reactions", type: :system do
+RSpec.describe 'Comments::Reactions' do
   before { login(user) }
+
   let(:user) { create(:user) }
   let(:goal) { create(:goal) }
   let!(:comment) { create(:comment, commentable: goal) }

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :notification do
-    association :user
-    association :comment
+    user
+    comment
     content { 'コメントがありました' }
     is_read { false }
 

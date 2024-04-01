@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Reactions", type: :system do
+RSpec.describe 'Reactions' do
   before { login(user) }
+
   let(:user) { create(:user) }
 
   describe '#destroy' do
