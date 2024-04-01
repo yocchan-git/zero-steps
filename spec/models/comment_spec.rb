@@ -105,7 +105,6 @@ RSpec.describe Comment, type: :model do
   describe '#send_message_to_discord' do
     before do
       allow(Discordrb::API::Channel).to receive(:create_message).and_return("Discordに通知しました")
-      # allow(confirm_form_instance).to receive(:article).and_return("Discordに通知しました")
     end
     let(:comment) { create(:comment) }
     it 'Discordに通知ができる' do

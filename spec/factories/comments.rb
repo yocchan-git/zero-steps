@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :comment do
     association :user
-    content { "応援しています！" }
+    sequence(:content) { |n| "応援しています#{n}" }
     commentable_type { 'Goal' }
     association :commentable, factory: :goal
 
