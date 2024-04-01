@@ -30,7 +30,7 @@ class Goals::TasksController < ApplicationController
 
   def destroy
     @task.destroy!
-    redirect_back(fallback_location: root_path, notice: 'タスクを削除しました')
+    redirect_to goal_tasks_path(@task.goal), notice: 'タスクを削除しました'
   end
 
   private
