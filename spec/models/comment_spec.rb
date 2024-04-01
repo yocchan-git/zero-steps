@@ -45,12 +45,12 @@ RSpec.describe Comment do
 
   describe '#create_mention_notification' do
     let(:comment) { create(:comment, content: "@#{user.name} さん、こんにちは") }
+    before { allow(comment).to receive(:send_message_to_discord) }
 
     context '存在するユーザーへメンションした場合' do
       let(:user) { create(:user) }
 
       it '通知が送られる' do
-        allow_any_instance_of(Comment).to receive(:send_message_to_discord)
         expect { comment.create_mention_notification }.to change(Notification, :count).by(1)
       end
     end

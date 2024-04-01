@@ -146,7 +146,7 @@ RSpec.describe 'Goals::Tasks' do
       it 'タスクの削除ができること' do
         visit goal_tasks_path(goal)
         within "#taskDeleteModal#{own_task.id}" do
-        click_on '削除する'
+          click_on '削除する'
         end
 
         expect(page).to have_css '.text-success', text: 'タスクを削除しました'
@@ -158,7 +158,7 @@ RSpec.describe 'Goals::Tasks' do
       it 'タスクの削除ができること' do
         visit goal_task_path(own_task, goal_id: goal.id)
         within "#taskDeleteModal#{own_task.id}" do
-        click_on '削除する'
+          click_on '削除する'
         end
 
         expect(page).to have_css '.text-success', text: 'タスクを削除しました'

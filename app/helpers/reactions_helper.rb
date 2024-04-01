@@ -16,6 +16,6 @@ module ReactionsHelper
   private
 
   def comment?(reactionable)
-    reactionable.class.name === 'Comment'
+    reactionable.instance_of?(Comment)
   end
 end

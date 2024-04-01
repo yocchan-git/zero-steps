@@ -5,12 +5,13 @@ require 'rails_helper'
 RSpec.describe Task do
   describe 'scope' do
     describe 'completed' do
-      let!(:progress_user) { create(:task) }
-      let!(:complete_task1) { create(:task, completed_at: '002024-4-01T00:00') }
-      let!(:complete_task2) { create(:task, completed_at: '002024-4-01T00:00') }
+      let!(:progress_task) { create(:task) }
+      let!(:completed_task1) { create(:task, completed_at: '002024-4-01T00:00') }
+      let!(:completed_task2) { create(:task, completed_at: '002024-4-01T00:00') }
 
       it '完了したタスクを取得できる' do
-        expect(described_class.completed.length).to eq 2
+        expect(described_class.completed).not_to include progress_task
+        expect(described_class.completed).to include completed_task1, completed_task2
       end
     end
   end
