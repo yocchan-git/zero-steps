@@ -83,7 +83,7 @@ RSpec.describe 'Goals::Tasks' do
           within '#taskFormModal' do
             fill_in '内容(500文字以内)', with: '水泳教室に通う'
             fill_in '期限', with: '002024-04-01T00:00'
-            click_button '作成する'
+            click_on '作成する'
           end
 
           expect(page).to have_link '水泳教室に通う'
@@ -99,7 +99,7 @@ RSpec.describe 'Goals::Tasks' do
         within '#taskFormModal' do
           fill_in '内容(500文字以内)', with: '水泳教室に通う'
           fill_in '期限', with: '002024-04-01T00:00'
-          click_button '作成する'
+          click_on '作成する'
         end
 
         expect(page).to have_link '水泳教室に通う'
@@ -117,7 +117,7 @@ RSpec.describe 'Goals::Tasks' do
         within "#taskFormModal#{own_task.id}" do
           fill_in '内容(500文字以内)', with: '水泳教室に通う'
           fill_in '期限', with: '002024-04-01T00:00'
-          click_button '更新する'
+          click_on '更新する'
         end
 
         expect(page).to have_link '水泳教室に通う'
@@ -130,7 +130,7 @@ RSpec.describe 'Goals::Tasks' do
         within "#taskFormModal#{own_task.id}" do
           fill_in '内容(500文字以内)', with: '水泳教室に通う'
           fill_in '期限', with: '002024-04-01T00:00'
-          click_button '更新する'
+          click_on '更新する'
         end
 
         expect(page).to have_css 'h2', text: '水泳教室に通う'
@@ -146,7 +146,7 @@ RSpec.describe 'Goals::Tasks' do
       it 'タスクの削除ができること' do
         visit goal_tasks_path(goal)
         within "#taskDeleteModal#{own_task.id}" do
-          click_link '削除する'
+        click_on '削除する'
         end
 
         expect(page).to have_css '.text-success', text: 'タスクを削除しました'
@@ -158,7 +158,7 @@ RSpec.describe 'Goals::Tasks' do
       it 'タスクの削除ができること' do
         visit goal_task_path(own_task, goal_id: goal.id)
         within "#taskDeleteModal#{own_task.id}" do
-          click_link '削除する'
+        click_on '削除する'
         end
 
         expect(page).to have_css '.text-success', text: 'タスクを削除しました'

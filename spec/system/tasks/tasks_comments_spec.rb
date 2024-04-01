@@ -27,7 +27,7 @@ RSpec.describe 'Tasks::Comments' do
     it 'コメントできること' do
       visit task_comments_path(task)
       fill_in 'コメント(500文字以内)', with: 'かっこいい目標ですね'
-      click_button 'コメントする'
+      click_on 'コメントする'
       expect(page).to have_content 'かっこいい目標ですね'
     end
   end

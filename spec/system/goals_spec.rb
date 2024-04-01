@@ -126,7 +126,7 @@ RSpec.describe 'Goals' do
       context 'titleが空の場合' do
         it '送信できないこと' do
           visit new_goal_path
-          click_button '作成する'
+          click_on '作成する'
           expect(page).to have_css 'h1', text: '目標を作成する'
         end
       end
@@ -136,7 +136,7 @@ RSpec.describe 'Goals' do
           visit new_goal_path
           fill_in 'タイトル(250文字以内)', with: 'あ' * 251
           fill_in '説明(500文字以内)', with: '毎日継続します！'
-          click_button '作成する'
+          click_on '作成する'
           expect(page).to have_css 'h2', text: 'あ' * 250
         end
       end
@@ -147,7 +147,7 @@ RSpec.describe 'Goals' do
         visit new_goal_path
         fill_in 'タイトル(250文字以内)', with: '体重を50kgにする'
         fill_in '説明(500文字以内)', with: '毎日継続します！'
-        click_button '作成する'
+        click_on '作成する'
         expect(page).to have_css 'h2', text: '体重を50kgにする'
       end
     end
@@ -161,7 +161,7 @@ RSpec.describe 'Goals' do
         it 'エラーの文言が表示される' do
           visit edit_goal_path(goal)
           fill_in 'タイトル(250文字以内)', with: ''
-          click_button '更新する'
+          click_on '更新する'
           expect(page).to have_css 'h1', text: '目標を編集する'
         end
       end
@@ -170,7 +170,7 @@ RSpec.describe 'Goals' do
         it 'エラーの文言が表示される' do
           visit edit_goal_path(goal)
           fill_in 'タイトル(250文字以内)', with: 'あ' * 251
-          click_button '更新する'
+          click_on '更新する'
           expect(page).to have_css 'h2', text: 'あ' * 250
         end
       end
@@ -181,7 +181,7 @@ RSpec.describe 'Goals' do
         visit edit_goal_path(goal)
         fill_in 'タイトル(250文字以内)', with: '体重を50kgにする'
         fill_in '説明(500文字以内)', with: '毎日継続します！'
-        click_button '更新する'
+        click_on '更新する'
         expect(page).to have_css 'h2', text: '体重を50kgにする'
       end
     end

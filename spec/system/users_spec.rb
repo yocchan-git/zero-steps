@@ -24,7 +24,7 @@ RSpec.describe 'Users' do
     context 'フォローしている人に絞り込んだ場合' do
       it 'フォローしている人だけに絞り込まれる' do
         visit users_path
-        click_link 'フォローしている人で絞り込む'
+        click_on 'フォローしている人で絞り込む'
         expect(page).to have_content following_user.name
         expect(page).to have_no_content unfollowing_user.name
       end
@@ -76,7 +76,7 @@ RSpec.describe 'Users' do
     it '更新できること' do
       visit edit_user_path(user)
       check '非公開アカウントにする'
-      click_button '更新する'
+      click_on '更新する'
       expect(page).to have_css '.text-success', text: 'ユーザー情報を更新しました'
     end
   end

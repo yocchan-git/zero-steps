@@ -13,7 +13,7 @@ RSpec.describe 'Relationships' do
     context 'ユーザー一覧ページからフォローした場合' do
       it 'フォローボタンが変わる' do
         visit users_path
-        click_button 'フォローする'
+        click_on 'フォローする'
         expect(page).to have_button 'フォロー解除'
       end
     end
@@ -21,7 +21,7 @@ RSpec.describe 'Relationships' do
     context 'ユーザー詳細ページからフォローした場合' do
       it 'フォローボタンが変わる' do
         visit user_path(other_user)
-        click_button 'フォローする'
+        click_on 'フォローする'
         expect(page).to have_button 'フォロー解除'
       end
     end
@@ -35,7 +35,7 @@ RSpec.describe 'Relationships' do
     context 'ユーザー一覧ページからフォロー解除した場合' do
       it 'フォローボタンが変わる' do
         visit users_path
-        click_button 'フォロー解除'
+        click_on 'フォロー解除'
         expect(page).to have_button 'フォローする'
       end
     end
@@ -43,7 +43,7 @@ RSpec.describe 'Relationships' do
     context 'ユーザー詳細ページからフォロー解除した場合' do
       it 'フォローボタンが変わる' do
         visit user_path(other_user)
-        click_button 'フォロー解除'
+        click_on 'フォロー解除'
         expect(page).to have_button 'フォローする'
       end
     end
