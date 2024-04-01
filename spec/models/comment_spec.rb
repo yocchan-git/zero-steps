@@ -45,6 +45,7 @@ RSpec.describe Comment do
 
   describe '#create_mention_notification' do
     let(:comment) { create(:comment, content: "@#{user.name} さん、こんにちは") }
+
     before { allow(comment).to receive(:send_message_to_discord) }
 
     context '存在するユーザーへメンションした場合' do
@@ -116,7 +117,8 @@ RSpec.describe Comment do
       expect(Discordrb::API::Channel).to have_received(:create_message).once.with(
         "Bot #{ENV.fetch('DISCORD_BOT_TOKEN', nil)}",
         ENV.fetch('DISCORD_CHANNEL_ID', nil),
-        "<@#{comment.commentable.user.uid}>さん\n\n#{comment.commentable.formatted_title}に#{comment.user.name}さんからコメントがありました\n\nコメント本文\n「#{comment.formatted_content}」\n\n[詳細はこちら](#{comment.comment_url})"
+        "<@#{comment.commentable.user.uid}>さん\n\n#{comment.commentable.formatted_title}に#{comment.user.name}さんから
+        コメントがありました\n\nコメント本文\n「#{comment.formatted_content}」\n\n[詳細はこちら](#{comment.comment_url})"
       )
     end
   end

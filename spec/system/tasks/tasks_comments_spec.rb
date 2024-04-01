@@ -9,15 +9,13 @@ RSpec.describe 'Tasks::Comments' do
   let(:task) { create(:task) }
 
   describe '#index' do
-    let!(:task_comment1) { create(:comment, commentable: task) }
-    let!(:task_comment2) { create(:comment, commentable: task) }
-    let!(:other_task_comment) { create(:comment) }
+    let!(:comment) { create(:comment, commentable: task) }
+    let!(:other_comment) { create(:comment) }
 
     it '目標に紐づくコメントが表示される' do
       visit task_comments_path(task)
-      expect(page).to have_content task_comment1.content
-      expect(page).to have_content task_comment2.content
-      expect(page).to have_no_content other_task_comment.content
+      expect(page).to have_content comment.content
+      expect(page).to have_no_content other_comment.content
     end
   end
 

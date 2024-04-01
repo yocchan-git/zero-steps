@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :task do
     user
     goal
-    content { '筋トレする' }
+    sequence(:content) { |n| "筋トレする#{n}日目" }
     completion_limits { '002024-4-01T00:00' }
 
     trait :completed do

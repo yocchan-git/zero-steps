@@ -5,12 +5,12 @@ require 'rails_helper'
 RSpec.describe User do
   describe 'scope' do
     describe 'active' do
-      let!(:active_user1) { create(:user) }
-      let!(:active_user2) { create(:user) }
+      let!(:active_user) { create(:user) }
       let!(:hidden_user) { create(:user, is_hidden: true) }
 
       it '非公開でないユーザーを取得できる' do
-        expect(described_class.active.length).to eq 2
+        expect(described_class.active).to include active_user
+        expect(described_class.active).not_to include hidden_user
       end
     end
   end

@@ -58,7 +58,8 @@ class Comment < ApplicationRecord
     Discordrb::API::Channel.create_message(
       "Bot #{ENV.fetch('DISCORD_BOT_TOKEN', nil)}",
       ENV.fetch('DISCORD_CHANNEL_ID', nil),
-      "<@#{commentable.user.uid}>さん\n\n#{goal? ? commentable.formatted_title : commentable.formatted_content}に#{user.name}さんから#{notification_type_word}がありました\n\nコメント本文\n「#{formatted_content}」\n\n[詳細はこちら](#{comment_url})"
+      "<@#{commentable.user.uid}>さん\n\n#{goal? ? commentable.formatted_title : commentable.formatted_content}に#{user.name}さんから
+      #{notification_type_word}がありました\n\nコメント本文\n「#{formatted_content}」\n\n[詳細はこちら](#{comment_url})"
     )
   end
 end

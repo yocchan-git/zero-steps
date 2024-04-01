@@ -46,7 +46,7 @@ RSpec.describe 'Goals::Tasks' do
     end
 
     context '終了しているタスクの場合' do
-      let!(:complete_post) { create(:complete_post, :task, complete_postable: completed_task) }
+      before { create(:complete_post, :task, complete_postable: completed_task) }
 
       it '終了投稿が表示される' do
         visit goal_task_path(completed_task, goal_id: goal.id)

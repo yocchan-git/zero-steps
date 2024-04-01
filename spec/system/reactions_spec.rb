@@ -9,9 +9,10 @@ RSpec.describe 'Reactions' do
 
   describe '#destroy' do
     context 'コメントの場合' do
+      before { create(:reaction, :comment, user:, reactionable: comment) }
+
       let(:goal) { create(:goal) }
       let!(:comment) { create(:comment, commentable: goal) }
-      let!(:reaction) { create(:reaction, :comment, user:, reactionable: comment) }
 
       it 'いいねを削除できる' do
         visit goal_path(goal)
@@ -23,9 +24,10 @@ RSpec.describe 'Reactions' do
     end
 
     context '終了投稿の場合' do
+      before { create(:reaction, :complete_post, user:, reactionable: complete_post) }
+
       let(:goal) { create(:goal, :completed) }
       let!(:complete_post) { create(:complete_post, complete_postable: goal) }
-      let!(:reaction) { create(:reaction, :complete_post, user:, reactionable: complete_post) }
 
       it 'いいねを削除できる' do
         visit goal_path(goal)

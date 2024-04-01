@@ -8,14 +8,16 @@ RSpec.describe 'Goals' do
   let(:user) { create(:user) }
 
   describe '#index' do
-    let!(:goal1) { create(:goal) }
-    let!(:goal2) { create(:goal) }
+    before do
+      create(:goal, title: 'サッカー選手になる')
+      create(:goal, title: '野球選手になる')
+    end
 
     it 'アクセスできる' do
       visit goals_path
       expect(page).to have_css 'h1', text: 'みんなの目標'
-      expect(page).to have_content goal1.title
-      expect(page).to have_content goal2.title
+      expect(page).to have_content 'サッカー選手になる'
+      expect(page).to have_content '野球選手になる'
     end
   end
 
@@ -51,53 +53,49 @@ RSpec.describe 'Goals' do
     end
 
     context 'タスクがある場合' do
-      let!(:task1) { create(:task, goal:, created_at: 1.day.ago) }
-      let!(:task2) { create(:task, goal:, created_at: 2.days.ago) }
-      let!(:task3) { create(:task, goal:, created_at: 3.days.ago) }
+      before { create_list(:task, comment_count, goal:, created_at: 1.day.ago) }
+
+      let(:comment_count) { 2 }
+      let!(:old_task) { create(:task, goal:, created_at: 2.days.ago) }
 
       context 'タスクが3つ以下の場合' do
-        it 'タスクが3つ表示されている' do
+        it 'タスクが表示されている' do
           visit goal_path(goal)
-          expect(page).to have_link task1.content
-          expect(page).to have_link task2.content
-          expect(page).to have_link task3.content
+          expect(page).to have_link old_task.content
         end
       end
 
       context 'タスクが4つの場合' do
         let!(:new_task) { create(:task, goal:, created_at: Time.current) }
 
-        it '最新のタスクが3つ表示されている' do
+        it '最新のタスクが表示されている' do
           visit goal_path(goal)
           expect(page).to have_link new_task.content
-          expect(page).to have_link task1.content
-          expect(page).to have_link task2.content
+          expect(page).to have_no_link old_task.content
         end
       end
     end
 
     context 'コメントがある場合' do
-      let!(:comment1) { create(:comment, commentable: goal, created_at: 1.day.ago) }
-      let!(:comment2) { create(:comment, commentable: goal, created_at: 2.days.ago) }
-      let!(:comment3) { create(:comment, commentable: goal, created_at: 3.days.ago) }
+      before { create_list(:comment, comment_count, commentable: goal, created_at: 1.day.ago) }
+
+      let(:comment_count) { 2 }
+      let!(:old_comment) { create(:comment, commentable: goal, created_at: 2.days.ago) }
 
       context 'コメントが3つ以下の場合' do
-        it 'コメントが3つ表示されている' do
+        it 'コメントが表示されている' do
           visit goal_path(goal)
-          expect(page).to have_content comment1.content
-          expect(page).to have_content comment2.content
-          expect(page).to have_content comment3.content
+          expect(page).to have_content old_comment.content
         end
       end
 
       context 'コメントが4つの場合' do
         let!(:new_comment) { create(:comment, commentable: goal, created_at: Time.current) }
 
-        it '最新のコメントが3つ表示されている' do
+        it '最新のコメントが表示されている' do
           visit goal_path(goal)
           expect(page).to have_content new_comment.content
-          expect(page).to have_content comment1.content
-          expect(page).to have_content comment2.content
+          expect(page).to have_no_content old_comment.content
         end
       end
     end

@@ -9,15 +9,17 @@ RSpec.describe 'Goals::Comments' do
   let(:goal) { create(:goal) }
 
   describe '#index' do
-    let!(:goal_comment1) { create(:comment, commentable: goal) }
-    let!(:goal_comment2) { create(:comment, commentable: goal) }
-    let!(:other_goal_comment) { create(:comment) }
+    before do
+      create(:comment, content: '目標面白い', commentable: goal)
+      create(:comment, content: '僕も筋トレする', commentable: goal)
+      create(:comment, content: 'パーティしましょう')
+    end
 
     it '目標に紐づくコメントが表示される' do
       visit goal_comments_path(goal)
-      expect(page).to have_content goal_comment1.content
-      expect(page).to have_content goal_comment2.content
-      expect(page).to have_no_content other_goal_comment.content
+      expect(page).to have_content '目標面白い'
+      expect(page).to have_content '僕も筋トレする'
+      expect(page).to have_no_content 'パーティしましょう'
     end
   end
 
