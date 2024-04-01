@@ -118,7 +118,7 @@ RSpec.describe Comment do
         "Bot #{ENV.fetch('DISCORD_BOT_TOKEN', nil)}",
         ENV.fetch('DISCORD_CHANNEL_ID', nil),
         "<@#{comment.commentable.user.uid}>さん\n\n#{comment.commentable.formatted_title}に#{comment.user.name}さんから
-        コメントがありました\n\nコメント本文\n「#{comment.formatted_content}」\n\n[詳細はこちら](#{comment.comment_url})"
+        コメントがありました\n\nコメント本文\n「#{comment.formatted_content}」\n\n[詳細はこちら](#{comment.comment_url})".delete(' ')
       )
     end
   end
