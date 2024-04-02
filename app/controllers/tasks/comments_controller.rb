@@ -7,7 +7,7 @@ class Tasks::CommentsController < ApplicationController
   COMMENT_COUNT = 5
 
   def index
-    @comments = @task.comments.includes(:user).order(created_at: :desc).page(params[:page]).per(COMMENT_COUNT)
+    @comments = @task.comments.eager_load(:user).order(created_at: :desc).page(params[:page]).per(COMMENT_COUNT)
   end
 
   def create
