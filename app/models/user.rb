@@ -24,6 +24,13 @@ class User < ApplicationRecord
 
   scope :active, -> { where(is_hidden: false) }
 
+  def create_goal_with_timeline!(params)
+    goal = goals.create!(params)
+    goal.timelines.create!(user: self, content: "#{name}さんが#{goal.formatted_title}という目標を作成しました")
+
+    goal
+  end
+
   def follow(target_user)
     following << target_user unless self == target_user
   end
