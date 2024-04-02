@@ -22,7 +22,7 @@ class Goals::CommentsController < ApplicationController
 
     if comment.mention_other_than_commentable_user? && !current_user?(@goal.user)
       comment.notifications.create!(user: @goal.user, content: "#{@goal.formatted_title}に#{current_user.name}さんからコメントがありました")
-      comment.send_message_to_discord(:comment)
+      comment.send_message_to_discord(send_user: @goal.user, notification_type: :comment)
     end
 
     respond_to do |format|

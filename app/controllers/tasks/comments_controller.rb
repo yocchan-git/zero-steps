@@ -22,7 +22,7 @@ class Tasks::CommentsController < ApplicationController
     comment.timelines.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}にコメントしました")
     if comment.mention_other_than_commentable_user? && !current_user?(@task.user)
       comment.notifications.create!(user: @task.user, content: "#{@task.formatted_content}に#{current_user.name}さんからコメントがありました")
-      comment.send_message_to_discord(:comment)
+      comment.send_message_to_discord(send_user: @task.user, notification_type: :comment)
     end
 
     respond_to do |format|
