@@ -13,7 +13,7 @@
 </div>
 
 <%= render 'shared/task_list', tasks: @tasks %>
-<%= render 'shared/task_create_modal', task: @task, goal: @goal %>
+<%= render 'shared/task_create_modal', goal: @goal %>
 
 <div class="d-flex justify-content-center">
   <%= paginate @tasks %>

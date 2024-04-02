@@ -52,7 +52,7 @@
   </div>
 <% end %>
 <%= render 'shared/task_list', tasks: %>
-<%= render 'shared/task_create_modal', task: Task.new, goal: @goal %>
+<%= render 'shared/task_create_modal', goal: @goal %>
 
 <%# TODO: ここリファクタリングする %>
 <% comments = @goal.comments.includes(:user).order(created_at: :desc).limit(3) %>
