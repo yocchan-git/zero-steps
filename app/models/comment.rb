@@ -2,6 +2,7 @@
 
 class Comment < ApplicationRecord
   include Rails.application.routes.url_helpers
+
   mentionable_as :content
 
   has_many :notifications, dependent: :destroy
@@ -11,6 +12,29 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
 
   validates :content, presence: true, length: { maximum: 500 }
+
+  def self.create!(commentable, user, comment_params)
+    comment = commentable.comments.build(comment_params)
+    comment.user = user
+    comment.save!
+
+    comment
+  end
+
+  def create_notification_and_timeline
+    commentable_formatted_content = goal? ? commentable.formatted_title : commentable.formatted_content
+    commentable_owner = commentable.user
+    comment_owner = user
+
+    create_mention_notification
+    timelines.create!(user: comment_owner, content: "#{comment_owner.name}さんが#{commentable_formatted_content}にコメントしました")
+
+    is_notificate_commentable_owner = mention_other_than_commentable_user? && user != commentable_owner
+    if is_notificate_commentable_owner
+      notifications.create!(user: commentable_owner, content: "#{commentable_formatted_content}に#{comment_owner.name}さんからコメントがありました")
+      send_message_to_discord(send_user: commentable_owner, notification_type: :comment)
+    end
+  end
 
   def goal?
     commentable_type == 'Goal'
@@ -24,6 +48,12 @@ class Comment < ApplicationRecord
   def formatted_content
     content.length <= 20 ? content : "#{content[0...20]}..."
   end
+
+  def comment_url
+    goal? ? goal_comments_url(commentable) : task_comments_url(commentable)
+  end
+
+  private
 
   def create_mention_notification
     mentions.each do |mention|
@@ -40,10 +70,6 @@ class Comment < ApplicationRecord
   def mention_other_than_commentable_user?
     commentable_user_name = commentable.user.name
     mentions.none?("@#{commentable_user_name}")
-  end
-
-  def comment_url
-    goal? ? goal_comments_url(commentable) : task_comments_url(commentable)
   end
 
   def send_message_to_discord(send_user:, notification_type:)
