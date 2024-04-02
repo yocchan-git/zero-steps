@@ -33,7 +33,7 @@ class Comment < ApplicationRecord
       next unless mentioned_user
 
       notifications.create!(user: mentioned_user, content: "コメントで#{user.name}さんからメンションされました")
-      send_message_to_discord(:mention)
+      send_message_to_discord(send_user: mentioned_user, notification_type: :mention)
     end
   end
 
@@ -46,7 +46,7 @@ class Comment < ApplicationRecord
     goal? ? goal_comments_url(commentable) : task_comments_url(commentable)
   end
 
-  def send_message_to_discord(notification_type)
+  def send_message_to_discord(send_user:, notification_type:)
     notification_type_word =
       case notification_type
       when :comment
@@ -58,7 +58,7 @@ class Comment < ApplicationRecord
     Discordrb::API::Channel.create_message(
       "Bot #{ENV.fetch('DISCORD_BOT_TOKEN', nil)}",
       ENV.fetch('DISCORD_CHANNEL_ID', nil),
-      "<@#{commentable.user.uid}>さん\n\n#{goal? ? commentable.formatted_title : commentable.formatted_content}に#{user.name}さんから
+      "<@#{send_user.uid}>さん\n\n#{goal? ? commentable.formatted_title : commentable.formatted_content}に#{user.name}さんから
       #{notification_type_word}がありました\n\nコメント本文\n「#{formatted_content}」\n\n[詳細はこちら](#{comment_url})".delete(' ')
     )
   end

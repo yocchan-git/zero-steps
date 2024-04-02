@@ -111,13 +111,14 @@ RSpec.describe Comment do
     end
 
     let(:comment) { create(:comment) }
+    let(:user) { create(:user) }
 
     it 'Discordに通知ができる' do
-      expect(comment.send_message_to_discord(:comment)).to eq 'Discordに通知しました'
+      expect(comment.send_message_to_discord(send_user: user, notification_type: :comment)).to eq 'Discordに通知しました'
       expect(Discordrb::API::Channel).to have_received(:create_message).once.with(
         "Bot #{ENV.fetch('DISCORD_BOT_TOKEN', nil)}",
         ENV.fetch('DISCORD_CHANNEL_ID', nil),
-        "<@#{comment.commentable.user.uid}>さん\n\n#{comment.commentable.formatted_title}に#{comment.user.name}さんから
+        "<@#{user.uid}>さん\n\n#{comment.commentable.formatted_title}に#{comment.user.name}さんから
         コメントがありました\n\nコメント本文\n「#{comment.formatted_content}」\n\n[詳細はこちら](#{comment.comment_url})".delete(' ')
       )
     end
