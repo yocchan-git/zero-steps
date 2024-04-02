@@ -9,12 +9,7 @@ class NotificationsController < ApplicationController
 
   def show
     notification = Notification.find(params[:id])
-
-    # TODO: ここモデルに移行する
-    unless notification.is_read
-      notification.is_read = true
-      notification.save!
-    end
+    notification.update!(is_read: true) unless notification.is_read
 
     redirect_to notification.comment.comment_url
   end
