@@ -8,12 +8,13 @@
       <%= form_with(model: Task.new, url: goal_tasks_path(goal)) do |form| %>
         <div class="modal-body">
             <div class="mb-3">
-              <%= form.label :content, "内容(500文字以内)", class: 'form-label' %>
+              <%= form.label :content, '内容(500文字以内)', class: 'form-label' %>
               <%= form.text_area :content, class: 'form-control', required: true, maxlength: 500 %>
             </div>
 
             <%= form.label :completion_limits, '期限' %>
-            <%= form.datetime_field :completion_limits, value: Time.current.beginning_of_day.strftime('%Y-%m-%dT%T'), class: 'form-control', required: true %>
+            <%= form.datetime_field :completion_limits, value: Time.current.beginning_of_day.strftime('%Y-%m-%dT%T'), class: 'form-control',
+                                                        required: true %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>

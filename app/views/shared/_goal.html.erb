@@ -2,7 +2,8 @@
   <div class="col-lg-6 col-md-8 col-12">
     <% goals.each do |goal| %>
       <div class="border border-1 rounded-1">
-        <p class="p-4 mb-0"><%= link_to goal.formatted_title, goal, class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
+        <p class="p-4 mb-0"><%= link_to goal.formatted_title, goal,
+                                        class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
         <div class="p-4"><%= render 'shared/task_progress_bar', goal: %></div>
       </div>
     <% end %>
