@@ -27,6 +27,10 @@ class CompleteUpdater
 
   def create_timeline
     @complete_post.timelines.create!(user: @user,
-                                     content: "#{@user.name}さんが#{formatted_text(@complete_postable)}という#{goal?(@complete_postable) ? '目標' : 'タスク'}を終了しました")
+                                     content: "#{@user.name}さんが#{formatted_text(@complete_postable)}という#{complete_postable_name}を終了しました")
+  end
+
+  def complete_postable_name
+    goal?(@complete_postable) ? '目標' : 'タスク'
   end
 end
