@@ -23,7 +23,8 @@
                 <% end %>
 
                 <% comments_path = goal?(commentable) ? goal_comments_path(commentable) : task_comments_path(commentable) %>
-                <% if current_user?(comment.user) && request.path_info == comments_path %>
+                <% is_delete_comment_path = request.path_info == comments_path || request.path_info == comment_path %>
+                <% if current_user?(comment.user) && is_delete_comment_path %>
                   <%= link_to comment_path(comment, page: params[:page]),
                               id: "comment-delete-icon#{comment.id}",
                               class: 'btn',
