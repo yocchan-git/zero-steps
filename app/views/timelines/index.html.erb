@@ -1,5 +1,5 @@
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-  <h1 class="fs-3 text-center">タイムライン<%= "(フォロー中)" if params[:only_follows] %></h1>
+  <h1 class="fs-3 text-center">タイムライン<%= '(フォロー中)' if params[:only_follows] %></h1>
 
   <div class="text-end">
     <% if params[:only_follows] %>
