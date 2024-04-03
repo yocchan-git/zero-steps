@@ -21,7 +21,7 @@
   </div>
 <% end %>
 
-<% tasks = @user.tasks.order(created_at: :desc).limit(3) %>
+<% tasks = recent_tasks(@user, task_count: 3) %>
 <% if tasks.present? %>
   <div class="mb-3">
     <h2 class="fs-4 text-center">最近のタスク</h2>
