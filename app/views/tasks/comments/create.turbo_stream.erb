@@ -1,7 +1,7 @@
 <% comments = @task.comments.includes(:user).order(created_at: :desc).page(params[:page]).per(5) %>
 
 <%= turbo_stream.update "comments" do %>
-  <%= render partial: 'shared/comment', locals: {comments:, content_type: :user, is_comment_index: true} %>
+  <%= render partial: 'shared/comment', locals: {comments:} %>
 <% end %>
 
 <%= turbo_stream.update "comment_form" do %>
