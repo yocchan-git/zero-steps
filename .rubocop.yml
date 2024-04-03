@@ -52,6 +52,9 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
+Lint/UselessAssignment:
+  Enabled: false
+
 Layout/LineLength:
   Max: 150
 
