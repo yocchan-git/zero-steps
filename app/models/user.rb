@@ -24,11 +24,9 @@ class User < ApplicationRecord
 
   scope :active, -> { where(is_hidden: false) }
 
-  def create_goal_with_timeline!(params)
-    goal = goals.create!(params)
-    goal.timelines.create!(user: self, content: "#{name}さんが#{goal.formatted_title}という目標を作成しました")
-
-    goal
+  def self.fetch_multiple(user, is_only_follows, page_count)
+    user_followings_or_self = is_only_follows ? user.following : self
+    user_followings_or_self.active.preload(:goals, :tasks, :comments).order(created_at: :desc).page(page_count)
   end
 
   def follow(target_user)

@@ -7,9 +7,9 @@ class Goals::CompletePostsController < ApplicationController
   def new; end
 
   def create
-    @goal.update!(completed_at: Time.current)
+    complete_updater = CompleteUpdater.new(@goal, current_user, complete_post_params)
 
-    if CompletePost.create_with_timelines!(@goal, current_user, complete_post_params)
+    if complete_updater.execute
       redirect_to @goal, notice: '終了投稿しました'
     else
       render 'goals/complete_posts/new'

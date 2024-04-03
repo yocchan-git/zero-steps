@@ -4,10 +4,10 @@
   </div>
 
   <div class="text-end">
-    <% if params[:only_follows] %>
+    <% if params[:is_only_follows] %>
       <%= link_to '全てのユーザーを表示する', users_path, class: 'btn btn-primary me-3' %>
     <% else %>
-      <%= link_to 'フォローしている人で絞り込む', users_path(only_follows: true), class: 'btn btn-primary' %>
+      <%= link_to 'フォローしている人で絞り込む', users_path(is_only_follows: true), class: 'btn btn-primary' %>
     <% end %>
   </div>
 </div>

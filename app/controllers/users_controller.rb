@@ -2,12 +2,7 @@
 
 class UsersController < ApplicationController
   def index
-    @users =
-      if params[:only_follows]
-        current_user.following.active.preload(:goals, :tasks, :comments).order(created_at: :desc).page(params[:page])
-      else
-        User.active.preload(:goals, :tasks, :comments).order(created_at: :desc).page(params[:page])
-      end
+    @users = User.fetch_multiple(current_user, params[:is_only_follows], params[:page])
   end
 
   def show
