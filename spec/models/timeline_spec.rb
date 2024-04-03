@@ -5,6 +5,39 @@ require 'rails_helper'
 RSpec.describe Timeline do
   include Rails.application.routes.url_helpers
 
+  describe '.fetch_multiple' do
+    let(:fetch_timelines) { described_class.fetch_multiple(user, is_only_follows, page_count) }
+
+    before { user.follow(following_user) }
+
+    let(:user) { create(:user) }
+    let(:page_count){ 1 }
+
+    let(:following_user) { create(:user) }
+    let(:unfollowing_user) { create(:user) }
+
+    let!(:following_user_timeline) { create(:timeline, user: following_user) }
+    let!(:unfollowing_user_timeline) { create(:timeline, user: unfollowing_user) }
+
+
+    context 'フォローしていない人も含む場合' do
+      let(:is_only_follows) { false }
+
+      it 'フォローしていない人のタイムラインも取得できる' do
+        expect(fetch_timelines).to include following_user_timeline, unfollowing_user_timeline
+      end
+    end
+
+    context 'フォローしている人に絞り込む場合' do
+      let(:is_only_follows) { true }
+
+      it 'フォローしている人だけのタイムラインが取得できる' do
+        expect(fetch_timelines).to include following_user_timeline
+        expect(fetch_timelines).not_to include unfollowing_user_timeline
+      end
+    end
+  end
+
   describe '#timelineable_url' do
     let(:timeline) { create(:timeline) }
     let(:timelineable) { timeline.timelineable }

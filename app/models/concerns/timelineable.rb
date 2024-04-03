@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Timelineable
   def formatted_text(timelineable)
     message = timelineable.instance_of?(Goal) ? timelineable.title : timelineable.content
