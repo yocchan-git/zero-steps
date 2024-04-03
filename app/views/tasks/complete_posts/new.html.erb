@@ -1,4 +1,4 @@
-<h1 class="fs-2 text-center mb-3"><%= @task.formatted_content %>の終了投稿</h1>
+<h1 class="fs-2 text-center mb-3"><%= formatted_text(@task) %>の終了投稿</h1>
 <p class="text-center">タスクを終えた感想を投稿しよう</p>
 
 <%= render 'shared/complete_post_form', complete_postable: @task %>

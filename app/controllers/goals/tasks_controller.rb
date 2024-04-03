@@ -16,7 +16,8 @@ class Goals::TasksController < ApplicationController
   def show; end
 
   def create
-    @goal.create_task_and_timeline!(task_params)
+    task_register = TaskRegister.new(@goal, task_params)
+    task_register.execute
     redirect_back(fallback_location: root_path, notice: 'タスクを作成しました')
   end
 

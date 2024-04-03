@@ -9,16 +9,4 @@ class Goal < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 250 }
   validates :description, presence: true, length: { maximum: 500 }
-
-  def create_task_and_timeline!(params)
-    task = tasks.build(params)
-    task.user = user
-    task.save!
-
-    task.timelines.create!(user:, content: "#{user.name}さんが#{task.formatted_content}というタスクを作成しました")
-  end
-
-  def formatted_title
-    title.length <= 20 ? title : "#{title[0...20]}..."
-  end
 end

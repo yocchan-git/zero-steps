@@ -11,8 +11,8 @@ class Tasks::CommentsController < ApplicationController
   end
 
   def create
-    comment = Comment.create!(@task, current_user, comment_params)
-    comment.create_notification_and_timeline
+    comment_register = CommentRegister.new(@task, current_user, comment_params)
+    comment_register.execute
 
     respond_to do |format|
       format.html { redirect_to task_comments_path(@task) }

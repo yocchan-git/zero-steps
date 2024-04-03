@@ -13,9 +13,9 @@ RSpec.describe 'Goals::Tasks' do
   describe '#index' do
     it '正しく表示されている' do
       visit goal_tasks_path(goal)
-      expect(page).to have_css 'h1', text: "#{goal.formatted_title}のタスク一覧"
-      expect(page).to have_link task.formatted_content
-      expect(page).to have_link completed_task.formatted_content
+      expect(page).to have_css 'h1', text: "#{formatted_text(goal)}のタスク一覧"
+      expect(page).to have_link formatted_text(task)
+      expect(page).to have_link formatted_text(completed_task)
     end
   end
 
@@ -68,7 +68,7 @@ RSpec.describe 'Goals::Tasks' do
       it 'コメントが表示される' do
         visit goal_task_path(task, goal_id: goal.id)
         expect(page).to have_no_content '最近のコメントはありません'
-        expect(page).to have_content comment.formatted_content
+        expect(page).to have_content formatted_text(comment)
       end
     end
   end

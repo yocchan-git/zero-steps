@@ -15,6 +15,32 @@ RSpec.describe User do
     end
   end
 
+  describe '.fetch_multiple' do
+    let(:fetch_timelines) { described_class.fetch_multiple(user:, is_only_follows:) }
+    let(:user) { create(:user) }
+    let(:following_user) { create(:user) }
+    let(:unfollowing_user) { create(:user) }
+
+    before { user.follow(following_user) }
+
+    context 'フォローしていない人も含む場合' do
+      let(:is_only_follows) { false }
+
+      it 'フォローしていない人のタイムラインも取得できる' do
+        expect(fetch_timelines).to include following_user, unfollowing_user
+      end
+    end
+
+    context 'フォローしている人に絞り込む場合' do
+      let(:is_only_follows) { true }
+
+      it 'フォローしている人だけのタイムラインが取得できる' do
+        expect(fetch_timelines).to include following_user
+        expect(fetch_timelines).not_to include unfollowing_user
+      end
+    end
+  end
+
   describe '#follow' do
     let(:follwoing_user) { create(:user) }
     let(:followed_user) { create(:user) }

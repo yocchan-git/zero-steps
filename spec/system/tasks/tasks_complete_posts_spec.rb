@@ -11,7 +11,7 @@ RSpec.describe 'Tasks::CompletePosts' do
   describe '#new' do
     it 'アクセスできる' do
       visit new_task_complete_post_path(task)
-      expect(page).to have_css 'h1', text: "#{task.formatted_content}の終了投稿"
+      expect(page).to have_css 'h1', text: "#{formatted_text(task)}の終了投稿"
     end
   end
 

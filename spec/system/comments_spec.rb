@@ -16,7 +16,7 @@ RSpec.describe 'Comments', :js do
       it '削除できる' do
         visit goal_comments_path(commentable)
         find("#comment-delete-icon#{comment.id}").click
-        expect(page.accept_confirm).to eq "#{comment.formatted_content}を本当に削除しますか？"
+        expect(page.accept_confirm).to eq "#{formatted_text(comment)}を本当に削除しますか？"
         expect(page).to have_no_content comment.content
       end
     end
@@ -27,7 +27,7 @@ RSpec.describe 'Comments', :js do
       it '削除できる' do
         visit task_comments_path(commentable)
         find("#comment-delete-icon#{comment.id}").click
-        expect(page.accept_confirm).to eq "#{comment.formatted_content}を本当に削除しますか？"
+        expect(page.accept_confirm).to eq "#{formatted_text(comment)}を本当に削除しますか？"
         expect(page).to have_no_content comment.content
       end
     end
