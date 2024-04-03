@@ -10,17 +10,17 @@ RSpec.describe Comment do
 
     let(:commentable) { create(:goal) }
     let(:user) { create(:user) }
-    let(:params) { { content: "その目標いいですね" } }
+    let(:params) { { content: 'その目標いいですね' } }
 
     it 'コメントが作成できること' do
-      expect{ subject }.to change{ Comment.count }.by(1)
+      expect { subject }.to change { Comment.count }.by(1)
     end
   end
 
   describe '#create_notification_and_timeline' do
-    before { allow(Discordrb::API::Channel).to receive(:create_message).and_return('Discordに通知しました') }
-
     subject { comment.create_notification_and_timeline }
+
+    before { allow(Discordrb::API::Channel).to receive(:create_message).and_return('Discordに通知しました') }
 
     let(:comment) { create(:comment, user:, commentable:, content:) }
     let(:user) { create(:user) }
@@ -30,7 +30,7 @@ RSpec.describe Comment do
     context 'メンションがない場合' do
       context '目標の作成者とコメントした人が違う場合' do
         it '通知とタイムラインが作成される' do
-          expect{ subject }.to change{ Timeline.count }.by(1).and change{ Notification.count }.by(1)
+          expect { subject }.to change { Timeline.count }.by(1).and change { Notification.count }.by(1)
         end
       end
 
@@ -38,7 +38,7 @@ RSpec.describe Comment do
         let(:commentable) { create(:goal, user:) }
 
         it 'タイムラインが作成される' do
-          expect{ subject }.to change{ Timeline.count }.by(1).and change{ Notification.count }.by(0)
+          expect { subject }.to change { Timeline.count }.by(1).and change { Notification.count }.by(0)
         end
       end
     end
@@ -50,13 +50,13 @@ RSpec.describe Comment do
         let(:commentable) { create(:goal, user:) }
 
         it '通知が1つだけ作成される(重複しない)' do
-          expect{ subject }.to change{ Notification.count }.by(1)
+          expect { subject }.to change { Notification.count }.by(1)
         end
       end
 
       context 'メンション相手が目標の作成者でない場合' do
         it '通知が2つ作成される(メンション相手と目標のオーナー)' do
-          expect{ subject }.to change{ Notification.count }.by(2)
+          expect { subject }.to change { Notification.count }.by(2)
         end
       end
     end

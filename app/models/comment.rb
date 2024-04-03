@@ -30,10 +30,10 @@ class Comment < ApplicationRecord
     timelines.create!(user: comment_owner, content: "#{comment_owner.name}さんが#{commentable_formatted_content}にコメントしました")
 
     is_notificate_commentable_owner = mention_other_than_commentable_user? && user != commentable_owner
-    if is_notificate_commentable_owner
-      notifications.create!(user: commentable_owner, content: "#{commentable_formatted_content}に#{comment_owner.name}さんからコメントがありました")
-      send_message_to_discord(send_user: commentable_owner, notification_type_word: 'コメント')
-    end
+    return unless is_notificate_commentable_owner
+
+    notifications.create!(user: commentable_owner, content: "#{commentable_formatted_content}に#{comment_owner.name}さんからコメントがありました")
+    send_message_to_discord(send_user: commentable_owner, notification_type_word: 'コメント')
   end
 
   def goal?

@@ -21,7 +21,7 @@ RSpec.describe 'Comments::Reactions' do
           end
         end
       end
-  
+
       context 'コメント一覧画面' do
         it 'いいねができること' do
           visit goal_comments_path(commentable)
@@ -35,6 +35,7 @@ RSpec.describe 'Comments::Reactions' do
 
     context 'タスク' do
       let(:commentable) { create(:task) }
+
       context '詳細画面' do
         it 'いいねができること' do
           visit goal_task_path(commentable, goal_id: commentable.goal.id)
@@ -44,7 +45,7 @@ RSpec.describe 'Comments::Reactions' do
           end
         end
       end
-  
+
       context 'コメント一覧画面' do
         it 'いいねができること' do
           visit task_comments_path(commentable)
@@ -60,9 +61,9 @@ RSpec.describe 'Comments::Reactions' do
       it 'いいねができること' do
         visit user_path(other_user)
         within "#comment_reaction_form#{comment.id}" do
-            find('.btn').click
+          find('.btn').click
             expect(page).to have_css '.fa-solid'
-          end
+        end
       end
     end
   end
