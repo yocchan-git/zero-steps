@@ -32,16 +32,12 @@ class Comment < ApplicationRecord
     is_notificate_commentable_owner = mention_other_than_commentable_user? && user != commentable_owner
     if is_notificate_commentable_owner
       notifications.create!(user: commentable_owner, content: "#{commentable_formatted_content}に#{comment_owner.name}さんからコメントがありました")
-      send_message_to_discord(send_user: commentable_owner, notification_type: :comment)
+      send_message_to_discord(send_user: commentable_owner, notification_type_word: 'コメント')
     end
   end
 
   def goal?
     commentable_type == 'Goal'
-  end
-
-  def after_save_mention(new_mentions)
-    # メンションされた後のメソッドだが、何もしない
   end
 
   # TODO: taskと全く同じなので、まとめる
@@ -51,6 +47,10 @@ class Comment < ApplicationRecord
 
   def comment_url
     goal? ? goal_comments_url(commentable) : task_comments_url(commentable)
+  end
+
+  def after_save_mention(new_mentions)
+    # メンションされた後のメソッド(必要)だが、何もしない
   end
 
   private
@@ -63,7 +63,7 @@ class Comment < ApplicationRecord
       next unless mentioned_user
 
       notifications.create!(user: mentioned_user, content: "コメントで#{user.name}さんからメンションされました")
-      send_message_to_discord(send_user: mentioned_user, notification_type: :mention)
+      send_message_to_discord(send_user: mentioned_user, notification_type_word: 'メンション')
     end
   end
 
@@ -72,15 +72,7 @@ class Comment < ApplicationRecord
     mentions.none?("@#{commentable_user_name}")
   end
 
-  def send_message_to_discord(send_user:, notification_type:)
-    notification_type_word =
-      case notification_type
-      when :comment
-        'コメント'
-      when :mention
-        'メンション'
-      end
-
+  def send_message_to_discord(send_user:, notification_type_word:)
     Discordrb::API::Channel.create_message(
       "Bot #{ENV.fetch('DISCORD_BOT_TOKEN', nil)}",
       ENV.fetch('DISCORD_CHANNEL_ID', nil),
