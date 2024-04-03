@@ -1,4 +1,6 @@
 class CompleteUpdater
+  include Timelineable
+
   def initialize(complete_postable, user, params)
     @complete_postable = complete_postable
     @user = user
@@ -22,7 +24,6 @@ class CompleteUpdater
   end
 
   def create_timeline
-    message = @complete_post.goal? ? @complete_postable.formatted_title : @complete_postable.formatted_content
-    @complete_post.timelines.create!(user: @user, content: "#{@user.name}さんが#{message}という#{@complete_post.goal? ? '目標' : 'タスク'}を終了しました")
+    @complete_post.timelines.create!(user: @user, content: "#{@user.name}さんが#{formatted_text(@complete_postable)}という#{@complete_post.goal? ? '目標' : 'タスク'}を終了しました")
   end
 end

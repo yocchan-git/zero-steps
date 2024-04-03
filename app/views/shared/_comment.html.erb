@@ -26,7 +26,7 @@
                   <%= link_to comment_path(comment, page: params[:page]),
                               id: "comment-delete-icon#{comment.id}",
                               class: 'btn',
-                              data: { turbo_method: :delete, turbo_confirm: "#{comment.formatted_content}を本当に削除しますか？" } do %>
+                              data: { turbo_method: :delete, turbo_confirm: "#{formatted_text(comment)}を本当に削除しますか？" } do %>
                     <i class="fa-solid fa-trash"></i>
                   <% end %>
                 <% end %>

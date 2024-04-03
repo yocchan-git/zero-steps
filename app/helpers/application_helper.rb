@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include Timelineable
+
   def default_meta_tags
     {
       site: 'Zero Steps',

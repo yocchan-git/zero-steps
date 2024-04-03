@@ -17,11 +17,6 @@ class Comment < ApplicationRecord
     commentable_type == 'Goal'
   end
 
-  # TODO: taskと全く同じなので、まとめる
-  def formatted_content
-    content.length <= 20 ? content : "#{content[0...20]}..."
-  end
-
   def comment_url
     goal? ? goal_comments_url(commentable) : task_comments_url(commentable)
   end

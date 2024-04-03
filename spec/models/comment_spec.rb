@@ -80,26 +80,6 @@ RSpec.describe Comment do
     end
   end
 
-  describe '#formatted_content' do
-    let(:comment) { create(:comment, content:) }
-
-    context '内容が20文字の場合' do
-      let(:content) { 'a' * 20 }
-
-      it 'そのまま表示される' do
-        expect(comment.formatted_content).to eq content
-      end
-    end
-
-    context '内容が21文字の場合' do
-      let(:content) { 'a' * 21 }
-
-      it '「20文字分+...」で表示される' do
-        expect(comment.formatted_content).to eq "#{'a' * 20}..."
-      end
-    end
-  end
-
   describe '#comment_url' do
     context '目標のコメントの場合' do
       let(:goal_comment) { create(:comment) }

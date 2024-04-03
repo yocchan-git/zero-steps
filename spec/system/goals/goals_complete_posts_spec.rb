@@ -11,7 +11,7 @@ RSpec.describe 'Goals::CompletePosts' do
   describe '#new' do
     it 'アクセスできる' do
       visit new_goal_complete_post_path(goal)
-      expect(page).to have_css 'h1', text: "#{goal.formatted_title}の終了投稿"
+      expect(page).to have_css 'h1', text: "#{formatted_text(goal)}の終了投稿"
     end
   end
 

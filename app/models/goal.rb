@@ -9,8 +9,4 @@ class Goal < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 250 }
   validates :description, presence: true, length: { maximum: 500 }
-
-  def formatted_title
-    title.length <= 20 ? title : "#{title[0...20]}..."
-  end
 end
