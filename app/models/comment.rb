@@ -2,6 +2,7 @@
 
 class Comment < ApplicationRecord
   include Rails.application.routes.url_helpers
+  include Timelineable
 
   mentionable_as :content
 
@@ -13,12 +14,8 @@ class Comment < ApplicationRecord
 
   validates :content, presence: true, length: { maximum: 500 }
 
-  def goal?
-    commentable_type == 'Goal'
-  end
-
-  def comment_url
-    goal? ? goal_comments_url(commentable) : task_comments_url(commentable)
+  def url
+    goal?(commentable) ? goal_comments_url(commentable) : task_comments_url(commentable)
   end
 
   def after_save_mention(new_mentions)

@@ -54,22 +54,19 @@ RSpec.describe Timeline do
     context 'コメントのタイムラインの場合' do
       let(:timeline) { create(:timeline, :comment) }
 
-      it 'comment_urlメソッドが呼ばれる' do
-        allow(timelineable).to receive(:comment_url)
+      it 'urlメソッドが呼ばれる' do
+        allow(timelineable).to receive(:url)
         timeline.timelineable_url
 
-        expect(timelineable).to have_received(:comment_url)
+        expect(timelineable).to have_received(:url)
       end
     end
 
     context '終了投稿のタイムラインの場合' do
       let(:timeline) { create(:timeline, :complete_post) }
 
-      it 'complete_post_urlメソッドが呼ばれる' do
-        allow(timelineable).to receive(:complete_post_url)
-        timeline.timelineable_url
-
-        expect(timelineable).to have_received(:complete_post_url)
+      it '正しいルーティングを返す' do
+        expect(timeline.timelineable_url).to eq goal_path(timeline.timelineable.complete_postable)
       end
     end
   end

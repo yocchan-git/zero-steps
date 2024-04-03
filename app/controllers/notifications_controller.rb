@@ -11,6 +11,6 @@ class NotificationsController < ApplicationController
     notification = Notification.find(params[:id])
     notification.update!(is_read: true) unless notification.is_read
 
-    redirect_to notification.comment.comment_url
+    redirect_to notification.comment.url
   end
 end

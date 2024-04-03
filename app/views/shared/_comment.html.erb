@@ -11,9 +11,9 @@
 
             <div>
               <% if request.path_info == user_path(comment.user) %>
-                <% request_uri = comment.goal? ? comment.commentable : goal_task_path(comment.commentable, goal_id: comment.commentable.goal.id) %>
+                <% request_uri = goal?(comment.commentable) ? comment.commentable : goal_task_path(comment.commentable, goal_id: comment.commentable.goal.id) %>
                 <%= link_to request_uri, class: 'text-reset text-decoration-none ' do %>
-                  <%= comment.goal? ? "#{comment.commentable.title}(目標)" : "#{comment.commentable.content}(タスク)" %>
+                  <%= goal?(comment.commentable) ? "#{comment.commentable.title}(目標)" : "#{comment.commentable.content}(タスク)" %>
                 <% end %>
               <% else %>
                 <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
@@ -21,7 +21,7 @@
                   <%= comment.user.name %>さん
                 <% end %>
 
-                <% comment_index_path = comment.goal? ? goal_comments_path(comment.commentable) : task_comments_path(comment.commentable) %>
+                <% comment_index_path = goal?(comment.commentable) ? goal_comments_path(comment.commentable) : task_comments_path(comment.commentable) %>
                 <% if current_user?(comment.user) && request.path_info == comment_index_path %>
                   <%= link_to comment_path(comment, page: params[:page]),
                               id: "comment-delete-icon#{comment.id}",
