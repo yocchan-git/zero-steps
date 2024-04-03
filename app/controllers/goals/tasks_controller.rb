@@ -7,19 +7,16 @@ class Goals::TasksController < ApplicationController
   before_action :set_task, only: :show
   before_action :set_current_user_task, only: %i[update destroy]
 
+  TASK_COUNTS = 5
+
   def index
-    @tasks = @goal.tasks.order(created_at: :desc).page(params[:page])
-    @task = Task.new
+    @tasks = @goal.tasks.order(created_at: :desc).page(params[:page]).per(TASK_COUNTS)
   end
 
   def show; end
 
   def create
-    @task = @goal.tasks.build(task_params)
-    @task.user = current_user
-
-    @task.save!
-    @task.timelines.create!(user: current_user, content: "#{current_user.name}さんが#{@task.formatted_content}というタスクを作成しました")
+    @goal.create_task_and_timeline!(task_params)
     redirect_back(fallback_location: root_path, notice: 'タスクを作成しました')
   end
 

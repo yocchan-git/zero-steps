@@ -13,10 +13,7 @@ RSpec.describe 'Users::Sessions' do
   end
 
   describe '#callback' do
-    before {
-      Rails.application.env_config['omniauth.auth'] =
-        OmniAuth.config.add_mock(:discord, { uid: user.uid, info: { name: user.name, image: user.image } })
-    }
+    before { OmniAuth.config.add_mock(:discord, { uid: user.uid, info: { name: user.name, image: user.image } }) }
 
     context '初めてのユーザーの場合' do
       let(:user) { build(:user) }

@@ -10,22 +10,25 @@
             </div>
 
             <div>
-              <% if content_type == :user %>
+              <% if request.path_info == user_path(comment.user) %>
+                <% request_uri = comment.goal? ? comment.commentable : goal_task_path(comment.commentable, goal_id: comment.commentable.goal.id) %>
+                <%= link_to request_uri, class: 'text-reset text-decoration-none ' do %>
+                  <%= comment.goal? ? "#{comment.commentable.title}(目標)" : "#{comment.commentable.content}(タスク)" %>
+                <% end %>
+              <% else %>
                 <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
                   <%= image_tag comment.user.image, class: 'rounded-circle', width: 30, height: 30 %>
                   <%= comment.user.name %>さん
                 <% end %>
 
-                <% if current_user?(comment.user) && is_comment_index %>
-                  <%= link_to comment_path(comment, page: params[:page]), id: "comment-delete-icon#{comment.id}", class: "btn", data: { turbo_method: :delete, turbo_confirm: "#{comment.formatted_content}を本当に削除しますか？" } do %>
+                <% comment_index_path = comment.goal? ? goal_comments_path(comment.commentable) : task_comments_path(comment.commentable) %>
+                <% if current_user?(comment.user) && request.path_info == comment_index_path %>
+                  <%= link_to comment_path(comment, page: params[:page]),
+                              id: "comment-delete-icon#{comment.id}",
+                              class: 'btn',
+                              data: { turbo_method: :delete, turbo_confirm: "#{comment.formatted_content}を本当に削除しますか？" } do %>
                     <i class="fa-solid fa-trash"></i>
                   <% end %>
-                <% end %>
-              <% elsif content_type == :commentable %>
-                <%# TODO: リファクタリングする %>
-                <% request_uri = comment.goal? ? comment.commentable : goal_task_path(comment.commentable, goal_id: comment.commentable.goal.id) %>
-                <%= link_to request_uri, class: 'text-reset text-decoration-none ' do %>
-                  <%= comment.goal? ? "#{comment.commentable.title}(目標)" : "#{comment.commentable.content}(タスク)" %>
                 <% end %>
               <% end %>
             </div>

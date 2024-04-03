@@ -19,11 +19,10 @@ class GoalsController < ApplicationController
   def edit; end
 
   def create
-    @goal = current_user.goals.new(goal_params)
+    goal = current_user.create_goal_with_timeline!(goal_params)
 
-    if @goal.save
-      @goal.timelines.create!(user: current_user, content: "#{current_user.name}さんが#{@goal.formatted_title}という目標を作成しました")
-      redirect_to @goal, notice: '目標を作成しました'
+    if goal
+      redirect_to goal, notice: '目標を作成しました'
     else
       render :new, status: :unprocessable_entity
     end

@@ -2,12 +2,11 @@
 
 class UsersController < ApplicationController
   def index
-    # TODO: リファクタリングする
     @users =
       if params[:only_follows]
-        current_user.following.active.includes(:goals, :tasks, :comments).order(created_at: :desc).page(params[:page])
+        current_user.following.active.preload(:goals, :tasks, :comments).order(created_at: :desc).page(params[:page])
       else
-        User.active.includes(:goals, :tasks, :comments).order(created_at: :desc).page(params[:page])
+        User.active.preload(:goals, :tasks, :comments).order(created_at: :desc).page(params[:page])
       end
   end
 

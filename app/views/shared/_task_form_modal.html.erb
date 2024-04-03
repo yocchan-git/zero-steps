@@ -10,7 +10,7 @@
             <%= render 'shared/validation_errors', resource: task %>
 
             <div class="mb-3">
-              <%= form.label :content, "内容(500文字以内)", class: 'form-label' %>
+              <%= form.label :content, '内容(500文字以内)', class: 'form-label' %>
               <%= form.text_area :content, class: 'form-control', required: true, maxlength: 500 %>
             </div>
 

@@ -52,6 +52,9 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
+Lint/UselessAssignment:
+  Enabled: false
+
 Layout/LineLength:
   Max: 150
 
@@ -108,6 +111,15 @@ RSpec/MessageSpies:
   Enabled: false
 
 RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExpectChange:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/ChangeByZero:
   Enabled: false
 
 RSpec/NestedGroups:

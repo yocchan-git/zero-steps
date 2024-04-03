@@ -38,26 +38,4 @@
   <%= render 'shared/complete_post', complete_post: %>
 <% end %>
 
-<%# TODO: ここリファクタリングする %>
-<% comments = @task.comments.includes(:user).order(created_at: :desc).limit(3) %>
-
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-  <div>
-    <h2 class="fs-3 mb-3">最近のコメント</h2>
-    <p>気軽にいいねやコメントで交流しよう！</p>
-  </div>
-  <div class="text-end">
-    <% link_message = comments.empty? ? 'コメント受付中' : 'もっと見る' %>
-    <%= link_to link_message, task_comments_path(@task), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
-  </div>
-</div>
-
-<% if comments.empty? %>
-  <div class="d-flex justify-content-center mb-3">
-    <div class="border-bottom border-bottom-5 m-4 px-4">
-      <p class="mb-1 p-0">最近のコメントはありません</p>
-    </div>
-  </div>
-<% end %>
-
-<%= render 'shared/comment', comments:, content_type: :user, is_comment_index: false %>
+<%= render 'shared/recent_comments', commentable: @task %>

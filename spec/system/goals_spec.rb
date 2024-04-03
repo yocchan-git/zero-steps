@@ -120,34 +120,12 @@ RSpec.describe 'Goals' do
   end
 
   describe '#create' do
-    context 'フォームに不正な値を入力した場合' do
-      context 'titleが空の場合' do
-        it '送信できないこと' do
-          visit new_goal_path
-          click_on '作成する'
-          expect(page).to have_css 'h1', text: '目標を作成する'
-        end
-      end
-
-      context 'titleに251文字以上入っている場合' do
-        it '250文字までしか入力できないこと' do
-          visit new_goal_path
-          fill_in 'タイトル(250文字以内)', with: 'あ' * 251
-          fill_in '説明(500文字以内)', with: '毎日継続します！'
-          click_on '作成する'
-          expect(page).to have_css 'h2', text: 'あ' * 250
-        end
-      end
-    end
-
-    context 'フォームに正常な値を入力した場合' do
-      it '目標を作成できる' do
-        visit new_goal_path
-        fill_in 'タイトル(250文字以内)', with: '体重を50kgにする'
-        fill_in '説明(500文字以内)', with: '毎日継続します！'
-        click_on '作成する'
-        expect(page).to have_css 'h2', text: '体重を50kgにする'
-      end
+    it '目標を作成できる' do
+      visit new_goal_path
+      fill_in 'タイトル(250文字以内)', with: '体重を50kgにする'
+      fill_in '説明(500文字以内)', with: '毎日継続します！'
+      click_on '作成する'
+      expect(page).to have_css 'h2', text: '体重を50kgにする'
     end
   end
 

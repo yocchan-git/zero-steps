@@ -12,8 +12,8 @@
   </div>
 </div>
 
-<%# TODO: リファクタリングする(マジックナンバーとか) %>
-<% goals = @user.goals.order(created_at: :desc).limit(3) %>
+<% goal_count = 3 %>
+<% goals = @user.goals.order(created_at: :desc).limit(goal_count) %>
 <% if goals.present? %>
   <div class="mb-3">
     <h2 class="fs-4 text-center">最近の目標</h2>
@@ -21,7 +21,7 @@
   </div>
 <% end %>
 
-<% tasks = @user.tasks.order(created_at: :desc).limit(3) %>
+<% tasks = recent_tasks(@user, task_count: 3) %>
 <% if tasks.present? %>
   <div class="mb-3">
     <h2 class="fs-4 text-center">最近のタスク</h2>
@@ -29,8 +29,8 @@
   </div>
 <% end %>
 
-<% comments = @user.comments.includes(:commentable).order(created_at: :desc).limit(3) %>
+<% comments = recent_comments(@user, comment_count: 3) %>
 <% if comments.present? %>
   <h2 class="fs-4 text-center">最近のコメント</h2>
-  <%= render 'shared/comment', comments:, content_type: :commentable %>
+  <%= render 'shared/comment', comments: %>
 <% end %>

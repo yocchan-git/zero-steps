@@ -7,7 +7,8 @@
     <% if @notifications.present? %>
         <% @notifications.each do |notification| %>
           <div class="border border-1 rounded-1">
-            <p class="p-4 mb-0"><%= link_to notification.content, notification_path(notification), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
+            <p class="p-4 mb-0"><%= link_to notification.content, notification_path(notification),
+                                            class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
           </div>
         <% end %>
     <% else %>

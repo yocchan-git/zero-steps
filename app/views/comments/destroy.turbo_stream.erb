@@ -1,3 +1,3 @@
 <%= turbo_stream.update "comments" do %>
-  <%= render partial: 'shared/comment', locals: {comments: @comments, content_type: :user, is_comment_index: true} %>
+  <%= render partial: 'shared/comment', locals: {comments: @comments} %>
 <% end %>
