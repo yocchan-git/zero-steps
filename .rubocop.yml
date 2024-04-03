@@ -113,6 +113,15 @@ RSpec/MessageSpies:
 RSpec/MultipleExpectations:
   Enabled: false
 
+RSpec/ExpectChange:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/ChangeByZero:
+  Enabled: false
+
 RSpec/NestedGroups:
   Max: 5
 

@@ -19,7 +19,9 @@ class GoalsController < ApplicationController
   def edit; end
 
   def create
-    if goal = current_user.create_goal_with_timeline!(goal_params)
+    goal = current_user.create_goal_with_timeline!(goal_params)
+
+    if goal
       redirect_to goal, notice: '目標を作成しました'
     else
       render :new, status: :unprocessable_entity
