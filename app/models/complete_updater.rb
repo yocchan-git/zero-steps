@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CompleteUpdater
   include Timelineable
 
@@ -24,6 +26,7 @@ class CompleteUpdater
   end
 
   def create_timeline
-    @complete_post.timelines.create!(user: @user, content: "#{@user.name}さんが#{formatted_text(@complete_postable)}という#{@complete_post.goal? ? '目標' : 'タスク'}を終了しました")
+    @complete_post.timelines.create!(user: @user,
+                                     content: "#{@user.name}さんが#{formatted_text(@complete_postable)}という#{@complete_post.goal? ? '目標' : 'タスク'}を終了しました")
   end
 end

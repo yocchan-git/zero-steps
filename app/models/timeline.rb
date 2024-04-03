@@ -10,7 +10,7 @@ class Timeline < ApplicationRecord
 
   validates :content, presence: true
 
-  def self.fetch_multiple(user, is_only_follows, page_count)
+  def self.fetch_multiple(user:, is_only_follows: false, page_count: nil)
     if is_only_follows
       where(user_id: [*user.following_ids]).order(created_at: :desc).eager_load(:user).page(page_count).per(TIMELINE_COUNT)
     else

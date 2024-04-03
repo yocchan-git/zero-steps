@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe CommentRegister, type: :model do
+RSpec.describe CommentRegister do
   let(:comment_register) { described_class.new(commentable, user, params) }
 
   describe '#execute' do

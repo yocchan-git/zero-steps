@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
   scope :active, -> { where(is_hidden: false) }
 
-  def self.fetch_multiple(user, is_only_follows, page_count)
+  def self.fetch_multiple(user:, is_only_follows: false, page_count: nil)
     user_followings_or_self = is_only_follows ? user.following : self
     user_followings_or_self.active.preload(:goals, :tasks, :comments).order(created_at: :desc).page(page_count)
   end

@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe CompleteUpdater, type: :model do
+RSpec.describe CompleteUpdater do
   let(:complete_updater) { described_class.new(complete_postable, user, params) }
 
   describe '#execute' do
     subject { complete_updater.execute }
 
-    before { travel_to(Time.current) }
+    before { freeze_time }
 
     let(:user) { create(:user) }
     let(:params) { { content: '終了しました！応援ありがとうございます' } }

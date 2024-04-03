@@ -16,16 +16,12 @@ RSpec.describe User do
   end
 
   describe '.fetch_multiple' do
-    let(:fetch_timelines) { described_class.fetch_multiple(user, is_only_follows, page_count) }
-
-    before { user.follow(following_user) }
-
+    let(:fetch_timelines) { described_class.fetch_multiple(user:, is_only_follows:) }
     let(:user) { create(:user) }
-    let(:page_count){ 1 }
-
     let(:following_user) { create(:user) }
     let(:unfollowing_user) { create(:user) }
 
+    before { user.follow(following_user) }
 
     context 'フォローしていない人も含む場合' do
       let(:is_only_follows) { false }
