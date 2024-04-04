@@ -84,4 +84,38 @@ RSpec.describe Timelineable do
       end
     end
   end
+
+  describe 'goal?' do
+    context '目標の場合' do
+      let(:timelineable) { create(:goal) }
+
+      it 'trueが返る' do
+        expect(goal?(timelineable)).to be_truthy
+      end
+    end
+
+    context 'タスクの場合' do
+      let(:timelineable) { create(:task) }
+
+      it 'falseが返る' do
+        expect(goal?(timelineable)).to be_falsy
+      end
+    end
+
+    context 'コメントの場合' do
+      let(:timelineable) { create(:comment) }
+
+      it 'falseが返る' do
+        expect(goal?(timelineable)).to be_falsy
+      end
+    end
+
+    context '終了投稿の場合' do
+      let(:timelineable) { create(:complete_post) }
+
+      it 'falseが返る' do
+        expect(goal?(timelineable)).to be_falsy
+      end
+    end
+  end
 end

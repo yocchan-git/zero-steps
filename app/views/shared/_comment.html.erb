@@ -10,10 +10,11 @@
             </div>
 
             <div>
+              <% commentable = comment.commentable %>
               <% if request.path_info == user_path(comment.user) %>
-                <% request_uri = comment.goal? ? comment.commentable : goal_task_path(comment.commentable, goal_id: comment.commentable.goal.id) %>
+                <% request_uri = goal?(commentable) ? commentable : goal_task_path(commentable, goal_id: commentable.goal.id) %>
                 <%= link_to request_uri, class: 'text-reset text-decoration-none ' do %>
-                  <%= comment.goal? ? "#{comment.commentable.title}(目標)" : "#{comment.commentable.content}(タスク)" %>
+                  <%= goal?(commentable) ? "#{commentable.title}(目標)" : "#{commentable.content}(タスク)" %>
                 <% end %>
               <% else %>
                 <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
@@ -21,8 +22,9 @@
                   <%= comment.user.name %>さん
                 <% end %>
 
-                <% comment_index_path = comment.goal? ? goal_comments_path(comment.commentable) : task_comments_path(comment.commentable) %>
-                <% if current_user?(comment.user) && request.path_info == comment_index_path %>
+                <% comments_path = goal?(commentable) ? goal_comments_path(commentable) : task_comments_path(commentable) %>
+                <% is_delete_comment_path = request.path_info == comments_path || request.path_info == comment_path %>
+                <% if current_user?(comment.user) && is_delete_comment_path %>
                   <%= link_to comment_path(comment, page: params[:page]),
                               id: "comment-delete-icon#{comment.id}",
                               class: 'btn',

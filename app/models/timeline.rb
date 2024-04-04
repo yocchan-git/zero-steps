@@ -2,6 +2,7 @@
 
 class Timeline < ApplicationRecord
   include Rails.application.routes.url_helpers
+  include Timelineable
 
   TIMELINE_COUNT = 10
 
@@ -25,9 +26,21 @@ class Timeline < ApplicationRecord
     when 'Task'
       goal_task_path(timelineable, goal_id: timelineable.goal.id)
     when 'Comment'
-      timelineable.comment_url
+      timelineable.url
     when 'CompletePost'
-      timelineable.complete_post_url
+      complete_post_url
+    end
+  end
+
+  private
+
+  def complete_post_url
+    complete_postable = timelineable.complete_postable
+
+    if goal?(complete_postable)
+      goal_path(complete_postable)
+    else
+      goal_task_path(complete_postable, goal_id: complete_postable.goal.id)
     end
   end
 end

@@ -57,7 +57,7 @@ class CommentRegister
       "Bot #{ENV.fetch('DISCORD_BOT_TOKEN', nil)}",
       ENV.fetch('DISCORD_CHANNEL_ID', nil),
       "<@#{send_user.uid}>さん\n\n#{formatted_text(@commentable)}に#{@user.name}さんから
-      #{notification_type_word}がありました\n\nコメント本文\n「#{formatted_text(@comment)}」\n\n[詳細はこちら](#{@comment.comment_url})".delete(' ')
+      #{notification_type_word}がありました\n\nコメント本文\n「#{formatted_text(@comment)}」\n\n[詳細はこちら](#{@comment.url})".delete(' ')
     )
   end
 end
