@@ -18,7 +18,12 @@ class Goals::TasksController < ApplicationController
   def create
     task_register = TaskRegister.new(@goal, task_params)
     task_register.execute
-    redirect_back(fallback_location: root_path, notice: 'タスクを作成しました')
+
+    @tasks = @goal.tasks.order(created_at: :desc).page(params[:page]).per(TASK_COUNTS)
+    render turbo_stream: [
+      turbo_stream.update("task_list", partial: "shared/task_list", locals: { tasks: @tasks }),
+      turbo_stream.update("task_create_modal", partial: "shared/task_create_modal", locals: { goal: @goal })
+    ]
   end
 
   def update
