@@ -11,10 +11,8 @@
         <div class="mb-3">
           <div class="border border-2 rounded-1">
             <div class="d-flex justify-content-between">
-              <div class="p-4">
-                <p><%= link_to formatted_text(task), goal_task_path(task, goal_id: task.goal.id),
-                              class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
-                <p>期限: <%= l task.completion_limits, format: :date %></p>
+              <div id="task_info<%= task.id %>" class="p-4">
+                <%= render 'goals/tasks/task_info', task:, is_tasks_path: true %>
               </div>
 
               <div class="p-4">
@@ -22,7 +20,9 @@
               </div>
             </div>
 
-            <div class="p-3 text-end">
+            <div class="p-2 d-flex justify-content-end">
+              <p class="pt-3 me-2"><%= link_to '詳しくみる', goal_task_path(task, goal_id: task.goal.id) %></p>
+
               <% if current_user?(task.user) %>
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#taskFormModal<%= task.id %>">
                   <i class="fa-solid fa-pen"></i>
@@ -36,7 +36,9 @@
           </div>
         </div>
 
-        <%= render 'shared/task_form_modal', task: %>
+        <div id="task_update_modal<%= task.id %>">
+          <%= render 'shared/task_form_modal', task: %>
+        </div>
         <%= render 'shared/task_delete_modal', task: %>
       <% end %>
     </div>

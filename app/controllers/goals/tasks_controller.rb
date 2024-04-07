@@ -28,7 +28,11 @@ class Goals::TasksController < ApplicationController
 
   def update
     @task.update!(task_params)
-    redirect_back(fallback_location: root_path, notice: 'タスクを更新しました')
+
+    render turbo_stream: [
+      turbo_stream.update("task_info#{@task.id}", partial: "goals/tasks/task_info", locals: { task: @task, is_tasks_path: params[:is_tasks_path] }),
+      turbo_stream.update("task_update_modal#{@task.id}", partial: "shared/task_form_modal", locals: { task: @task })
+    ]
   end
 
   def destroy
