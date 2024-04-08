@@ -1,7 +1,14 @@
 <% if tasks.empty? %>
   <div class="d-flex justify-content-center mb-3">
     <div class="border-bottom border-bottom-5 m-4 px-4">
-      <p class="mb-1 p-0">最近のタスクはありません</p>
+      <% if params[:is_new_goal] %>
+        <p class="text-center">
+          目標が作成できました！<br>
+          次はその目標を叶えるためにタスクを作成しましょう
+        </p>
+      <% else %>
+        <p class="mb-1 p-0">最近のタスクはありません</p>
+      <% end %>
     </div>
   </div>
 <% else %>
