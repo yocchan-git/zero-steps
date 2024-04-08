@@ -3,7 +3,7 @@
 class TaskRegister
   include Timelineable
 
-  attr_reader :goal
+  attr_reader :task
 
   def initialize(goal, params)
     @goal = goal
@@ -11,17 +11,15 @@ class TaskRegister
   end
 
   def execute
-    task = create_task
-    task.timelines.create!(user: @goal.user, content: "#{@goal.user.name}さんが#{formatted_text(task)}というタスクを作成しました")
+    create_task
+    @task.timelines.create!(user: @goal.user, content: "#{@goal.user.name}さんが#{formatted_text(task)}というタスクを作成しました")
   end
 
   private
 
   def create_task
-    task = @goal.tasks.build(@params)
-    task.user = @goal.user
-    task.save!
-
-    task
+    @task = @goal.tasks.build(@params)
+    @task.user = @goal.user
+    @task.save!
   end
 end
