@@ -22,7 +22,7 @@ class GoalsController < ApplicationController
     goal_register = GoalRegister.new(current_user, goal_params)
 
     if goal_register.execute
-      redirect_to goal_register.goal, notice: '目標を作成しました'
+      redirect_to goal_tasks_path(goal_register.goal, is_new_goal: true)
     else
       render :new, status: :unprocessable_entity
     end

@@ -125,7 +125,8 @@ RSpec.describe 'Goals' do
       fill_in 'タイトル(250文字以内)', with: '体重を50kgにする'
       fill_in '説明(500文字以内)', with: '毎日継続します！'
       click_on '作成する'
-      expect(page).to have_css 'h2', text: '体重を50kgにする'
+      expect(page).to have_css 'h1', text: '体重を50kgにするのタスク一覧'
+      expect(page).to have_content '目標が作成できました！'
     end
   end
 
