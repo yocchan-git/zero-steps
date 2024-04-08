@@ -23,7 +23,7 @@ RSpec.describe 'Goals::Tasks' do
     it '正しく表示されている' do
       visit goal_task_path(task, goal_id: goal.id)
       expect(page).to have_link '目標一覧へ戻る'
-      expect(page).to have_css 'h2', text: task.content
+      expect(page).to have_css 'h1', text: task.content
       expect(page).to have_css 'h2', text: '最近のコメント'
     end
 
@@ -133,7 +133,7 @@ RSpec.describe 'Goals::Tasks' do
           click_on '更新する'
         end
 
-        expect(page).to have_css 'h2', text: '水泳教室に通う'
+        expect(page).to have_css 'h1', text: '水泳教室に通う'
       end
     end
 
