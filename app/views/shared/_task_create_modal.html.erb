@@ -5,7 +5,7 @@
         <h1 class="modal-title fs-5" id="taskFormModalLabel">タスクを作成する</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <%= form_with(model: Task.new, url: goal_tasks_path(goal), data: { action: "turbo:submit-end->modal#close" }) do |form| %>
+      <%= form_with(model: Task.new, url: goal_tasks_path(goal), data: { action: 'turbo:submit-end->modal#close' }) do |form| %>
         <div class="modal-body">
             <div class="mb-3">
               <%= form.label :content, '内容(500文字以内)', class: 'form-label' %>
