@@ -24,7 +24,7 @@
   </div>
 
   <div id="task_update_modal<%= @task.id %>">
-    <%= render 'shared/task_form_modal', task: @task %>
+    <%= render 'shared/task_form_modal', task: @task, is_tasks_path: false %>
   </div>
   <%= render 'shared/task_delete_modal', task: @task %>
 <% end %>

@@ -5,7 +5,6 @@
         <h1 class="modal-title fs-5" id="taskFormModalLabel<%= task.id %>">「<%= formatted_text(task) %>」を編集する</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <% is_tasks_path = request.path_info == goal_tasks_path(task.goal) %>
       <%= form_with(model: task, url: goal_task_path(task, goal_id: task.goal.id, is_tasks_path:), data: { action: "turbo:submit-end->modal#close" }) do |form| %>
         <div class="modal-body">
             <%= render 'shared/validation_errors', resource: task %>

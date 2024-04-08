@@ -28,11 +28,12 @@ class Goals::TasksController < ApplicationController
 
   def update
     @task.update!(task_params)
+    @is_tasks_path = params[:is_tasks_path]
 
-    render turbo_stream: [
-      turbo_stream.update("task_info#{@task.id}", partial: "goals/tasks/task_info", locals: { task: @task, is_tasks_path: params[:is_tasks_path] }),
-      turbo_stream.update("task_update_modal#{@task.id}", partial: "shared/task_form_modal", locals: { task: @task })
-    ]
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.turbo_stream
+    end
   end
 
   def destroy
