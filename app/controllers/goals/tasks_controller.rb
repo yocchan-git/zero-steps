@@ -18,12 +18,23 @@ class Goals::TasksController < ApplicationController
   def create
     task_register = TaskRegister.new(@goal, task_params)
     task_register.execute
-    redirect_back(fallback_location: root_path, notice: 'タスクを作成しました')
+
+    @task = task_register.task
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.turbo_stream
+    end
   end
 
   def update
     @task.update!(task_params)
-    redirect_back(fallback_location: root_path, notice: 'タスクを更新しました')
+    @is_tasks_path = params[:is_tasks_path]
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.turbo_stream
+    end
   end
 
   def destroy

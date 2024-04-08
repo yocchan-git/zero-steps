@@ -1,0 +1,16 @@
+
+<% tasks = @goal.tasks %>
+
+<% if tasks.count == 1 %>
+  <%= turbo_stream.update "task_list" do %>
+    <%= render partial: "shared/task_list", locals: { tasks: } %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.prepend "new_task_card" do %>
+    <%= render partial: "goals/tasks/task_card", locals: { task: @task, is_tasks_path: true } %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update "task_create_modal" do %>
+  <%= render partial: "shared/task_create_modal", locals: { goal: @goal } %>
+<% end %>

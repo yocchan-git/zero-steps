@@ -1,0 +1,7 @@
+<%= turbo_stream.update "task_info#{@task.id}" do %>
+  <%= render partial: "goals/tasks/task_info", locals: { task: @task, is_tasks_path: @is_tasks_path.to_s == 'true' } %>
+<% end %>
+
+<%= turbo_stream.update "task_update_modal#{@task.id}" do %>
+  <%= render partial: "shared/task_form_modal", locals: { task: @task, is_tasks_path: @is_tasks_path.to_s == 'true' } %>
+<% end %>

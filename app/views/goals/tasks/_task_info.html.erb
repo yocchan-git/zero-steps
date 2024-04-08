@@ -1,0 +1,9 @@
+<% if is_tasks_path %>
+  <p><%= link_to formatted_text(task),
+                 goal_task_path(task, goal_id: task.goal.id),
+                 class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
+<% else %>
+  <h1 class="fs-4"><%= task.content %></h1>
+<% end %>
+
+<p>期限: <%= l task.completion_limits, format: :date %></p>

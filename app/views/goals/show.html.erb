@@ -24,7 +24,7 @@
 
 <% if @goal.completed_at? %>
   <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-    <h2 class="fs-3">終了投稿</h2>
+    <h2 class="fs-4">終了投稿</h2>
   </div>
   <p class="text-center">いいねやコメントでお祝いしましょう！</p>
   <% complete_post = @goal.complete_post %>
@@ -33,7 +33,7 @@
 
 <% tasks = recent_tasks(@goal, task_count: 3) %>
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-  <h2 class="fs-3">最近のタスク</h2>
+  <h2 class="fs-4">最近のタスク</h2>
   <div class="text-end">
     <% if tasks.empty? && current_user?(@goal.user) %>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskFormModal">
@@ -44,14 +44,12 @@
     <% end %>
   </div>
 </div>
-<% if tasks.empty? %>
-  <div class="d-flex justify-content-center mb-3">
-    <div class="border-bottom border-bottom-5 m-4 px-4">
-      <p class="mb-1 p-0">最近のタスクはありません</p>
-    </div>
-  </div>
-<% end %>
-<%= render 'shared/task_list', tasks: %>
-<%= render 'shared/task_create_modal', goal: @goal %>
+
+<div id="task_list">
+  <%= render 'shared/task_list', tasks: %>
+</div>
+<div id="task_create_modal">
+  <%= render 'shared/task_create_modal', goal: @goal %>
+</div>
 
 <%= render 'shared/recent_comments', commentable: @goal %>

@@ -1,6 +1,6 @@
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-  <div>
-    <h2 class="fs-3"><%= @task.content %></h2>
+  <div id="task_info<%= @task.id %>">
+    <%= render 'task_info', task: @task, is_tasks_path: false %>
   </div>
 
   <div class="text-end">
@@ -23,7 +23,9 @@
     </button>
   </div>
 
-  <%= render 'shared/task_form_modal', task: @task %>
+  <div id="task_update_modal<%= @task.id %>">
+    <%= render 'shared/task_form_modal', task: @task, is_tasks_path: false %>
+  </div>
   <%= render 'shared/task_delete_modal', task: @task %>
 <% end %>
 
@@ -33,7 +35,7 @@
 
 <% if @task.completed_at? %>
   <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-    <h2 class="fs-3">終了投稿</h2>
+    <h2 class="fs-4">終了投稿</h2>
   </div>
   <p class="text-center">いいねやコメントでお祝いしましょう！</p>
   <% complete_post = @task.complete_post %>

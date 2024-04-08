@@ -15,10 +15,10 @@ RSpec.describe TaskRegister do
       expect { subject }.to change { Task.count }.by(1).and change { Timeline.count }.by(1)
     end
 
-    it 'goalにもアクセスできること' do
+    it 'taskにもアクセスできること' do
       subject
 
-      expect(task_register.goal).to eq goal
+      expect(task_register.task).to eq Task.last
     end
   end
 end
