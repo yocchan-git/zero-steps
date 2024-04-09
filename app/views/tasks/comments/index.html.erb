@@ -19,6 +19,8 @@
   <%= paginate @comments %>
 </div>
 
-<div id="comment_form">
-  <%= render 'shared/comment_form', commentable: @task %>
-</div>
+<% unless params[:page] %>
+  <div id="comment_form">
+    <%= render 'shared/comment_form', commentable: @task %>
+  </div>
+<% end %>

@@ -11,11 +11,11 @@ class Goals::CommentsController < ApplicationController
   end
 
   def create
-    comment_register = CommentRegister.new(@goal, current_user, comment_params)
-    comment_register.execute
+    @comment_register = CommentRegister.new(@goal, current_user, comment_params)
+    @comment_register.execute
 
     respond_to do |format|
-      format.html { redirect_to goal_comments_path(@goal) }
+      format.html { redirect_back(fallback_location: root_path) }
       format.turbo_stream
     end
   end

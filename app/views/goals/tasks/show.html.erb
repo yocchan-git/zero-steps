@@ -45,3 +45,6 @@
 <% end %>
 
 <%= render 'shared/recent_comments', commentable: @task %>
+<div class="mt-3" id="comment_form">
+  <%= render 'shared/comment_form', commentable: @task %>
+</div>
