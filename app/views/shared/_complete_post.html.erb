@@ -2,7 +2,9 @@
   <div class="col-lg-6 col-md-8 col-12">
     <div class="mb-3">
       <div class="border border-2 rounded-1">
-        <p class="p-4"><%= complete_post.content %></p>
+        <div class="p-4">
+          <%= escaped_simple_format(complete_post.content) %>
+        </div>
         <div class="d-flex justify-content-between p-3">
           <div class="d-flex align-items-center">
             <%= render 'shared/reaction_form', reactionable: complete_post, request_uri: complete_post_reactions_path(complete_post) %>

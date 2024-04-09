@@ -16,6 +16,11 @@ module ApplicationHelper
     }
   end
 
+  def escaped_simple_format(text)
+    escaped_text = h(text)
+    simple_format(escaped_text)
+  end
+
   private
 
   def full_title(page_title = '')
