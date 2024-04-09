@@ -1,6 +1,6 @@
 <% content_for(:title, '目標詳細') %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-5">
   <div>
     <h2 class="fs-3"><%= @goal.title %></h2>
     <%= escaped_simple_format(@goal.description) %>
@@ -9,11 +9,20 @@
   </div>
 
   <div class="text-end">
-    <% if @goal.completed_at? %>
-      <p class="text-success">達成(<%= l @goal.completed_at, format: :date %>)</p>
-    <% elsif current_user?(@goal.user) %>
-      <%= link_to '終了投稿する', new_goal_complete_post_path(@goal), class: 'btn btn-primary' %>
-    <% end %>
+    <div class="text-center mb-5">
+      <% if @goal.completed_at? %>
+        <p class="text-success">達成(<%= l @goal.completed_at, format: :date %>)</p>
+      <% elsif current_user?(@goal.user) %>
+        <%= link_to '終了投稿する', new_goal_complete_post_path(@goal), class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= link_to @goal.user, class: 'text-reset text-decoration-none ' do %>
+        <%= image_tag @goal.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
+        <%= @goal.user.name %>さん(作成者)
+      <% end %>
+    </div>
   </div>
 </div>
 

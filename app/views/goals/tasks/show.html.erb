@@ -1,16 +1,25 @@
 <% content_for(:title, 'タスク詳細') %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-5">
   <div id="task_info<%= @task.id %>">
     <%= render 'task_info', task: @task, is_tasks_path: false %>
   </div>
 
   <div class="text-end">
-    <% if @task.completed_at? %>
-      <p class="text-success">完了(<%= l @task.completed_at, format: :date %>)</p>
-    <% elsif current_user?(@task.user) %>
-      <%= link_to '終了投稿する', new_task_complete_post_path(@task), class: 'btn btn-primary' %>
-    <% end %>
+    <div class="text-center mb-5">
+      <% if @task.completed_at? %>
+        <p class="text-success">完了(<%= l @task.completed_at, format: :date %>)</p>
+      <% elsif current_user?(@task.user) %>
+        <%= link_to '終了投稿する', new_task_complete_post_path(@task), class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= link_to @task.user, class: 'text-reset text-decoration-none ' do %>
+        <%= image_tag @task.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
+        <%= @task.user.name %>さん(作成者)
+      <% end %>
+    </div>
   </div>
 </div>
 
