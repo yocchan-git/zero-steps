@@ -11,12 +11,6 @@
   </div>
 </div>
 
-<% if comments.empty? %>
-  <div class="d-flex justify-content-center mb-3">
-    <div class="border-bottom border-bottom-5 m-4 px-4">
-      <p class="mb-1 p-0">最近のコメントはありません</p>
-    </div>
-  </div>
-<% end %>
-
-<%= render 'shared/comment', comments: %>
+<div id="comments">
+  <%= render 'shared/comment', comments: %>
+</div>

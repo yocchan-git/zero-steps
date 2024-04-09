@@ -1,44 +1,17 @@
-<div class="d-flex justify-content-center">
-  <div class="col-lg-6 col-md-8 col-12">
-    <% comments.each do |comment| %>
-      <div class="mb-3">
-        <div class="border border-2 rounded-1">
-          <div class="p-4">
-            <%= escaped_simple_format(comment.content) %>
-          </div>
-          <div class="d-flex justify-content-between p-3">
-            <div class="d-flex align-items-center">
-              <%= render 'shared/reaction_form', reactionable: comment, request_uri: comment_reactions_path(comment) %>
-            </div>
-
-            <div>
-              <% commentable = comment.commentable %>
-              <% if request.path_info == user_path(comment.user) %>
-                <% request_uri = goal?(commentable) ? commentable : goal_task_path(commentable, goal_id: commentable.goal.id) %>
-                <%= link_to request_uri, class: 'text-reset text-decoration-none ' do %>
-                  <%= goal?(commentable) ? "#{formatted_text(commentable)}(目標)" : "#{formatted_text(commentable)}(タスク)" %>
-                <% end %>
-              <% else %>
-                <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
-                  <%= image_tag comment.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
-                  <%= comment.user.name %>さん
-                <% end %>
-
-                <% comments_path = goal?(commentable) ? goal_comments_path(commentable) : task_comments_path(commentable) %>
-                <% is_delete_comment_path = request.path_info == comments_path || request.path_info == comment_path %>
-                <% if current_user?(comment.user) && is_delete_comment_path %>
-                  <%= link_to comment_path(comment, page: params[:page]),
-                              id: "comment-delete-icon#{comment.id}",
-                              class: 'btn',
-                              data: { turbo_method: :delete, turbo_confirm: "#{formatted_text(comment)}を本当に削除しますか？" } do %>
-                    <i class="fa-solid fa-trash"></i>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
+<% if comments.empty? %>
+  <div class="d-flex justify-content-center mb-3">
+    <div class="border-bottom border-bottom-5 m-4 px-4">
+      <p class="mb-1 p-0">最近のコメントはありません</p>
+    </div>
   </div>
-</div>
+<% else %>
+  <div class="d-flex justify-content-center">
+    <div class="col-lg-6 col-md-8 col-12">
+      <div id="new_comment_card"></div>
+
+      <% comments.each do |comment| %>
+        <%= render 'shared/comment_card', comment: %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -3,6 +3,8 @@
 class CommentRegister
   include Timelineable
 
+  attr_reader :comment
+
   def initialize(commentable, user, params)
     @commentable = commentable
     @user = user

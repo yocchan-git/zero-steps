@@ -11,11 +11,11 @@ class Tasks::CommentsController < ApplicationController
   end
 
   def create
-    comment_register = CommentRegister.new(@task, current_user, comment_params)
-    comment_register.execute
+    @comment_register = CommentRegister.new(@task, current_user, comment_params)
+    @comment_register.execute
 
     respond_to do |format|
-      format.html { redirect_to task_comments_path(@task) }
+      format.html { redirect_back(fallback_location: root_path) }
       format.turbo_stream
     end
   end

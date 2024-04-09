@@ -1,3 +1,1 @@
-<%= turbo_stream.update "comments" do %>
-  <%= render partial: 'shared/comment', locals: {comments: @comments} %>
-<% end %>
+<%= turbo_stream.remove "comment_card#{@comment.id}" %>
