@@ -3,7 +3,7 @@
     <%= form_with(model: [commentable, Comment.new]) do |form| %>
       <div class="mb-3">
         <%= form.label :content, 'コメント(500文字以内)', class: 'form-label' %>
-        <%= form.text_area :content, class: 'form-control', required: true, maxlength: 500 %>
+        <%= form.text_area :content, class: 'form-control', placeholder: '応援してます！', required: true, maxlength: 500 %>
       </div>
 
       <div class="d-flex justify-content-end">

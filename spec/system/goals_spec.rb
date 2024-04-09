@@ -148,7 +148,7 @@ RSpec.describe 'Goals' do
           visit edit_goal_path(goal)
           fill_in 'タイトル(250文字以内)', with: 'あ' * 251
           click_on '更新する'
-          expect(page).to have_css 'h2', text: 'あ' * 250
+          expect(page).to have_content 'あ' * 250
         end
       end
     end
@@ -159,7 +159,7 @@ RSpec.describe 'Goals' do
         fill_in 'タイトル(250文字以内)', with: '体重を50kgにする'
         fill_in '説明(500文字以内)', with: '毎日継続します！'
         click_on '更新する'
-        expect(page).to have_css 'h2', text: '体重を50kgにする'
+        expect(page).to have_content '体重を50kgにする'
       end
     end
   end

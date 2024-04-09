@@ -1,3 +1,5 @@
+<% content_for(:title, 'ユーザー一覧') %>
+
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
   <div>
     <h1 class="fs-3 text-center">ユーザー一覧</h1>
@@ -17,7 +19,7 @@
     <div class="col-md-4 mb-3">
       <div class="border border-2 rounded-1">
         <div class="p-4 text-center">
-          <%= image_tag user.image, width: 120, height: 120 %>
+          <%= image_tag user.image, alt: 'ユーザーアイコン', width: 120, height: 120 %>
         </div>
 
         <div class="text-center">

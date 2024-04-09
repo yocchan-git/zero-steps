@@ -1,3 +1,5 @@
+<% content_for(:title, 'タイムライン') %>
+
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
   <h1 class="fs-3 text-center">タイムライン<%= '(フォロー中)' if params[:is_only_follows] %></h1>
 
@@ -20,7 +22,7 @@
 
           <div class="p-3 text-end">
             <%= link_to timeline.user, class: 'text-reset text-decoration-none' do %>
-              <%= image_tag timeline.user.image, class: 'rounded-circle', width: 30, height: 30 %>
+              <%= image_tag timeline.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
               <%= timeline.user.name %>さん
             <% end %>
           </div>

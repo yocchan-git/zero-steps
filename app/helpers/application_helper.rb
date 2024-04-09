@@ -3,22 +3,30 @@
 module ApplicationHelper
   include Timelineable
 
-  def default_meta_tags
+  def default_meta_tags(page_title = '')
     {
-      site: 'Zero Steps',
-      title: 'ゼロ高生向けの目標共有アプリ',
+      title: full_title(page_title),
       reverse: true,
       charset: 'utf-8',
-      description: 'Zero Stepsを使えば目標をタスク化し、進捗などを共有して励まし合えます！',
+      description: 'Zero Stepsを使えば目標をタスク化し、進捗などを共有して励まし合うアプリです',
       keywords: 'ゼロ高,目標,タスク,共有',
       canonical: request.original_url,
-      separator: '|',
       og: default_og,
       twitter: default_twitter
     }
   end
 
+  def escaped_simple_format(text)
+    escaped_text = h(text)
+    simple_format(escaped_text)
+  end
+
   private
+
+  def full_title(page_title = '')
+    app_name = 'Zero Steps'
+    page_title.empty? ? app_name : "#{page_title} | #{app_name}"
+  end
 
   def default_og
     {

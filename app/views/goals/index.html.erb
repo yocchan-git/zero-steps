@@ -1,3 +1,5 @@
+<% content_for(:title, '目標一覧') %>
+
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
   <div>
     <h1 class="fs-2">みんなの目標</h1>
@@ -22,7 +24,7 @@
 
         <div class="p-3 text-end">
           <%= link_to current_user, class: 'text-reset text-decoration-none ' do %>
-            <%= image_tag goal.user.image, class: 'rounded-circle', width: 30, height: 30 %>
+            <%= image_tag goal.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
             <%= goal.user.name %>さん
           <% end %>
         </div>
