@@ -13,10 +13,12 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
-    <div class="container mt-4">
-      <%= render 'layouts/flash_message' %>
-      <%= yield %>
+    <div class="wrapper">
+      <%= render 'layouts/header' %>
+      <div class="container mt-4">
+        <%= render 'layouts/flash_message' %>
+        <%= yield %>
+      </div>
     </div>
     <%= render 'layouts/footer' %>
   </body>
