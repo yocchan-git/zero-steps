@@ -18,7 +18,7 @@
                 <% end %>
               <% else %>
                 <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
-                  <%= image_tag comment.user.image, class: 'rounded-circle', width: 30, height: 30 %>
+                  <%= image_tag comment.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
                   <%= comment.user.name %>さん
                 <% end %>
 

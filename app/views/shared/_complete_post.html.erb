@@ -10,7 +10,7 @@
 
           <div>
             <%= link_to complete_post.user, class: 'text-reset text-decoration-none ' do %>
-              <%= image_tag complete_post.user.image, class: 'rounded-circle', width: 30, height: 30 %>
+              <%= image_tag complete_post.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
               <%= complete_post.user.name %>さん
             <% end %>
           </div>
