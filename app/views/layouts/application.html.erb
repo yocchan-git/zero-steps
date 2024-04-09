@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Zero Steps</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,7 +9,7 @@
     <%= javascript_importmap_tags %>
     <script src="https://kit.fontawesome.com/4aa12ef06a.js" crossorigin="anonymous"></script>
     <%= favicon_link_tag('favicon.png') %>
-    <%= display_meta_tags(default_meta_tags) %>
+    <%= display_meta_tags(default_meta_tags(yield(:title))) %>
   </head>
 
   <body>
