@@ -1,4 +1,4 @@
-<div class="mb-3">
+<div id="comment_card<%= comment.id %>" class="mb-3">
   <div class="border border-2 rounded-1">
     <div class="p-4">
       <%= escaped_simple_format(comment.content) %>
@@ -20,16 +20,14 @@
             <%= image_tag comment.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
             <%= comment.user.name %>さん
           <% end %>
+        <% end %>
 
-          <% comments_path = goal?(commentable) ? goal_comments_path(commentable) : task_comments_path(commentable) %>
-          <% is_delete_comment_path = request.path_info == comments_path || request.path_info == comment_path %>
-          <% if current_user?(comment.user) && is_delete_comment_path %>
-            <%= link_to comment_path(comment, page: params[:page]),
-                        id: "comment-delete-icon#{comment.id}",
-                        class: 'btn',
-                        data: { turbo_method: :delete, turbo_confirm: "#{formatted_text(comment)}を本当に削除しますか？" } do %>
-              <i class="fa-solid fa-trash"></i>
-            <% end %>
+        <% if current_user?(comment.user) %>
+          <%= link_to comment_path(comment, page: params[:page]),
+                      id: "comment-delete-icon#{comment.id}",
+                      class: 'btn',
+                      data: { turbo_method: :delete, turbo_confirm: "#{formatted_text(comment)}を本当に削除しますか？" } do %>
+            <i class="fa-solid fa-trash"></i>
           <% end %>
         <% end %>
       </div>
