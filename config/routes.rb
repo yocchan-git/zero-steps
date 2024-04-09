@@ -28,4 +28,7 @@ Rails.application.routes.draw do
   resources :reactions, only: %i[destroy]
   resources :timelines, only: %i[index]
   resources :notifications, only: %i[index show]
+
+  # 利用規約, プライバシーポリシー
+  get "/pages/*id" => 'pages#show', as: :static_page, format: false
 end
