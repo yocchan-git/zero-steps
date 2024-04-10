@@ -6,7 +6,7 @@
   </div>
 
   <div class="text-end">
-    <div class="text-center mb-5">
+    <div class="text-md-center my-4">
       <% if @task.completed_at? %>
         <p class="text-success">完了(<%= l @task.completed_at, format: :date %>)</p>
       <% elsif current_user?(@task.user) %>

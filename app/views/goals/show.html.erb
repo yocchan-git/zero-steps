@@ -9,7 +9,7 @@
   </div>
 
   <div class="text-end">
-    <div class="text-center mb-5">
+    <div class="text-md-center my-4">
       <% if @goal.completed_at? %>
         <p class="text-success">達成(<%= l @goal.completed_at, format: :date %>)</p>
       <% elsif current_user?(@goal.user) %>
