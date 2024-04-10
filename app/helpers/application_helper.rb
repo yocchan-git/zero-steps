@@ -8,7 +8,7 @@ module ApplicationHelper
       title: full_title(page_title),
       reverse: true,
       charset: 'utf-8',
-      description: 'Zero Stepsを使えば目標をタスク化し、進捗などを共有して励まし合うアプリです',
+      description: full_description(page_title),
       keywords: 'ゼロ高,目標,タスク,共有',
       canonical: request.original_url,
       og: default_og,
@@ -26,6 +26,11 @@ module ApplicationHelper
   def full_title(page_title = '')
     app_name = 'Zero Steps'
     page_title.empty? ? app_name : "#{page_title} | #{app_name}"
+  end
+
+  def full_description(page_title = '')
+    default_text = 'Zero Stepsは目標をタスク化し、進捗などを共有して励まし合うアプリです。'
+    page_title.empty? ? default_text : "#{default_text} | 今のページ:#{page_title}"
   end
 
   def default_og
