@@ -41,6 +41,29 @@ RSpec.describe User do
     end
   end
 
+  describe '.find_or_create_from_discord_info' do
+    let(:user_info) { User.find_or_create_from_discord_info(auth_info) }
+    let(:auth_info) { OmniAuth::AuthHash.new({ provider: 'discord', uid: '123456', info: { name: 'yocchan', image: 'https://discord.cdn.example.com' } }) }
+
+    context '新しく作成されるユーザーの場合' do
+      it 'userは新規作成され、is_new_userはtrueになる' do
+        expect(user_info[:user].uid).to eq '123456'
+        expect(user_info[:user].name).to eq 'yocchan'
+        expect(user_info[:user].image).to eq 'https://discord.cdn.example.com'
+        expect(user_info[:is_new_user]).to be_truthy
+      end
+    end
+
+    context 'すでに作成されているユーザーの場合' do
+      let!(:user) { create(:user, uid: '123456') }
+
+      it 'userの値は正しく、is_new_userはfalseになる' do
+        expect(user_info[:user]).to eq user
+        expect(user_info[:is_new_user]).to be_falsey
+      end
+    end
+  end
+
   describe '#follow' do
     let(:follwoing_user) { create(:user) }
     let(:followed_user) { create(:user) }
