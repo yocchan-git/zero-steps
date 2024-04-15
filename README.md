@@ -43,6 +43,37 @@ $ git clone git@github.com:yocchan-git/zero-steps.git
 $ cd zero-steps
 $ bin/setup
 ```
+
+### ログインできるようにする
+前準備として、`.env.sample`を`.env`の名前でコピーしてください。  
+そして、以下の2つの手順で`.env`ファイルを変更してください。
+
+#### 1. Discordの設定キーを取得する
+Discordログインする方法をブログ記事に書きました。  
+そちらの[手順１](https://qiita.com/yocchan_qiita/items/8527aa1455141c71cc23#1-discord%E3%81%AE%E9%96%8B%E7%99%BA%E8%80%85%E7%94%A8%E7%94%BB%E9%9D%A2%E3%81%A7%E8%A8%AD%E5%AE%9A%E3%82%AD%E3%83%BC%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B)を実行し設定キーの取得とリダイレクトURLの設定をしてください。
+
+```.env
+# クライアントIDを入れる
+DISCORD_CLIENT_ID=
+
+# クライアントシークレットの値を入れる
+DISCORD_CLIENT_SECRET=
+```
+
+#### 2. botをコメントできるようにする
+こちらも別途[記事](https://qiita.com/yocchan_qiita/items/2a586e9b1a41d89579f7)を書いたので、その記事の通りに設定してください。
+
+```.env
+# botトークンの値を入れる
+DISCORD_BOT_TOKEN=
+
+# チャンネルIDの値を入れる
+DISCORD_CHANNEL_ID=
+```
+
+必要であればサーバーを再起動してください。
+以上でログインできるようになります。
+
 ### 起動
 ```
 $ rails s -b 0.0.0.0 -p 3000
