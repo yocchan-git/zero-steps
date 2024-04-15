@@ -6,8 +6,8 @@ class Users::SessionsController < ApplicationController
   def new; end
 
   def callback
-    auth_info = request.env['omniauth.auth']
-    if (user_info = User.find_or_create_from_discord_info(auth_info))
+    auth = request.env['omniauth.auth']
+    if (user_info = User.find_or_create_from_discord(auth))
       reset_session
       log_in user_info[:user]
     end

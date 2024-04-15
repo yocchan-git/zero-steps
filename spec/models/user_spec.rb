@@ -41,9 +41,9 @@ RSpec.describe User do
     end
   end
 
-  describe '.find_or_create_from_discord_info' do
-    let(:user_info) { User.find_or_create_from_discord_info(auth_info) }
-    let(:auth_info) { OmniAuth::AuthHash.new({ provider: 'discord', uid: '123456', info: { name: 'yocchan', image: 'https://discord.cdn.example.com' } }) }
+  describe '.find_or_create_from_discord' do
+    let(:user_info) { User.find_or_create_from_discord(auth) }
+    let(:auth) { OmniAuth::AuthHash.new({ provider: 'discord', uid: '123456', info: { name: 'yocchan', image: 'https://discord.cdn.example.com' } }) }
 
     context '新しく作成されるユーザーの場合' do
       it 'userは新規作成され、is_new_userはtrueになる' do

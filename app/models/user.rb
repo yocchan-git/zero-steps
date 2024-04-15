@@ -29,13 +29,13 @@ class User < ApplicationRecord
     user_followings_or_self.active.preload(:goals, :tasks, :comments).order(created_at: :desc).page(page_count)
   end
 
-  def self.find_or_create_from_discord_info(discord_info)
+  def self.find_or_create_from_discord(auth)
     is_new_user = false
-    user = User.find_or_create_by(uid: discord_info.uid) do |new_user|
+    user = User.find_or_create_by(uid: auth.uid) do |new_user|
       new_user.update!(
-        uid: discord_info.uid,
-        name: discord_info.info.name,
-        image: discord_info.info.image
+        uid: auth.uid,
+        name: auth.info.name,
+        image: auth.info.image
       )
       is_new_user = true
     end
