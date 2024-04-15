@@ -7,13 +7,13 @@ class Users::SessionsController < ApplicationController
 
   def callback
     auth = request.env['omniauth.auth']
-    if (user_info = User.find_or_create_from_discord(auth))
+    if (authentication = User.auth_discord(auth))
       reset_session
-      log_in user_info[:user]
+      log_in authentication[:user]
     end
 
     flash[:notice] = 'ログインしました'
-    if user_info[:is_new_user]
+    if authentication[:is_new_user]
       redirect_to edit_user_path(current_user)
     else
       redirect_to root_path

@@ -29,7 +29,7 @@ class User < ApplicationRecord
     user_followings_or_self.active.preload(:goals, :tasks, :comments).order(created_at: :desc).page(page_count)
   end
 
-  def self.find_or_create_from_discord(auth)
+  def self.auth_discord(auth)
     is_new_user = false
     user = User.find_or_create_by(uid: auth.uid) do |new_user|
       new_user.update!(
