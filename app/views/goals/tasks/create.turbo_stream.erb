@@ -2,8 +2,8 @@
 <% tasks = @goal.tasks %>
 
 <% if tasks.count == 1 %>
-  <%= turbo_stream.update "task_list" do %>
-    <%= render partial: "shared/task_list", locals: { tasks: } %>
+  <%= turbo_stream.update "tasks" do %>
+    <%= render partial: "shared/tasks", locals: { tasks: } %>
   <% end %>
 <% else %>
   <%= turbo_stream.prepend "new_task_card" do %>
