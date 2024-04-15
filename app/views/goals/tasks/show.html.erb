@@ -2,8 +2,8 @@
 
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
   <div>
-    <div id="task_info<%= @task.id %>">
-      <%= render 'task_info', task: @task, is_tasks_path: false %>
+    <div id="task_header<%= @task.id %>">
+      <%= render 'task_header', task: @task, is_tasks_path: false %>
     </div>
 
     <% if current_user?(@task.user) %>
@@ -18,7 +18,7 @@
       </div>
 
       <div id="task_update_modal<%= @task.id %>">
-        <%= render 'shared/task_form_modal', task: @task, is_tasks_path: false %>
+        <%= render 'shared/task_update_modal', task: @task, is_tasks_path: false %>
       </div>
       <%= render 'shared/task_delete_modal', task: @task %>
     <% end %>

@@ -29,6 +29,20 @@ class User < ApplicationRecord
     user_followings_or_self.active.preload(:goals, :tasks, :comments).order(created_at: :desc).page(page_count)
   end
 
+  def self.auth_discord(auth)
+    is_new_user = false
+    user = User.find_or_create_by(uid: auth.uid) do |new_user|
+      new_user.update!(
+        uid: auth.uid,
+        name: auth.info.name,
+        image: auth.info.image
+      )
+      is_new_user = true
+    end
+
+    { user:, is_new_user: }
+  end
+
   def follow(target_user)
     following << target_user unless self == target_user
   end
