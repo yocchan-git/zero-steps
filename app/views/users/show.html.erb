@@ -19,7 +19,7 @@
 <% if goals.present? %>
   <div class="mb-3">
     <h2 class="fs-4 text-center">最近の目標</h2>
-    <%= render 'shared/goal', goals: %>
+    <%= render 'shared/goals', goals: %>
   </div>
 <% end %>
 
@@ -27,12 +27,12 @@
 <% if tasks.present? %>
   <div class="mb-3">
     <h2 class="fs-4 text-center">最近のタスク</h2>
-    <%= render 'shared/task_list', tasks: %>
+    <%= render 'shared/tasks', tasks: %>
   </div>
 <% end %>
 
 <% comments = recent_comments(@user, comment_count: 3) %>
 <% if comments.present? %>
   <h2 class="fs-4 text-center">最近のコメント</h2>
-  <%= render 'shared/comment', comments: %>
+  <%= render 'shared/comments', comments: %>
 <% end %>
