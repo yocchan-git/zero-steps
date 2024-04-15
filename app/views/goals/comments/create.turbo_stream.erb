@@ -2,7 +2,7 @@
 
 <% if comments.count == 1 %>
   <%= turbo_stream.update "comments" do %>
-    <%= render partial: "shared/comment", locals: { comments: } %>
+    <%= render partial: "shared/comments", locals: { comments: } %>
   <% end %>
 <% else %>
   <%= turbo_stream.prepend "new_comment_card" do %>
