@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_17_090527) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_17_064055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_090527) do
     t.index ["complete_postable_type", "complete_postable_id"], name: "index_complete_posts_on_complete_postable"
     t.index ["complete_postable_type", "complete_postable_id"], name: "index_complete_posts_on_postable", unique: true
     t.index ["user_id"], name: "index_complete_posts_on_user_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "followed_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_friendships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_friendships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_friendships_on_follower_id"
   end
 
   create_table "goals", force: :cascade do |t|
@@ -67,16 +77,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_090527) do
     t.index ["reactionable_type", "reactionable_id"], name: "index_reactions_on_reactionable"
     t.index ["user_id", "reactionable_type", "reactionable_id"], name: "index_reactions_on_user_and_reactionable", unique: true
     t.index ["user_id"], name: "index_reactions_on_user_id"
-  end
-
-  create_table "relationships", force: :cascade do |t|
-    t.bigint "follower_id", null: false
-    t.bigint "followed_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["followed_id"], name: "index_relationships_on_followed_id"
-    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -113,12 +113,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_090527) do
 
   add_foreign_key "comments", "users"
   add_foreign_key "complete_posts", "users"
+  add_foreign_key "friendships", "users", column: "followed_id"
+  add_foreign_key "friendships", "users", column: "follower_id"
   add_foreign_key "goals", "users"
   add_foreign_key "notifications", "comments"
   add_foreign_key "notifications", "users"
   add_foreign_key "reactions", "users"
-  add_foreign_key "relationships", "users", column: "followed_id"
-  add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "tasks", "goals"
   add_foreign_key "tasks", "users"
   add_foreign_key "timelines", "users"

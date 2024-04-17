@@ -76,7 +76,7 @@ DISCORD_CHANNEL_ID=
 
 ### 起動
 ```
-$ rails s -b 0.0.0.0 -p 3000
+$ rails s
 ```
 
 http://localhost:3000 にアクセスする
