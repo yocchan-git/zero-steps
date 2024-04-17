@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Relationships' do
+RSpec.describe 'Friendships' do
   before { login(user) }
 
   let(:user) { create(:user) }

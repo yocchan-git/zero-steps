@@ -8,16 +8,16 @@ class User < ApplicationRecord
   has_many :timelines, dependent: :destroy
   has_many :reactions, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  has_many :active_relationships, class_name: 'Relationship',
+  has_many :active_friendships, class_name: 'Friendship',
                                   foreign_key: 'follower_id',
                                   dependent: :destroy,
                                   inverse_of: :follower
-  has_many :passive_relationships, class_name: 'Relationship',
+  has_many :passive_friendships, class_name: 'Friendship',
                                    foreign_key: 'followed_id',
                                    dependent: :destroy,
                                    inverse_of: :followed
-  has_many :following, through: :active_relationships, source: :followed
-  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :following, through: :active_friendships, source: :followed
+  has_many :followers, through: :passive_friendships, source: :follower
 
   validates :uid, presence: true
   validates :name, presence: true
