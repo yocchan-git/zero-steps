@@ -7,7 +7,7 @@ RSpec.describe TasksHelper do
     before { create_list(:task, sample_count, goal:, user:, created_at: 1.day.ago) }
 
     let!(:recent_task) { create(:task, goal:, user:, created_at: Time.current) }
-    let!(:old_task) { create(:task, goal:, user:, created_at: 2.day.ago) }
+    let!(:old_task) { create(:task, goal:, user:, created_at: 2.days.ago) }
 
     let(:goal) { create(:goal) }
     let(:user) { create(:user) }

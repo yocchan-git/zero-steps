@@ -7,7 +7,7 @@ RSpec.describe CommentsHelper do
     before { create_list(:comment, sample_count, commentable:, created_at: 1.day.ago) }
 
     let!(:recent_comment) { create(:comment, commentable:, created_at: Time.current) }
-    let!(:old_comment) { create(:comment, commentable:, created_at: 2.day.ago) }
+    let!(:old_comment) { create(:comment, commentable:, created_at: 2.days.ago) }
 
     let(:comments) { recent_comments(commentable, comment_count:) }
     let(:sample_count) { comment_count - 1 }
