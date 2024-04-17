@@ -4,12 +4,13 @@ require 'rails_helper'
 
 RSpec.describe CommentsHelper do
   describe 'recent_comments' do
-    before { create_list(:comment, comment_count - 1, commentable:, created_at: 1.day.ago) }
+    before { create_list(:comment, sample_count, commentable:, created_at: 1.day.ago) }
 
     let!(:recent_comment) { create(:comment, commentable:, created_at: Time.current) }
     let!(:old_comment) { create(:comment, commentable:, created_at: 2.day.ago) }
 
     let(:comments) { recent_comments(commentable, comment_count:) }
+    let(:sample_count) { comment_count - 1 }
 
     context '目標の場合' do
       let(:commentable) { create(:goal) }
