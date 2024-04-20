@@ -1,6 +1,6 @@
 <% content_for(:title, 'タスク一覧') %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-between mb-3">
   <div class="text-center">
     <h1 class="fs-2"><%= formatted_text(@goal) %>のタスク一覧</h1>
   </div>
@@ -13,6 +13,8 @@
     <% end %>
   </div>
 </div>
+
+<hr class="mb-4">
 
 <div id="tasks">
   <%= render 'shared/tasks', tasks: @tasks %>

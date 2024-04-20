@@ -1,6 +1,6 @@
 <% content_for(:title, 'ユーザー一覧') %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-between mb-3">
   <div>
     <h1 class="fs-3 text-center">ユーザー一覧<%= '(フォロー中)' if params[:is_only_follows] %></h1>
   </div>
@@ -13,6 +13,8 @@
     <% end %>
   </div>
 </div>
+
+<hr class="mb-4">
 
 <div class="row">
   <% @users.each do |user| %>

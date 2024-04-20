@@ -1,6 +1,6 @@
 <% content_for(:title, '目標一覧') %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-between mb-3">
   <div>
     <h1 class="fs-2">みんなの目標</h1>
   </div>
@@ -9,6 +9,8 @@
     <%= link_to '目標を作成する', new_goal_path, class: 'btn btn-primary' %>
   </div>
 </div>
+
+<hr class="mb-4">
 
 <div class="row">
   <% @goals.each do |goal| %>
