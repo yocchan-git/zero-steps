@@ -12,7 +12,7 @@ class TaskRegister
 
   def execute
     create_task
-    @task.timelines.create!(user: @goal.user, content: "#{@goal.user.name}さんが#{formatted_text(task)}というタスクを作成しました")
+    @task.timelines.create!(user: @goal.user, content: "#{formatted_text(task)}というタスクを作成しました")
   end
 
   private

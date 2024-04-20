@@ -13,21 +13,31 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center me-4">
   <div class="col-lg-6 col-md-8 col-12">
     <% @timelines.each do |timeline| %>
-      <div class="mb-3">
-        <div class="border border-2 rounded-1">
-          <p class="p-4"><%= link_to timeline.content, timeline.timelineable_url,
-                                     class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
-
-          <div class="p-3 text-end">
-            <%= link_to timeline.user, class: 'text-reset text-decoration-none' do %>
-              <%= image_tag timeline.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
-              <%= timeline.user.name %>さん
-            <% end %>
-          </div>
+      <div class="d-flex mb-3">
+        <div class="me-3">
+          <%= link_to timeline.user do %>
+            <%= image_tag timeline.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 50, height: 50 %>
+          <% end %>
         </div>
+          <div class="card flex-fill">
+            <div class="card-header bg-white">
+              <%= link_to timeline.user, class: 'text-reset text-decoration-none' do %>
+                <%= timeline.user.name %>さん
+              <% end %>
+            </div>
+            <div class="card-body">
+              <%= link_to timeline.timelineable_url, class: 'link-dark text-decoration-none' do %>
+                <p class="card-text hover-underline"><%= timeline.content %></p>
+                <div class="d-flex justify-content-between">
+                  <span><%= comment_text(timeline.timelineable) %></span>
+                  <p class="text-end mb-0"><%= l timeline.created_at, format: :long %></p>
+                </div>
+              <% end %>
+            </div>
+          </div>
       </div>
     <% end %>
   </div>

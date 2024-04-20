@@ -13,9 +13,9 @@ class Timeline < ApplicationRecord
 
   def self.fetch_multiple(user:, is_only_follows: false, page_count: nil)
     if is_only_follows
-      where(user_id: [*user.following_ids]).order(created_at: :desc).eager_load(:user).page(page_count).per(TIMELINE_COUNT)
+      where(user_id: [*user.following_ids]).order(created_at: :desc).preload(:user, :timelineable).page(page_count).per(TIMELINE_COUNT)
     else
-      order(created_at: :desc).eager_load(:user).page(page_count).per(TIMELINE_COUNT)
+      order(created_at: :desc).preload(:user, :timelineable).page(page_count).per(TIMELINE_COUNT)
     end
   end
 
