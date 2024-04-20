@@ -1,18 +1,17 @@
 <% content_for(:title, 'タイムライン') %>
 
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-between mb-3">
-  <h1 class="fs-3 text-center">タイムライン<%= '(フォロー中)' if params[:is_only_follows] %></h1>
-
-  <div class="text-end">
-    <% if params[:is_only_follows] %>
-      <%= link_to '全てのユーザーを表示する', timelines_path, class: 'btn btn-primary me-3' %>
-    <% else %>
-      <%= link_to 'フォローしている人で絞り込む', timelines_path(is_only_follows: true), class: 'btn btn-primary' %>
-    <% end %>
-  </div>
+  <h1 class="fs-3 text-center">タイムライン</h1>
 </div>
 
 <hr class="mb-4">
+
+<div class="text-center mb-4">
+  <div class="btn-group">
+    <%= link_to '全て', timelines_path, class: "btn #{group_btn_class(params[:is_only_follows], type: :all)}" %>
+    <%= link_to 'フォロー中', timelines_path(is_only_follows: true), class: "btn #{group_btn_class(params[:is_only_follows], type: :follow)}" %>
+  </div>
+</div>
 
 <div class="d-flex justify-content-center">
   <div class="col-lg-6 col-md-8 col-12">
