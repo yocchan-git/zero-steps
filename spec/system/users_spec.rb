@@ -24,7 +24,7 @@ RSpec.describe 'Users' do
     context 'フォローしている人に絞り込んだ場合' do
       it 'フォローしている人だけに絞り込まれる' do
         visit users_path
-        click_on 'フォローしている人で絞り込む'
+        click_on 'フォロー中'
         expect(page).to have_content following_user.name
         expect(page).to have_no_content unfollowing_user.name
       end
