@@ -21,7 +21,7 @@ RSpec.describe 'Users::Sessions' do
       it '新規作成され、更新画面に遷移する' do
         visit new_users_session_path
         click_on 'Discord アカウントでログイン'
-        expect(page).to have_css '.text-success', text: 'ログインしました'
+        expect(page).to have_css '.alert-success', text: 'ログインしました'
         expect(page).to have_css 'h1', text: '企業の方ですか？'
       end
     end
@@ -30,7 +30,7 @@ RSpec.describe 'Users::Sessions' do
       it 'ログインし、タイムライン画面に遷移する' do
         visit new_users_session_path
         click_on 'Discord アカウントでログイン'
-        expect(page).to have_css '.text-success', text: 'ログインしました'
+        expect(page).to have_css '.alert-success', text: 'ログインしました'
         expect(page).to have_css 'h1', text: 'タイムライン'
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe 'Users::Sessions' do
     it 'ログインが失敗する' do
       visit new_users_session_path
       click_on 'Discord アカウントでログイン'
-      expect(page).to have_css '.text-danger', text: 'キャンセルしました'
+      expect(page).to have_css '.alert-danger', text: 'キャンセルしました'
       expect(page).to have_css 'h1', text: 'ログイン'
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe 'Users::Sessions' do
       login(user)
 
       click_on 'ログアウト'
-      expect(page).to have_css '.text-success', text: 'ログアウトしました'
+      expect(page).to have_css '.alert-success', text: 'ログアウトしました'
       expect(page).to have_css 'h1', text: 'ログイン'
     end
   end

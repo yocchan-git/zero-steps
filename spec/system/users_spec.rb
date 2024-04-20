@@ -49,7 +49,7 @@ RSpec.describe 'Users' do
         it 'アクセスできない' do
           visit user_path(other_user)
           expect(page).to have_css 'h1', text: 'ユーザー一覧'
-          expect(page).to have_css '.text-danger', text: 'このユーザーにはアクセスできません'
+          expect(page).to have_css '.alert-danger', text: 'このユーザーにはアクセスできません'
         end
       end
 
@@ -77,7 +77,7 @@ RSpec.describe 'Users' do
       visit edit_user_path(user)
       check '非公開アカウントにする'
       click_on '更新する'
-      expect(page).to have_css '.text-success', text: 'ユーザー情報を更新しました'
+      expect(page).to have_css '.alert-success', text: 'ユーザー情報を更新しました'
     end
   end
 end

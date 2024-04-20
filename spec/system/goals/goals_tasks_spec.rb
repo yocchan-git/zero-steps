@@ -162,7 +162,7 @@ RSpec.describe 'Goals::Tasks' do
           click_on '削除する'
         end
 
-        expect(page).to have_css '.text-success', text: 'タスクを削除しました'
+        expect(page).to have_css '.alert-success', text: 'タスクを削除しました'
         expect(page).to have_no_link '水泳教室に通う'
       end
     end
@@ -174,7 +174,7 @@ RSpec.describe 'Goals::Tasks' do
           click_on '削除する'
         end
 
-        expect(page).to have_css '.text-success', text: 'タスクを削除しました'
+        expect(page).to have_css '.alert-success', text: 'タスクを削除しました'
         expect(page).to have_no_link '水泳教室に通う'
       end
     end
@@ -186,7 +186,7 @@ RSpec.describe 'Goals::Tasks' do
           click_on '削除する'
         end
 
-        expect(page).to have_css '.text-success', text: 'タスクを削除しました'
+        expect(page).to have_css '.alert-success', text: 'タスクを削除しました'
         expect(page).to have_no_link '水泳教室に通う'
       end
     end
