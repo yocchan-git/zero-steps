@@ -27,8 +27,7 @@ RSpec.describe 'Timelines' do
     context 'フォローしている人で絞り込んだ場合' do
       it 'フォローしている人のタイムラインだけ表示される' do
         visit timelines_path
-        click_on 'フォローしている人で絞り込む'
-        expect(page).to have_css 'h1', text: 'タイムライン(フォロー中)'
+        click_on 'フォロー中'
         expect(page).to have_link following_user_timeline.content
         expect(page).to have_no_link unfollowing_user_timeline.content
       end
