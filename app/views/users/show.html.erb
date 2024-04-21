@@ -1,6 +1,6 @@
 <% content_for(:title, 'ユーザー詳細') %>
 
-<div class="text-center mb-3">
+<div class="text-center mb-5">
   <%= image_tag @user.image, alt: "#{@user.name}のアイコン", width: 120, height: 120 %>
   <p><%= @user.name %></p>
 
@@ -17,7 +17,7 @@
 <% goal_count = 3 %>
 <% goals = @user.goals.order(created_at: :desc).limit(goal_count) %>
 <% if goals.present? %>
-  <div class="mb-3">
+  <div class="mb-5">
     <h2 class="fs-4 text-center">最近の目標</h2>
     <%= render 'shared/goals', goals: %>
   </div>
@@ -25,7 +25,7 @@
 
 <% tasks = recent_tasks(@user, task_count: 3) %>
 <% if tasks.present? %>
-  <div class="mb-3">
+  <div class="mb-5">
     <h2 class="fs-4 text-center">最近のタスク</h2>
     <%= render 'shared/tasks', tasks: %>
   </div>
