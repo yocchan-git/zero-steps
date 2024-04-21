@@ -19,7 +19,7 @@
 
     <div>
       <%= link_to @goal.user, class: 'text-reset text-decoration-none ' do %>
-        <%= image_tag @goal.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
+        <%= image_tag @goal.user.image, class: 'rounded-circle', alt: "#{@goal.user.name}のアイコン", width: 30, height: 30 %>
         <%= @goal.user.name %>さん(作成者)
       <% end %>
     </div>

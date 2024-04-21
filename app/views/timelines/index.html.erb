@@ -19,7 +19,7 @@
       <div class="d-flex mb-3">
         <div class="me-3">
           <%= link_to timeline.user do %>
-            <%= image_tag timeline.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 50, height: 50 %>
+            <%= image_tag timeline.user.image, class: 'rounded-circle', alt: "#{timeline.user.name}のアイコン", width: 50, height: 50 %>
           <% end %>
         </div>
           <div class="card flex-fill">

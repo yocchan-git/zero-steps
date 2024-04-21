@@ -35,7 +35,7 @@
 
     <div>
       <%= link_to @task.user, class: 'text-reset text-decoration-none ' do %>
-        <%= image_tag @task.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
+        <%= image_tag @task.user.image, class: 'rounded-circle', alt: "#{@task.user.name}のアイコン", width: 30, height: 30 %>
         <%= @task.user.name %>さん(作成者)
       <% end %>
     </div>

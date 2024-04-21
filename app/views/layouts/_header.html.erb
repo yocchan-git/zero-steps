@@ -15,7 +15,7 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <%= link_to current_user, class: 'nav-link active' do %>
-              <%= image_tag current_user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
+              <%= image_tag current_user.image, class: 'rounded-circle', alt: "#{current_user.name}のアイコン", width: 30, height: 30 %>
               <%= current_user.name %>さん
             <% end %>
           </li>

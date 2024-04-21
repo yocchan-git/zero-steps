@@ -1,7 +1,7 @@
 <% content_for(:title, 'ユーザー詳細') %>
 
 <div class="text-center mb-3">
-  <%= image_tag @user.image, alt: 'ユーザーアイコン', width: 120, height: 120 %>
+  <%= image_tag @user.image, alt: "#{@user.name}のアイコン", width: 120, height: 120 %>
   <p><%= @user.name %></p>
 
   <div class="d-flex justify-content-center">
