@@ -35,7 +35,7 @@
 
 <% if @goal.completed_at? %>
   <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-    <h2 class="fs-4">終了投稿</h2>
+    <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">終了投稿</h2>
   </div>
   <p class="text-center">いいねやコメントでお祝いしましょう！</p>
   <% complete_post = @goal.complete_post %>
@@ -44,7 +44,7 @@
 
 <% tasks = recent_tasks(@goal, task_count: 3) %>
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-  <h2 class="fs-4">最近のタスク</h2>
+  <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">最近のタスク</h2>
   <div class="text-end">
     <% if tasks.empty? && current_user?(@goal.user) %>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskFormModal">
