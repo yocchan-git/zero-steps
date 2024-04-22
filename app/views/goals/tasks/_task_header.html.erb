@@ -6,4 +6,13 @@
   <h1 class="fs-4"><%= escaped_simple_format(task.content) %></h1>
 <% end %>
 
-<p>期限: <%= l task.completion_limits, format: :date %></p>
+<% limit_days = task.completion_limits.day - Time.current.day %>
+<% if task.completion_limits > Time.current.since(7.days) %>
+  <p>期限: <%= l task.completion_limits, format: :date %></p>
+<% elsif limit_days >= 1 && limit_days <= 7 %>
+  <p>期限: あと<%= limit_days %>日</p>
+<% elsif task.completion_limits > Time.current %>
+  <p>期限: <span class="text-danger"><%= l task.completion_limits, format: :hour_and_minutes %>まで</span></p>
+<% else %>
+  <p class="text-danger">期限切れ</p>
+<% end %>
