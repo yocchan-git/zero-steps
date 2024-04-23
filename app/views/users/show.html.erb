@@ -21,7 +21,11 @@
 <% goals = @user.goals.order(created_at: :desc).limit(goal_count) %>
 <% if goals.present? %>
   <div class="mb-5">
-    <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">最近の目標</h2>
+    <div class="d-flex justify-content-center">
+      <div class="col-lg-6 col-md-8 col-12">
+        <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">最近の目標</h2>
+      </div>
+    </div>
     <%= render 'shared/goals', goals: %>
   </div>
 <% end %>
@@ -29,13 +33,21 @@
 <% tasks = recent_tasks(@user, task_count: 3) %>
 <% if tasks.present? %>
   <div class="mb-5">
-    <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">最近のタスク</h2>
+    <div class="d-flex justify-content-center">
+      <div class="col-lg-6 col-md-8 col-12">
+        <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">最近のタスク</h2>
+      </div>
+    </div>
     <%= render 'shared/tasks', tasks: %>
   </div>
 <% end %>
 
 <% comments = recent_comments(@user, comment_count: 3) %>
 <% if comments.present? %>
-  <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">最近のコメント</h2>
+  <div class="d-flex justify-content-center">
+    <div class="col-lg-6 col-md-8 col-12">
+      <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">最近のコメント</h2>
+    </div>
+  </div>
   <%= render 'shared/comments', comments: %>
 <% end %>
