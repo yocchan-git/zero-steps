@@ -1,15 +1,17 @@
 <% comments = recent_comments(commentable, comment_count: 3) %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-  <div>
-    <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">最近のコメント</h2>
+<div class="d-flex justify-content-center">
+  <div class="col-lg-6 col-md-8 col-12">
+    <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-2">コメント</h2>
     <p>気軽にいいねやコメントで交流しよう！</p>
   </div>
-  <div class="text-end">
-    <%= link_to link_text(comments), comment_index_url(commentable),
-                class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
-  </div>
 </div>
+
+<% if comments.present? %>
+  <div class="text-center mb-3">
+    <%= link_to 'もっと見る', comment_index_url(commentable), class: 'btn btn-outline-secondary py-2' %>
+  </div>
+<% end %>
 
 <div id="comments">
   <%= render 'shared/comments', comments: %>

@@ -13,7 +13,7 @@ RSpec.describe 'CompletePosts::Reactions' do
       let(:complete_postable) { create(:goal, :completed) }
 
       it 'いいねができること' do
-        visit goal_path(complete_postable)
+        visit goal_path(complete_postable, is_complete_post: true)
         within "#complete_post_reaction_form#{complete_post.id}" do
           find('.btn').click
           expect(page).to have_css '.fa-solid'

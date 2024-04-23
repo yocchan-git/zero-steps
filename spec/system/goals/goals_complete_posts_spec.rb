@@ -20,6 +20,8 @@ RSpec.describe 'Goals::CompletePosts' do
       visit new_goal_complete_post_path(goal)
       fill_in '内容(500文字以内)', with: 'この目標は終了しました'
       click_on '投稿する'
+
+      visit goal_path(goal, is_complete_post: true)
       expect(page).to have_css 'h2', text: '終了投稿'
       expect(page).to have_content 'この目標は終了しました'
     end

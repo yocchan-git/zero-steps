@@ -15,7 +15,7 @@ RSpec.describe 'Reactions' do
       let!(:comment) { create(:comment, commentable: goal) }
 
       it 'いいねを削除できる' do
-        visit goal_path(goal)
+        visit goal_path(goal, is_comments: true)
         within "#comment_reaction_form#{comment.id}" do
           find('.btn').click
           expect(page).to have_css '.fa-regular'
@@ -30,7 +30,7 @@ RSpec.describe 'Reactions' do
       let!(:complete_post) { create(:complete_post, complete_postable: goal) }
 
       it 'いいねを削除できる' do
-        visit goal_path(goal)
+        visit goal_path(goal, is_complete_post: true)
         within "#complete_post_reaction_form#{complete_post.id}" do
           find('.btn').click
           expect(page).to have_css '.fa-regular'

@@ -1,20 +1,22 @@
 <div class="d-flex justify-content-center">
   <div class="col-lg-6 col-md-8 col-12">
-    <div class="mb-3">
-      <div class="border border-2 rounded-1">
-        <div class="p-4">
-          <%= escaped_simple_format(complete_post.content) %>
-        </div>
-        <div class="d-flex justify-content-between p-3">
-          <div class="d-flex align-items-center">
-            <%= render 'shared/reaction_form', reactionable: complete_post, request_uri: complete_post_reactions_path(complete_post) %>
+    <div class="d-flex mb-3">
+      <div class="me-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+          <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+        </svg>
+      </div>
+
+      <div class="card flex-fill">
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-0">
+            <div class="d-flex align-items-center">
+              <%= escaped_simple_format(complete_post.content) %>
+            </div>
           </div>
 
-          <div>
-            <%= link_to complete_post.user, class: 'text-reset text-decoration-none ' do %>
-              <%= image_tag complete_post.user.image, class: 'rounded-circle', alt: "#{complete_post.user.name}のアイコン", width: 30, height: 30 %>
-              <%= complete_post.user.name %>さん
-            <% end %>
+          <div class="d-flex align-items-center">
+            <%= render 'shared/reaction_form', reactionable: complete_post, request_uri: complete_post_reactions_path(complete_post) %>
           </div>
         </div>
       </div>
