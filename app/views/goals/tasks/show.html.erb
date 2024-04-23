@@ -43,7 +43,7 @@
 </div>
 
 <div class="d-flex justify-content-center mb-5">
-  <%= link_to '目標一覧へ戻る', goal_tasks_path(@task.goal), class: 'btn btn-secondary' %>
+  <%= link_to 'タスク一覧へ戻る', goal_tasks_path(@task.goal), class: 'btn btn-secondary' %>
 </div>
 
 <% if @task.completed_at? %>
