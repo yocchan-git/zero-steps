@@ -5,13 +5,15 @@
     </button>
     <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start overflow-x-auto dropdown-notifications">
       <% notifications.each do |notification| %>
-        <div class="hover-bg-change p-3">
-          <p>
-            <%= link_to notification.content, notification_path(notification), class: 'link-dark link-offset-2 text-decoration-none' %>
-          </p>
-        </div>
+        <%= link_to notification_path(notification), class: 'link-dark link-offset-2 text-decoration-none' do %>
+          <div class="hover-bg-change p-3">
+            <%= notification.content %>
+          </div>
+        <% end %>
       <% end %>
-      <p class="hover-bg-change text-center py-3"><%= link_to 'すべての通知を見る', notifications_path, class: 'link-dark link-offset-2 text-decoration-none' %></p>
+      <%= link_to notifications_path, class: 'link-dark link-offset-2 text-decoration-none' do %>
+        <p class="hover-bg-change text-center py-3">すべての通知を見る</p>
+      <% end %>
     </div>
   </div>
 </div>
