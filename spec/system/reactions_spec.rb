@@ -9,7 +9,7 @@ RSpec.describe 'Reactions' do
 
   describe '#destroy' do
     context 'コメントの場合' do
-      before { create(:reaction, :comment, user:, reactionable: comment) }
+      before { create(:reaction, user:, reactionable: comment) }
 
       let(:goal) { create(:goal) }
       let!(:comment) { create(:comment, commentable: goal) }

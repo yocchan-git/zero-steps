@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ReactionsHelper do
   describe 'reaction_form_id_name' do
-    let(:reaction) { create(:reaction, :comment) }
+    let(:reaction) { create(:reaction) }
     let(:reactionable) { reaction.reactionable }
 
     context 'コメントのリアクションの場合' do
@@ -23,7 +23,7 @@ RSpec.describe ReactionsHelper do
   end
 
   describe 'reaction_count_id_name' do
-    let(:reaction) { create(:reaction, :comment) }
+    let(:reaction) { create(:reaction) }
     let(:reactionable) { reaction.reactionable }
 
     context 'コメントのリアクションの場合' do
@@ -42,7 +42,7 @@ RSpec.describe ReactionsHelper do
   end
 
   describe 'reactionable_path' do
-    let(:reaction) { create(:reaction, :comment) }
+    let(:reaction) { create(:reaction) }
     let(:reactionable) { reaction.reactionable }
 
     context 'コメントのリアクションの場合' do

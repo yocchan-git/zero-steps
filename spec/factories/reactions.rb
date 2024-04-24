@@ -3,11 +3,8 @@
 FactoryBot.define do
   factory :reaction, class: 'Reaction' do
     user
-
-    trait :comment do
-      reactionable_type { 'Comment' }
-      reactionable factory: %i[comment]
-    end
+    reactionable_type { 'Comment' }
+    reactionable factory: :comment
 
     trait :complete_post do
       reactionable_type { 'CompletePost' }

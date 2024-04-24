@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Reaction do
   describe '#comment?' do
     context 'コメントのリアクションの場合' do
-      let(:comment_reaction) { create(:reaction, :comment) }
+      let(:comment_reaction) { create(:reaction) }
 
       it 'trueで返る' do
         expect(comment_reaction).to be_comment
@@ -23,7 +23,7 @@ RSpec.describe Reaction do
 
   describe '#reaction_form_id_name' do
     context 'コメントのリアクションの場合' do
-      let(:comment_reaction) { create(:reaction, :comment) }
+      let(:comment_reaction) { create(:reaction) }
 
       it '適切なクラス名が返る' do
         expect(comment_reaction.reaction_form_id_name).to eq "comment_reaction_form#{comment_reaction.reactionable.id}"
@@ -41,7 +41,7 @@ RSpec.describe Reaction do
 
   describe '#reaction_count_id_name' do
     context 'コメントのリアクションの場合' do
-      let(:comment_reaction) { create(:reaction, :comment) }
+      let(:comment_reaction) { create(:reaction) }
 
       it '適切なクラス名が返る' do
         expect(comment_reaction.reaction_count_id_name).to eq "comment_reaction_count#{comment_reaction.reactionable.id}"
