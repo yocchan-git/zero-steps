@@ -1,9 +1,9 @@
 <% if is_tasks_path %>
-  <p class="mb-1 trancate-title">
-    <%= link_to task.content,
+  <div class="trancate-content">
+    <%= link_to escaped_simple_format(task.content),
                 goal_task_path(task, goal_id: task.goal.id),
                 class: 'link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover' %>
-  </p>
+  </div>
 <% else %>
   <h1 class="fs-4"><%= escaped_simple_format(task.content) %></h1>
 <% end %>
