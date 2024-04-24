@@ -1,10 +1,12 @@
 <% content_for(:title, '終了投稿の作成') %>
 
-<div class="d-flex justify-content-center mb-3">
-  <div class="col-lg-6 col-md-8 col-12">
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-between">
+  <div>
     <h1 class="fs-2"><%= formatted_text(@goal) %>の終了投稿</h1>
-    <p>目標を終えた感想を投稿しよう</p>
+    <p class="mb-0">目標を終えた感想を投稿しよう</p>
   </div>
 </div>
+
+<hr class="mb-4">
 
 <%= render 'shared/complete_post_form', complete_postable: @goal %>
