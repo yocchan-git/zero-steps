@@ -22,7 +22,7 @@ RSpec.describe 'Goals::Tasks' do
   describe '#show' do
     it '正しく表示されている' do
       visit goal_task_path(task, goal_id: goal.id)
-      expect(page).to have_link 'タスク一覧へ戻る'
+      expect(page).to have_link 'タスク一覧へ'
       expect(page).to have_content task.content
       expect(page).to have_css 'h2', text: 'コメント'
     end
@@ -40,7 +40,7 @@ RSpec.describe 'Goals::Tasks' do
 
         it '終了投稿ボタンが表示される' do
           visit goal_task_path(task, goal_id: goal.id)
-          expect(page).to have_link '終了投稿する'
+          expect(page).to have_link '終了する'
         end
       end
     end
@@ -49,7 +49,7 @@ RSpec.describe 'Goals::Tasks' do
       before { create(:complete_post, :task, complete_postable: completed_task) }
 
       it '終了投稿が表示される' do
-        visit goal_task_path(completed_task, goal_id: goal.id)
+        visit goal_task_path(completed_task, goal_id: goal.id, is_complete_post: true)
         expect(page).to have_css 'h2', text: '終了投稿'
         expect(page).to have_content completed_task.complete_post.content
       end
