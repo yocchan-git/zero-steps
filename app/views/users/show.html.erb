@@ -39,36 +39,54 @@
 <% if params[:is_goals] %>
   <% goal_count = 3 %>
   <% goals = @user.goals.order(created_at: :desc).limit(goal_count) %>
-  <% if goals.present? %>
     <div class="mb-5">
       <div class="d-flex justify-content-center">
         <div class="col-lg-6 col-md-8 col-12">
-          <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">最近の目標</h2>
+          <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">目標</h2>
         </div>
       </div>
-      <%= render 'shared/goals', goals: %>
+      <% if goals.present? %>
+        <%= render 'shared/goals', goals: %>
+      <% else %>
+        <div class="d-flex justify-content-center">
+          <div class="border-bottom border-bottom-5 mt-2 px-4">
+            <p class="mt-3 mb-1 p-0">目標がありません</p>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
 <% elsif params[:is_tasks] %>
   <% tasks = recent_tasks(@user, task_count: 3) %>
-  <% if tasks.present? %>
     <div class="mb-5">
       <div class="d-flex justify-content-center">
         <div class="col-lg-6 col-md-8 col-12">
           <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">タスク</h2>
         </div>
       </div>
-      <%= render 'shared/tasks', tasks: %>
+      <% if tasks.present? %>
+        <%= render 'shared/tasks', tasks: %>
+      <% else %>
+        <div class="d-flex justify-content-center">
+          <div class="border-bottom border-bottom-5 mt-2 px-4">
+            <p class="mt-3 mb-1 p-0">タスクがありません</p>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
 <% elsif params[:is_comments] %>
   <% comments = recent_comments(@user, comment_count: 3) %>
-  <% if comments.present? %>
     <div class="d-flex justify-content-center">
       <div class="col-lg-6 col-md-8 col-12">
-        <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">最近のコメント</h2>
+        <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">コメント</h2>
       </div>
     </div>
-    <%= render 'shared/comments', comments: %>
-  <% end %>
+    <% if comments.present? %>
+      <%= render 'shared/comments', comments: %>
+    <% else %>
+      <div class="d-flex justify-content-center">
+        <div class="border-bottom border-bottom-5 mt-2 px-4">
+          <p class="mt-3 mb-1 p-0">コメントがありません</p>
+        </div>
+      </div>
+    <% end %>
 <% end %>
