@@ -153,6 +153,14 @@ RSpec.describe 'Users' do
       visit edit_user_path(user)
       expect(page).to have_css 'h1', text: 'ユーザー編集'
     end
+
+    context 'テンプレートを使うを押した場合', :js do
+      it '自己紹介のテキストエリアにテンプレが挿入される' do
+        visit edit_user_path(user)
+        click_on 'テンプレートを使う'
+        expect(page).to have_field '自己紹介', with: "■性格\n\n\n■好きなこと・趣味\n\n\n■今やっていること\n\n\n■将来どうなりたいか\n\n\n■卒業後の進路\n"
+      end
+    end
   end
 
   describe '#update' do
