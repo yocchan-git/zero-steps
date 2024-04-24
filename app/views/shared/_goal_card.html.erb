@@ -1,0 +1,46 @@
+<% task_count = goal.tasks.count %>
+<% completed_task_count = goal.tasks.completed.count %>
+<% completed_task_rate = task_count.zero? ? 0 : (completed_task_count.to_f / task_count * 100).ceil %>
+<% arranged_rate = goal.completed_at? ? 100 : completed_task_rate %>
+
+<div class="d-flex mb-3">
+  <div class="me-3">
+    <% bg_color = goal.completed_at? ? 'bg-completed' : 'bg-primary' %>
+    <div class="status-circle text-white d-flex align-items-center justify-content-center rounded-circle <%= bg_color %>">
+      <%= arranged_rate %>%
+    </div>
+  </div>
+
+  <div class="card flex-fill">
+    <div class="card-header bg-white">
+      <%= link_to goal, class: 'link-dark link-underline-opacity-0' do %>
+        <p class="fs-5 trancate-title hover-underline mb-0">
+          <%= goal.title %>
+        </p>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <div class="trancate-content mb-2"><%= goal.description %></div>
+      <div class="row d-flex align-items-center">
+        <div class="col-8">
+          <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 10px;">
+            <div class="progress-bar" style="width: <%= arranged_rate %>%"></div>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <span>(<%= goal.completed_at? ? '達成' : "#{completed_task_count}/#{task_count}" %>)</span>
+        </div>
+      </div>
+
+      <% if request.path_info == goals_path %>
+        <div class="mt-3 text-end">
+          <%= link_to goal.user, class: 'text-reset text-decoration-none' do %>
+            <%= image_tag goal.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
+            <%= goal.user.name %>さん
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

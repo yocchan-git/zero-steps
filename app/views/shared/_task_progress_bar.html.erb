@@ -1,15 +1,21 @@
 <% task_count = goal.tasks.count %>
 <% completed_task_count = goal.tasks.completed.count %>
+<% is_completed = goal.completed_at? %>
 
 <div class="row d-flex align-items-center">
   <% completed_task_rate = task_count.zero? ? 0 : (completed_task_count.to_f / task_count * 100).ceil %>
   <div class="col-8">
     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 10px;">
-      <div class="progress-bar" style="width: <%= goal.completed_at? ? 100 : completed_task_rate %>%"></div>
+      <div class="progress-bar" style="width: <%= is_completed ? 100 : completed_task_rate %>%"></div>
     </div>
   </div>
 
   <div class="col-4">
-    <span>(<%= goal.completed_at? ? '達成' : "#{completed_task_count}/#{task_count}" %>)</span>
+    <span class="<%= 'text-success' if is_completed %>"><%= if is_completed
+                                                              "達成(#{l(goal.completed_at,
+                                                                        format: :date)})"
+                                                            else
+                                                              "(#{completed_task_count}/#{task_count})"
+                                                            end %></span>
   </div>
 </div>

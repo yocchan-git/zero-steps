@@ -1,35 +1,52 @@
 <div id="comment_card<%= comment.id %>" class="mb-3">
-  <div class="border border-2 rounded-1">
-    <div class="p-4">
-      <%= escaped_simple_format(comment.content) %>
-    </div>
-    <div class="d-flex justify-content-between p-3">
-      <div class="d-flex align-items-center">
-        <%= render 'shared/reaction_form', reactionable: comment, request_uri: comment_reactions_path(comment) %>
-      </div>
+  <% commentable = comment.commentable %>
+  <% is_user_path = request.path_info == user_path(comment.user) %>
 
-      <div>
-        <% commentable = comment.commentable %>
-        <% if request.path_info == user_path(comment.user) %>
+  <div class="d-flex mb-3">
+    <div class="me-3">
+      <% if is_user_path %>
+        <div class="status-circle text-white d-flex align-items-center justify-content-center rounded-circle me-3 bg-primary">
+          <%= goal?(commentable) ? '目標' : 'タスク' %>
+        </div>
+      <% else %>
+        <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
+          <%= image_tag comment.user.image, class: 'rounded-circle', alt: "#{comment.user.name}のアイコン", width: 50, height: 50 %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="card flex-fill">
+      <div class="card-header bg-white">
+        <% if is_user_path %>
           <% request_uri = goal?(commentable) ? commentable : goal_task_path(commentable, goal_id: commentable.goal.id) %>
-          <%= link_to request_uri, class: 'text-reset text-decoration-none ' do %>
-            <%= goal?(commentable) ? "#{formatted_text(commentable)}(目標)" : "#{formatted_text(commentable)}(タスク)" %>
+          <%= link_to request_uri, class: 'text-reset text-decoration-none' do %>
+            <%= formatted_text(commentable) %>
           <% end %>
         <% else %>
           <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>
-            <%= image_tag comment.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
-            <%= comment.user.name %>さん
+            <%= comment.user.name %>
           <% end %>
         <% end %>
+      </div>
 
-        <% if current_user?(comment.user) %>
-          <%= link_to comment_path(comment, page: params[:page]),
-                      id: "comment-delete-icon#{comment.id}",
-                      class: 'btn',
-                      data: { turbo_method: :delete, turbo_confirm: "#{formatted_text(comment)}を本当に削除しますか？" } do %>
-            <i class="fa-solid fa-trash"></i>
-          <% end %>
-        <% end %>
+      <div class="card-body">
+        <%= escaped_simple_format(comment.content) %>
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center">
+            <%= render 'shared/reaction_form', reactionable: comment, request_uri: comment_reactions_path(comment) %>
+          </div>
+
+          <p class="text-end mb-0">
+            <% if current_user?(comment.user) %>
+              <%= link_to comment_path(comment, page: params[:page]),
+                          id: "comment-delete-icon#{comment.id}",
+                          class: 'btn',
+                          data: { turbo_method: :delete, turbo_confirm: "#{formatted_text(comment)}を本当に削除しますか？" } do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+            <% end %>
+          </p>
+        </div>
       </div>
     </div>
   </div>

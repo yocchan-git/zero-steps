@@ -1,6 +1,6 @@
 <% content_for(:title, 'コメント一覧') %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-between mb-3">
   <div>
     <h1 class="fs-2 text-center mb-3"><%= formatted_text(@task) %>のコメント一覧</h1>
     <p>気軽にいいねやコメントで交流しよう！</p>
@@ -10,6 +10,8 @@
     <%= link_to 'タスク詳細へ戻る', goal_task_path(@task, goal_id: @task.goal.id), class: 'btn btn-secondary' %>
   </div>
 </div>
+
+<hr class="mb-4">
 
 <div id="comments">
   <%= render 'shared/comments', comments: @comments %>

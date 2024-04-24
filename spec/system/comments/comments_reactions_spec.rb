@@ -14,7 +14,7 @@ RSpec.describe 'Comments::Reactions' do
     context '目標' do
       context '詳細画面' do
         it 'いいねができること' do
-          visit goal_path(commentable)
+          visit goal_path(commentable, is_comments: true)
           within "#comment_reaction_form#{comment.id}" do
             find('.btn').click
             expect(page).to have_css '.fa-solid'
@@ -59,7 +59,7 @@ RSpec.describe 'Comments::Reactions' do
 
     context 'ユーザー詳細画面' do
       it 'いいねができること' do
-        visit user_path(other_user)
+        visit user_path(other_user, is_comments: true)
         within "#comment_reaction_form#{comment.id}" do
           find('.btn').click
             expect(page).to have_css '.fa-solid'

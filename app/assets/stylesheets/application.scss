@@ -18,10 +18,40 @@ footer {
   width: 280px !important;
 }
 
+.bg-completed {
+  background-color: #4cae7d;
+}
+
+.status-circle {
+  width: 65px !important;
+  height: 65px !important;
+}
+
 .hover-bg-change {
   background-color: white;
 }
 
 .hover-bg-change:hover {
   background-color: rgb(229, 231, 235);
+}
+
+.link-dark:hover .hover-underline {
+  text-decoration: underline;
+  text-underline-offset: 0.3ex;
+}
+
+.trancate-title {
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.trancate-content {
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }

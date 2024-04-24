@@ -22,9 +22,9 @@ RSpec.describe 'Goals::Tasks' do
   describe '#show' do
     it '正しく表示されている' do
       visit goal_task_path(task, goal_id: goal.id)
-      expect(page).to have_link '目標一覧へ戻る'
+      expect(page).to have_link 'タスク一覧へ'
       expect(page).to have_content task.content
-      expect(page).to have_css 'h2', text: '最近のコメント'
+      expect(page).to have_css 'h2', text: 'コメント'
     end
 
     context '終了していないタスクの場合' do
@@ -40,7 +40,7 @@ RSpec.describe 'Goals::Tasks' do
 
         it '終了投稿ボタンが表示される' do
           visit goal_task_path(task, goal_id: goal.id)
-          expect(page).to have_link '終了投稿する'
+          expect(page).to have_link '終了する'
         end
       end
     end
@@ -49,7 +49,7 @@ RSpec.describe 'Goals::Tasks' do
       before { create(:complete_post, :task, complete_postable: completed_task) }
 
       it '終了投稿が表示される' do
-        visit goal_task_path(completed_task, goal_id: goal.id)
+        visit goal_task_path(completed_task, goal_id: goal.id, is_complete_post: true)
         expect(page).to have_css 'h2', text: '終了投稿'
         expect(page).to have_content completed_task.complete_post.content
       end
@@ -58,7 +58,7 @@ RSpec.describe 'Goals::Tasks' do
     context 'コメントがない場合' do
       it 'コメントがない文言が表示される' do
         visit goal_task_path(task, goal_id: goal.id)
-        expect(page).to have_content '最近のコメントはありません'
+        expect(page).to have_content 'コメントがありません'
       end
     end
 
@@ -139,7 +139,7 @@ RSpec.describe 'Goals::Tasks' do
 
     context 'ユーザー詳細画面' do
       it 'タスクの更新ができること' do
-        visit user_path(user)
+        visit user_path(user, is_tasks: true)
         within "#taskFormModal#{own_task.id}" do
           fill_in '内容(500文字以内)', with: '水泳教室に通う'
           fill_in '期限', with: '002024-04-01T00:00'
@@ -162,7 +162,7 @@ RSpec.describe 'Goals::Tasks' do
           click_on '削除する'
         end
 
-        expect(page).to have_css '.text-success', text: 'タスクを削除しました'
+        expect(page).to have_css '.alert-success', text: 'タスクを削除しました'
         expect(page).to have_no_link '水泳教室に通う'
       end
     end
@@ -174,19 +174,19 @@ RSpec.describe 'Goals::Tasks' do
           click_on '削除する'
         end
 
-        expect(page).to have_css '.text-success', text: 'タスクを削除しました'
+        expect(page).to have_css '.alert-success', text: 'タスクを削除しました'
         expect(page).to have_no_link '水泳教室に通う'
       end
     end
 
     context 'ユーザー詳細画面' do
       it 'タスクの削除ができること' do
-        visit user_path(user)
+        visit user_path(user, is_tasks: true)
         within "#taskDeleteModal#{own_task.id}" do
           click_on '削除する'
         end
 
-        expect(page).to have_css '.text-success', text: 'タスクを削除しました'
+        expect(page).to have_css '.alert-success', text: 'タスクを削除しました'
         expect(page).to have_no_link '水泳教室に通う'
       end
     end

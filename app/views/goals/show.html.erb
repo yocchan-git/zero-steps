@@ -1,69 +1,91 @@
 <% content_for(:title, '目標詳細') %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-5">
-  <div>
+<div class="d-flex justify-content-center mb-3">
+  <div class="col-lg-6 col-md-8 col-12">
     <h2 class="fs-3"><%= @goal.title %></h2>
     <%= escaped_simple_format(@goal.description) %>
 
     <%= render 'shared/task_progress_bar', goal: @goal %>
   </div>
+</div>
 
-  <div class="text-end">
-    <div class="text-md-center my-4">
-      <% if @goal.completed_at? %>
-        <p class="text-success">達成(<%= l @goal.completed_at, format: :date %>)</p>
-      <% elsif current_user?(@goal.user) %>
-        <%= link_to '終了投稿する', new_goal_complete_post_path(@goal), class: 'btn btn-primary' %>
-      <% end %>
-    </div>
-
-    <div>
-      <%= link_to @goal.user, class: 'text-reset text-decoration-none ' do %>
-        <%= image_tag @goal.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
-        <%= @goal.user.name %>さん(作成者)
-      <% end %>
-    </div>
-  </div>
+<div class="text-center mb-3">
+  <%= link_to @goal.user, class: 'text-reset text-decoration-none ' do %>
+    <%= image_tag @goal.user.image, class: 'rounded-circle', alt: "#{@goal.user.name}のアイコン", width: 30, height: 30 %>
+    <%= @goal.user.name %>さん
+  <% end %>
 </div>
 
 <div class="d-flex justify-content-center mb-5">
-  <% if current_user?(@goal.user) %>
-    <%= link_to '修正する', edit_goal_path(@goal), class: 'btn btn-warning me-3' %>
+  <% if !@goal.completed_at? && current_user?(@goal.user) %>
+    <%= link_to '終了する', new_goal_complete_post_path(@goal), class: 'btn btn-primary me-3 py-2 px-3' %>
   <% end %>
-  <%= link_to '目標一覧へ戻る', goals_path, class: 'btn btn-secondary' %>
+
+  <% if current_user?(@goal.user) %>
+    <%= link_to '修正する', edit_goal_path(@goal), class: 'btn btn-outline-secondary me-3 py-2 px-3' %>
+  <% end %>
+  <%= link_to '目標一覧へ', goals_path, class: 'btn btn-outline-secondary py-2 px-2' %>
 </div>
 
-<% if @goal.completed_at? %>
-  <div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-    <h2 class="fs-4">終了投稿</h2>
+<div class="d-flex justify-content-center mb-3">
+  <div class="col-lg-6 col-md-8 col-12">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <%= link_to 'タスク', goal_path(@goal), class: "nav-link link-dark #{'active' unless params[:is_complete_post] || params[:is_comments]}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'コメント', goal_path(@goal, is_comments: true), class: "nav-link link-dark #{'active' if params[:is_comments]}" %>
+      </li>
+      <% if @goal.completed_at? %>
+        <li class="nav-item">
+          <%= link_to '終了投稿', goal_path(@goal, is_complete_post: true), class: "nav-link link-dark #{'active' if params[:is_complete_post]}" %>
+        </li>
+      <% end %>
+    </ul>
   </div>
-  <p class="text-center">いいねやコメントでお祝いしましょう！</p>
+</div>
+
+<% if !(params[:is_complete_post] || params[:is_comments]) %>
+  <% tasks = recent_tasks(@goal, task_count: 3) %>
+  <div class="d-flex justify-content-center">
+    <div class="col-lg-6 col-md-8 col-12">
+      <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-3">タスク</h2>
+    </div>
+  </div>
+
+  <div class="text-center mb-3">
+    <% if tasks.empty? && current_user?(@goal.user) %>
+      <button type="button" class="btn btn-primary py-2" data-bs-toggle="modal" data-bs-target="#taskFormModal">
+        作成する
+      </button>
+    <% else %>
+      <%= link_to 'もっと見る', goal_tasks_path(@goal), class: 'btn btn-outline-secondary py-2' %>
+    <% end %>
+  </div>
+
+  <div id="tasks">
+    <%= render 'shared/tasks', tasks: %>
+  </div>
+  <div id="task_create_modal">
+    <%= render 'shared/task_create_modal', goal: @goal %>
+  </div>
+<% elsif params[:is_comments] %>
+  <%= render 'shared/recent_comments', commentable: @goal %>
+  <div class="mt-3" id="comment_form">
+    <%= render 'shared/comment_form', commentable: @goal %>
+  </div>
+<% elsif @goal.completed_at? && params[:is_complete_post] %>
+  <div class="d-flex justify-content-center">
+    <div class="col-lg-6 col-md-8 col-12">
+      <h2 class="rounded fs-5 fw-semibold border-start border-5 bg-secondary-subtle border-primary p-2 mb-2">終了投稿</h2>
+      <p>いいねやコメントでお祝いしましょう！</p>
+    </div>
+  </div>
+
+  <div class="text-center mb-3">
+    <%= link_to 'コメントする', comment_index_url(@goal), class: 'btn btn-outline-secondary py-2' %>
+  </div>
+
   <% complete_post = @goal.complete_post %>
   <%= render 'shared/complete_post', complete_post: %>
 <% end %>
-
-<% tasks = recent_tasks(@goal, task_count: 3) %>
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-  <h2 class="fs-4">最近のタスク</h2>
-  <div class="text-end">
-    <% if tasks.empty? && current_user?(@goal.user) %>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskFormModal">
-        タスクを作成する
-      </button>
-    <% else %>
-      <%= link_to 'もっと見る', goal_tasks_path(@goal), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
-    <% end %>
-  </div>
-</div>
-
-<div id="tasks">
-  <%= render 'shared/tasks', tasks: %>
-</div>
-<div id="task_create_modal">
-  <%= render 'shared/task_create_modal', goal: @goal %>
-</div>
-
-<%= render 'shared/recent_comments', commentable: @goal %>
-<div class="mt-3" id="comment_form">
-  <%= render 'shared/comment_form', commentable: @goal %>
-</div>

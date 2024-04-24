@@ -28,7 +28,7 @@ class CommentRegister
   end
 
   def create_timeline
-    @comment.timelines.create!(user: @user, content: "#{@user.name}さんが#{formatted_text(@commentable)}にコメントしました")
+    @comment.timelines.create!(user: @user, content: "#{formatted_text(@commentable)}にコメントしました")
   end
 
   def create_notifications

@@ -27,8 +27,10 @@ RSpec.describe 'Goals' do
     context 'タスク・コメントがない場合' do
       it 'タスク・コメントがない場合の文言が表示される' do
         visit goal_path(goal)
-        expect(page).to have_content '最近のタスクはありません'
-        expect(page).to have_content '最近のタスクはありません'
+        expect(page).to have_content 'タスクがありません'
+
+        visit goal_path(goal, is_comments: true)
+        expect(page).to have_content 'コメントがありません'
       end
 
       context '自分の目標の場合' do
@@ -36,16 +38,16 @@ RSpec.describe 'Goals' do
 
         it '修正などのボタンが表示される' do
           visit goal_path(goal)
-          expect(page).to have_link '終了投稿する'
+          expect(page).to have_link '終了する'
           expect(page).to have_link '修正する'
-          expect(page).to have_button 'タスクを作成する'
+          expect(page).to have_button '作成する'
         end
       end
 
       context '他人の目標の場合' do
         it '「タスクを作成する」の文言が表示されない' do
           visit goal_path(goal)
-          expect(page).to have_no_link '終了投稿する'
+          expect(page).to have_no_link '終了する'
           expect(page).to have_no_link '修正する'
           expect(page).to have_no_button 'タスクを作成する'
         end
@@ -84,7 +86,7 @@ RSpec.describe 'Goals' do
 
       context 'コメントが3つ以下の場合' do
         it 'コメントが表示されている' do
-          visit goal_path(goal)
+          visit goal_path(goal, is_comments: true)
           expect(page).to have_content old_comment.content
         end
       end
@@ -93,7 +95,7 @@ RSpec.describe 'Goals' do
         let!(:new_comment) { create(:comment, commentable: goal, created_at: Time.current) }
 
         it '最新のコメントが表示されている' do
-          visit goal_path(goal)
+          visit goal_path(goal, is_comments: true)
           expect(page).to have_content new_comment.content
           expect(page).to have_no_content old_comment.content
         end

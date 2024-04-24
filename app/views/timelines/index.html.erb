@@ -1,29 +1,40 @@
 <% content_for(:title, 'タイムライン') %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
-  <h1 class="fs-3 text-center">タイムライン<%= '(フォロー中)' if params[:is_only_follows] %></h1>
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-between mb-3">
+  <h1 class="fs-3 text-center">タイムライン</h1>
+</div>
 
-  <div class="text-end">
-    <% if params[:is_only_follows] %>
-      <%= link_to '全てのユーザーを表示する', timelines_path, class: 'btn btn-primary me-3' %>
-    <% else %>
-      <%= link_to 'フォローしている人で絞り込む', timelines_path(is_only_follows: true), class: 'btn btn-primary' %>
-    <% end %>
+<hr class="mb-4">
+
+<div class="text-center mb-4">
+  <div class="btn-group">
+    <%= link_to '全て', timelines_path, class: "btn px-4 py-2 #{group_btn_class(params[:is_only_follows], type: :all)}" %>
+    <%= link_to 'フォロー', timelines_path(is_only_follows: true), class: "btn px-2 py-2 #{group_btn_class(params[:is_only_follows], type: :follow)}" %>
   </div>
 </div>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center me-4">
   <div class="col-lg-6 col-md-8 col-12">
     <% @timelines.each do |timeline| %>
-      <div class="mb-3">
-        <div class="border border-2 rounded-1">
-          <p class="p-4"><%= link_to timeline.content, timeline.timelineable_url,
-                                     class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
-
-          <div class="p-3 text-end">
+      <div class="d-flex mb-3">
+        <div class="me-3">
+          <%= link_to timeline.user do %>
+            <%= image_tag timeline.user.image, class: 'rounded-circle', alt: "#{timeline.user.name}のアイコン", width: 50, height: 50 %>
+          <% end %>
+        </div>
+        <div class="card flex-fill">
+          <div class="card-header bg-white">
             <%= link_to timeline.user, class: 'text-reset text-decoration-none' do %>
-              <%= image_tag timeline.user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
               <%= timeline.user.name %>さん
+            <% end %>
+          </div>
+          <div class="card-body">
+            <%= link_to timeline.timelineable_url, class: 'link-dark text-decoration-none' do %>
+              <p class="card-text hover-underline"><%= timeline.content %></p>
+              <div class="d-flex justify-content-between">
+                <span><%= comment_text(timeline.timelineable) %></span>
+                <p class="text-end mb-0"><%= l timeline.created_at, format: :long %></p>
+              </div>
             <% end %>
           </div>
         </div>

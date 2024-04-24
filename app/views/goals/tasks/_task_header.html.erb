@@ -1,9 +1,22 @@
 <% if is_tasks_path %>
-  <p><%= link_to formatted_text(task),
-                 goal_task_path(task, goal_id: task.goal.id),
-                 class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></p>
+  <p class="mb-1 trancate-title">
+    <%= link_to task.content,
+                goal_task_path(task, goal_id: task.goal.id),
+                class: 'link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover' %>
+  </p>
 <% else %>
   <h1 class="fs-4"><%= escaped_simple_format(task.content) %></h1>
 <% end %>
 
-<p>期限: <%= l task.completion_limits, format: :date %></p>
+<% unless task.completed_at? %>
+  <% limit_days = task.completion_limits.day - Time.current.day %>
+  <% if task.completion_limits > Time.current.since(7.days) %>
+    <p class="mb-0">期限: <%= l task.completion_limits, format: :date %></p>
+  <% elsif limit_days >= 1 && limit_days <= 7 %>
+    <p class="mb-0">期限: あと<%= limit_days %>日</p>
+  <% elsif task.completion_limits > Time.current %>
+    <p class="mb-0">期限: <span class="text-danger"><%= l task.completion_limits, format: :hour_and_minutes %>まで</span></p>
+  <% else %>
+    <p class="text-danger mb-0">期限切れ</p>
+  <% end %>
+<% end %>

@@ -48,25 +48,6 @@ RSpec.describe CommentsHelper do
     end
   end
 
-  describe 'link_text' do
-    context 'commentsが空の場合' do
-      let(:comments) { [] }
-
-      it '「コメント受付中」の文言が返る' do
-        expect(link_text(comments)).to eq 'コメント受付中'
-      end
-    end
-
-    context 'commentsに値がある場合' do
-      let(:comments) { [comment] }
-      let(:comment) { create(:comment) }
-
-      it '「もっと見る」の文言が返る' do
-        expect(link_text(comments)).to eq 'もっと見る'
-      end
-    end
-  end
-
   describe 'comment_index_url' do
     let(:url) { comment_index_url(commentable) }
 

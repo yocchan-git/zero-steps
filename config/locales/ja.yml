@@ -181,6 +181,7 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H時%M分"
       date: "%Y/%m/%d"
+      hour_and_minutes: "%H時%M分"
     pm: 午後
   views:
     pagination:

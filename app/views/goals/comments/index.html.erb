@@ -1,14 +1,16 @@
 <% content_for(:title, 'コメント一覧') %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-between mb-3">
   <div>
     <h1 class="fs-2 text-center mb-3"><%= formatted_text(@goal) %>のコメント一覧</h1>
     <p>気軽にいいねやコメントで交流しよう！</p>
   </div>
+</div>
 
-  <div class="text-end">
-    <%= link_to '目標詳細へ戻る', goal_path(@goal), class: 'btn btn-secondary' %>
-  </div>
+<hr class="mb-4">
+
+<div class="text-center mb-3">
+  <%= link_to '目標詳細へ', goal_path(@goal), class: 'btn btn-outline-secondary py-2' %>
 </div>
 
 <div id="comments">

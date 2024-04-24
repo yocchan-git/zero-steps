@@ -1,16 +1,22 @@
 <% content_for(:title, 'タスク一覧') %>
 
-<div class="d-sm-flex flex-sm-column flex-md-row justify-content-around mb-3">
+<div class="d-sm-flex flex-sm-column flex-md-row justify-content-between mb-3">
   <div class="text-center">
     <h1 class="fs-2"><%= formatted_text(@goal) %>のタスク一覧</h1>
   </div>
+</div>
 
-  <div class="text-end">
-    <% if current_user?(@goal.user) %>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskFormModal">
-        タスクを作成する
-      </button>
-    <% end %>
+<hr class="mb-4">
+
+<div class="d-flex justify-content-center mb-3">
+  <% if current_user?(@goal.user) %>
+    <button type="button" class="btn btn-primary me-3 px-3" data-bs-toggle="modal" data-bs-target="#taskFormModal">
+      作成する
+    </button>
+  <% end %>
+
+  <div>
+    <%= link_to '目標詳細へ', @goal, class: 'btn btn-outline-secondary px-2' %>
   </div>
 </div>
 
@@ -23,8 +29,4 @@
 
 <div class="d-flex justify-content-center">
   <%= paginate @tasks %>
-</div>
-
-<div class="d-flex justify-content-center">
-  <%= link_to '目標詳細に戻る', @goal, class: 'btn btn-secondary' %>
 </div>

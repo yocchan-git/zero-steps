@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container">
-    <%= link_to root_path, class: 'navbar-brand d-flex align-items-center' do %>
-      <%= image_tag 'logo.png', alt: 'ロゴ', width: 50, height: 45 %>
-      <span class="align-middle">Zero Steps</span>
-    <% end %>
+<% if current_user %>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+      <%= link_to root_path, class: 'navbar-brand d-flex align-items-center' do %>
+        <%= image_tag 'logo.png', alt: 'ロゴ', width: 50, height: 45 %>
+        <span class="align-middle">Zero Steps</span>
+      <% end %>
 
-    <% if current_user %>
       <%= render 'layouts/notification', notifications: @unread_notifications %>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +15,7 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <%= link_to current_user, class: 'nav-link active' do %>
-              <%= image_tag current_user.image, class: 'rounded-circle', alt: 'ユーザーアイコン', width: 30, height: 30 %>
+              <%= image_tag current_user.image, class: 'rounded-circle', alt: "#{current_user.name}のアイコン", width: 30, height: 30 %>
               <%= current_user.name %>さん
             <% end %>
           </li>
@@ -33,6 +33,6 @@
           </li>
         </ul>
       </div>
-    <% end %>
-  </div>
-</nav>
+    </div>
+  </nav>
+<% end %>
