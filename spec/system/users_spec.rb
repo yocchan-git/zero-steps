@@ -74,7 +74,7 @@ RSpec.describe 'Users' do
         end
 
         context '目標がある場合' do
-          let!(:goal) { create(:goal, user: public_user, title: '体重を50kgにする') }
+          before { create(:goal, user: public_user, title: '体重を50kgにする') }
 
           it '目標が表示される' do
             visit user_path(public_user, is_goals: true)
@@ -94,7 +94,7 @@ RSpec.describe 'Users' do
         end
 
         context 'タスクがない場合' do
-          let!(:task) { create(:task, user: public_user, content: 'ジムに入会する') }
+          before { create(:task, user: public_user, content: 'ジムに入会する') }
 
           it 'タスクが表示される' do
             visit user_path(public_user, is_tasks: true)
@@ -114,7 +114,7 @@ RSpec.describe 'Users' do
         end
 
         context 'コメントがある場合' do
-          let!(:comment) { create(:comment, user: public_user, content: '応援しています！') }
+          before { create(:comment, user: public_user, content: '応援しています！') }
 
           it 'コメントが表示される' do
             visit user_path(public_user, is_comments: true)
