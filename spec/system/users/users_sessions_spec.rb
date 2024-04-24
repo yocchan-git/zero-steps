@@ -22,7 +22,7 @@ RSpec.describe 'Users::Sessions' do
         visit new_users_session_path
         click_on 'Discord アカウントでログイン'
         expect(page).to have_css '.alert-success', text: 'ログインしました'
-        expect(page).to have_css 'h1', text: 'ユーザー編集'
+        expect(page).to have_css 'h1', text: 'ユーザー登録'
       end
     end
 

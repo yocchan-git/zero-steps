@@ -1,7 +1,16 @@
-<% content_for(:title, 'ユーザー編集') %>
+<% is_new_user = params[:is_new_user] %>
+<% title = is_new_user ? 'ユーザー登録' : 'ユーザー編集' %>
+<% button_title = is_new_user ? '登録する' : '更新する' %>
+
+<% content_for(:title, title) %>
 
 <div class="d-sm-flex flex-sm-column flex-md-row justify-content-between mb-3">
-  <h1 class="fs-2">ユーザー編集</h1>
+  <div>
+    <h1 class="fs-2"><%= title %></h1>
+    <% if is_new_user %>
+      <p class="mb-0">自己紹介などユーザー情報を入力しましょう</p>
+    <% end %>
+  </div>
 </div>
 
 <hr class="mb-4">
@@ -20,13 +29,13 @@
       </div>
 
       <div class="mb-5">
-        <p class="mb-1">企業アカウントの場合は<a href="https://yocchan-eng.hatenablog.com/draft/entry/YL2zxcesxtqxiW1CDTxz8dpf6mY#%E9%9D%9E%E5%85%AC%E9%96%8B%E8%A8%AD%E5%AE%9A" target="_blank" rel="noopener noreferrer">非公開設定</a>もできます。</p>
+        <p class="mb-1">企業アカウントの場合は<a href="https://yocchan-eng.hatenablog.com/draft/entry/YL2zxcesxtqxiW1CDTxz8dpf6mY#%E9%9D%9E%E5%85%AC%E9%96%8B%E8%A8%AD%E5%AE%9A" target="_blank" rel="noopener noreferrer">非公開設定</a>もできます↓</p>
         <%= form.check_box :is_hidden, class: 'form-check-input' %>
         <%= form.label :is_hidden, '非公開にする', class: 'form-check-label' %>
       </div>
 
       <div class="d-flex justify-content-center">
-        <%= form.submit class: 'btn btn-primary me-3 px-3 py-2' %>
+        <%= form.submit button_title, class: 'btn btn-primary me-3 px-3 py-2' %>
         <%= link_to 'TOPへ', root_path, class: 'btn btn-secondary px-4 py-2' %>
       </div>
     <% end %>
