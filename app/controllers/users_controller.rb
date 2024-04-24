@@ -21,6 +21,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:is_hidden)
+    params.require(:user).permit(:is_hidden, :self_introduction)
   end
 end
