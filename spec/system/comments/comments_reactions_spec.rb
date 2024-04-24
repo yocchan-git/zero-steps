@@ -3,7 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Comments::Reactions' do
-  before { login(user) }
+  before do
+    login(user)
+    create_list(:reaction, 5)
+  end
 
   let(:user) { create(:user) }
   let!(:comment) { create(:comment, user: other_user, commentable:) }

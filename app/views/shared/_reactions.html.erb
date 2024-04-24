@@ -1,4 +1,4 @@
-<%= form_with(model: reactionable.reactions.find_by(reactionable:), html: { method: :delete }) do |f| %>
+<%= form_with(model: reaction, html: { method: :delete }) do |f| %>
   <%= f.button type: 'submit', class: 'btn' do %>
     <i class="fa-solid fa-thumbs-up"></i>
   <% end %>

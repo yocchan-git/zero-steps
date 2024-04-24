@@ -1,5 +1,7 @@
+<% reaction = current_user.reactions.find_by(reactionable: @reactionable) %>
+
 <%= turbo_stream.update "complete_post_reaction_form#{@reactionable.id}" do %>
-  <%= render partial: "shared/reactions", locals: {reactionable: @reactionable} %>
+  <%= render partial: "shared/reactions", locals: {reaction:} %>
 <% end %>
 
 <%= turbo_stream.update "complete_post_reaction_count#{@reactionable.id}" do %>
