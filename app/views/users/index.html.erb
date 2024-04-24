@@ -8,8 +8,8 @@
 
 <div class="text-center mb-4">
   <div class="btn-group">
-    <%= link_to '全て', users_path, class: "btn #{group_btn_class(params[:is_only_follows], type: :all)}" %>
-    <%= link_to 'フォロー中', users_path(is_only_follows: true), class: "btn #{group_btn_class(params[:is_only_follows], type: :follow)}" %>
+    <%= link_to '全て', users_path, class: "btn px-4 py-2 #{group_btn_class(params[:is_only_follows], type: :all)}" %>
+    <%= link_to 'フォロー', users_path(is_only_follows: true), class: "btn px-2 py-2 #{group_btn_class(params[:is_only_follows], type: :follow)}" %>
   </div>
 </div>
 
