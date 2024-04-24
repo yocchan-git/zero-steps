@@ -31,21 +31,24 @@
               <div class="row">
                 <div class="col">
                   <dt class="border border-1 rounded-top">目標</dt>
-                  <%= link_to user_path(user, is_goals: true), class: 'link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover' do %>
+                  <%= link_to user_path(user, is_goals: true),
+                              class: 'link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover' do %>
                     <dd class="border border-1 rounded-bottom p-2"><%= user.goals.length %></dd>
                   <% end %>
                 </div>
 
                 <div class="col">
                   <dt class="border border-1 rounded-top">タスク</dt>
-                  <%= link_to user_path(user, is_tasks: true), class: 'link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover' do %>
+                  <%= link_to user_path(user, is_tasks: true),
+                              class: 'link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover' do %>
                     <dd class="border border-1 rounded-bottom p-2"><%= user.tasks.length %></dd>
                   <% end %>
                 </div>
 
                 <div class="col">
                   <dt class="border border-1 rounded-top">コメント</dt>
-                  <%= link_to user_path(user, is_comments: true), class: 'link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover' do %>
+                  <%= link_to user_path(user, is_comments: true),
+                              class: 'link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover' do %>
                     <dd class="border border-1 rounded-bottom p-2"><%= user.comments.length %></dd>
                   <% end %>
                 </div>

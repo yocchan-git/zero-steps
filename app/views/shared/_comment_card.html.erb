@@ -20,7 +20,7 @@
         <% if is_user_path %>
           <% request_uri = goal?(commentable) ? commentable : goal_task_path(commentable, goal_id: commentable.goal.id) %>
           <%= link_to request_uri, class: 'text-reset text-decoration-none' do %>
-            <%= goal?(commentable) ? formatted_text(commentable) : formatted_text(commentable) %>
+            <%= formatted_text(commentable) %>
           <% end %>
         <% else %>
           <%= link_to comment.user, class: 'text-reset text-decoration-none ' do %>

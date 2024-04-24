@@ -5,7 +5,8 @@
 
 <div class="d-flex mb-3">
   <div class="me-3">
-    <div class="status-circle text-white d-flex align-items-center justify-content-center rounded-circle <%= goal.completed_at? ? 'bg-completed' : 'bg-primary' %>">
+    <% bg_color = goal.completed_at? ? 'bg-completed' : 'bg-primary' %>
+    <div class="status-circle text-white d-flex align-items-center justify-content-center rounded-circle <%= bg_color %>">
       <%= arranged_rate %>%
     </div>
   </div>

@@ -56,7 +56,8 @@
       </li>
       <% if @task.completed_at? %>
         <li class="nav-item">
-          <%= link_to '終了投稿', goal_task_path(@task, goal_id: @task.goal.id, is_complete_post: true), class: "nav-link link-dark #{'active' if params[:is_complete_post]}" %>
+          <%= link_to '終了投稿', goal_task_path(@task, goal_id: @task.goal.id, is_complete_post: true),
+                      class: "nav-link link-dark #{'active' if params[:is_complete_post]}" %>
         </li>
       <% end %>
     </ul>

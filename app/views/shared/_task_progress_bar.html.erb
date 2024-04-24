@@ -11,6 +11,11 @@
   </div>
 
   <div class="col-4">
-    <span class="<%= 'text-success' if is_completed %>"><%= is_completed ? "達成(#{l(goal.completed_at, format: :date)})" : "(#{completed_task_count}/#{task_count})" %></span>
+    <span class="<%= 'text-success' if is_completed %>"><%= if is_completed
+                                                              "達成(#{l(goal.completed_at,
+                                                                        format: :date)})"
+                                                            else
+                                                              "(#{completed_task_count}/#{task_count})"
+                                                            end %></span>
   </div>
 </div>
