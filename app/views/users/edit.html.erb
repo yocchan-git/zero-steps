@@ -8,10 +8,15 @@
 
 <div class="d-flex justify-content-center mb-3">
   <div class="col-lg-6 col-md-8 col-12">
-    <%= form_with(model: current_user) do |form| %>
+    <%= form_with(model: current_user, data: { controller: "user"}) do |form| %>
       <div class="mb-5">
         <%= form.label :self_introduction, '自己紹介', class: 'form-label' %>
-          <%= form.text_area :self_introduction, class: 'form-control', placeholder: 'ゼロ高3年生のよっちゃんです！', rows: '10' %>
+        
+        <div class="mb-2">
+          <button type="button" class="btn btn-outline-dark" data-action="click->user#setSelfIntroductionTarget"><i class="fa-solid fa-pen-to-square me-1"></i>テンプレートを使う</button>
+        </div>
+
+        <%= form.text_area :self_introduction, class: 'form-control', placeholder: "■性格\n\n\n■好きなこと・趣味\n\n\n■今やっていること\n\n\n■将来どうなりたいか\n\n\n■卒業後の進路", rows: '15', data: { user_target: "self_introduction" } %>
       </div>
 
       <div class="mb-5">
