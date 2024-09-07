@@ -1,32 +1,38 @@
 ## Zero Steps
 ### サービス概要
-ゼロ高等学院の生徒向けの目標共有サービスです。
+一言で言うと、「目標共有サービス」です。
 目標を決め、タスクに分けることで交流しながら目標を達成していけるアプリになります。
 
 また、ログインにはDiscordアカウントが必要ですのでご注意ください
 
 ### 主な機能の説明
+#### ログイン
+ログインにはDiscordアカウントが必要です。  
+ログインボタンを押して、「認証」をクリックすればログイン完了です！
+
+[![Image from Gyazo](https://i.gyazo.com/0970f6f553246dac126cdafaea5774e7.gif)](https://gyazo.com/0970f6f553246dac126cdafaea5774e7)
+
+#### ユーザー登録
+初めてログインした際は、ユーザー登録画面に遷移します。
+「自己紹介」を書いたり、非公開設定などの情報を入力して登録するボタンを押してください。
+
+[![Image from Gyazo](https://i.gyazo.com/e53760a4616945557941865dccdbdf41.png)](https://gyazo.com/e53760a4616945557941865dccdbdf41)
+
 #### 目標
 目標を決めて、登録することができます。
-[![Image from Gyazo](https://i.gyazo.com/d6fcaefc723d3d42dd775d6a012e9fbf.png)](https://gyazo.com/d6fcaefc723d3d42dd775d6a012e9fbf)
+[![Image from Gyazo](https://i.gyazo.com/66905bf26e5166aff15b1b2f1723e214.gif)](https://gyazo.com/66905bf26e5166aff15b1b2f1723e214)
 
 #### タスク
 目標にはタスクを作成することが可能です。
 これらをこなしていくことで、目標が近づいていきます
 
-[![Image from Gyazo](https://i.gyazo.com/0038488399fd559632362c892af8d4c1.png)](https://gyazo.com/0038488399fd559632362c892af8d4c1)
+[![Image from Gyazo](https://i.gyazo.com/81ebf0a472f9818d2132398c7e1775bd.gif)](https://gyazo.com/81ebf0a472f9818d2132398c7e1775bd)
 
 #### コメント
 目標やタスクにコメントで応援することができます。
 メンション機能などもあるので、コメントで通知をすることも可能です
 
-[![Image from Gyazo](https://i.gyazo.com/bc38b8005ba483c24d75e18b7f13a7a2.png)](https://gyazo.com/bc38b8005ba483c24d75e18b7f13a7a2)
-
-#### ユーザーの非公開モード
-企業の方など非公開にすることができます。  
-初ログイン後の質問にチェックを入れてください
-
-[![Image from Gyazo](https://i.gyazo.com/b214e3ed021ed9c464144e71437bb44e.png)](https://gyazo.com/b214e3ed021ed9c464144e71437bb44e)
+[![Image from Gyazo](https://i.gyazo.com/f9777dbd7932fafab8999484b3ec40bf.gif)](https://gyazo.com/f9777dbd7932fafab8999484b3ec40bf)
 
 ## 使用技術
 - Ruby 3.2.2
